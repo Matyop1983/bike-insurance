@@ -169,7 +169,7 @@ export function QuoteForm({ initialType = "" }: { initialType?: QuoteType | "" }
       ref={formRef}
       noValidate
       onSubmit={onSubmit}
-      className="rounded-sm border border-line bg-paper px-5 pt-5 pb-8 shadow-[0_24px_50px_-36px_rgba(0,0,0,0.35)] sm:px-8 sm:pt-8 sm:pb-10"
+      className="rounded-sm border border-line bg-paper px-5 pt-5 pb-8 shadow-[0_24px_50px_-36px_rgba(26,36,51,0.28)] sm:px-8 sm:pt-8 sm:pb-10"
     >
       <p className="sr-only" aria-live="polite">
         {status.kind === "submitting" ? "Sending your request" : ""}
@@ -194,7 +194,7 @@ export function QuoteForm({ initialType = "" }: { initialType?: QuoteType | "" }
                 key={option.value}
                 className={`cursor-pointer rounded-sm border px-4 py-3 ${
                   selected
-                    ? "border-ink bg-ink text-stone"
+                    ? "border-teal bg-teal text-ink"
                     : "border-line bg-stone text-ink"
                 }`}
               >
@@ -208,7 +208,7 @@ export function QuoteForm({ initialType = "" }: { initialType?: QuoteType | "" }
                 />
                 <span className="block text-sm font-semibold">{option.label}</span>
                 <span
-                  className={`mt-1 block text-xs ${selected ? "text-stone/70" : "text-muted"}`}
+                  className={`mt-1 block text-xs ${selected ? "text-ink/70" : "text-muted"}`}
                 >
                   {option.hint}
                 </span>
@@ -382,7 +382,7 @@ export function QuoteForm({ initialType = "" }: { initialType?: QuoteType | "" }
                   key={option.value}
                   className={`flex cursor-pointer items-center gap-3 rounded-sm border px-4 py-3 text-sm font-medium ${
                     checked
-                      ? "border-ink bg-ink/5 text-ink"
+                      ? "border-teal bg-teal/10 text-ink"
                       : "border-line bg-stone text-ink"
                   }`}
                 >
@@ -391,7 +391,7 @@ export function QuoteForm({ initialType = "" }: { initialType?: QuoteType | "" }
                     name="coverage"
                     value={option.value}
                     checked={checked}
-                    className="size-4 accent-ink"
+                    className="size-4 accent-teal"
                     onChange={() => toggleCoverage(option.value)}
                   />
                   {option.label}

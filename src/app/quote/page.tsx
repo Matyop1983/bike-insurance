@@ -27,7 +27,7 @@ export default async function QuotePage({
       />
       <div className="wrap grid gap-10 pb-20 lg:grid-cols-[1.05fr_0.8fr] lg:items-start">
         <QuoteForm initialType={initialType} />
-        <aside className="space-y-5 rounded-sm border border-line bg-stone p-6 sm:p-8">
+        <aside className="space-y-5 rounded-sm border border-line bg-paper p-6 sm:p-8">
           <SampleCallout>{sampleNotice}</SampleCallout>
           <div>
             <h2 className="text-lg font-semibold text-ink">What happens</h2>

@@ -7,40 +7,37 @@ import { homePillars, testimonials } from "@/lib/content";
 export default function HomePage() {
   return (
     <>
-      <section className="bg-ink text-stone">
+      <section>
         <div className="wrap grid items-center gap-10 py-14 lg:grid-cols-[1.15fr_0.85fr] lg:py-20">
           <div>
-            <p className="text-xs font-semibold tracking-[0.22em] text-teal uppercase">
+            <p className="text-xs font-semibold tracking-[0.22em] text-teal-dark uppercase">
               Edinburg, Texas
             </p>
-            <h1 className="display mt-4 text-[2.5rem] leading-[1.08] text-balance sm:text-5xl lg:text-6xl">
+            <h1 className="display mt-4 text-[2.5rem] leading-[1.08] text-balance text-ink sm:text-5xl lg:text-6xl">
               {brand.tagline}.
             </h1>
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-stone/75">
+            <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted">
               {brand.integrity} Commercial coverage, individual policies, and a
               featured bicycle insurance product — with an advisor you can actually
               reach.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link
-                href="/business-insurance"
+                href={quoteCta.href}
                 className="inline-flex items-center justify-center rounded-sm bg-teal px-6 py-3 text-sm font-semibold text-ink hover:bg-teal-dark"
               >
-                Business insurance
+                {quoteCta.label}
               </Link>
               <Link
-                href={quoteCta.href}
-                className="inline-flex items-center justify-center rounded-sm border border-stone/25 px-6 py-3 text-sm font-semibold text-stone hover:bg-white/10"
+                href="/business-insurance"
+                className="inline-flex items-center justify-center rounded-sm border border-line bg-paper px-6 py-3 text-sm font-semibold text-ink hover:bg-stone"
               >
-                {quoteCta.label}
+                Business insurance
               </Link>
             </div>
           </div>
           <div className="flex justify-center px-2 sm:px-6">
-            <Logo
-              variant="onDark"
-              className="h-auto w-full max-w-[13rem] sm:max-w-[18rem] lg:max-w-[22rem]"
-            />
+            <Logo className="h-auto w-full max-w-[13rem] sm:max-w-[18rem] lg:max-w-[22rem]" />
           </div>
         </div>
       </section>

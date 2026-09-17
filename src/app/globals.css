@@ -5,14 +5,15 @@
   --font-display: var(--font-source-serif), ui-serif, Georgia, "Times New Roman",
     serif;
 
-  --color-ink: #0a0a0a;
-  --color-ink-mid: #161616;
+  /* Palette #2: cool gray surfaces, navy/charcoal type, logo teal CTAs */
+  --color-ink: #1a2433;
+  --color-ink-mid: #243044;
   --color-teal: #00d9c7;
   --color-teal-dark: #00b3a4;
-  --color-stone: #f4f5f5;
+  --color-stone: #eef2f6;
   --color-paper: #ffffff;
-  --color-muted: #5c6368;
-  --color-line: #d4d8da;
+  --color-muted: #5a6573;
+  --color-line: #d5dee6;
 }
 
 html {
@@ -40,7 +41,7 @@ body {
   font-family: var(--font-sans);
   background-image: radial-gradient(
     ellipse 70% 45% at 100% 0%,
-    rgba(0, 217, 199, 0.1),
+    rgba(0, 217, 199, 0.08),
     transparent 55%
   );
 }

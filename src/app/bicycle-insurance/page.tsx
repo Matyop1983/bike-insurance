@@ -27,7 +27,7 @@ export default function BicycleInsurancePage() {
       />
 
       <div className="wrap grid items-center gap-10 pb-16 lg:grid-cols-[0.9fr_1.1fr]">
-        <div className="overflow-hidden rounded-sm bg-ink px-4 pt-6">
+        <div className="overflow-hidden rounded-sm bg-ink-mid px-4 pt-6">
           <BikeHeroArt />
         </div>
         <div>

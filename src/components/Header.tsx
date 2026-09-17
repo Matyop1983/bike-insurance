@@ -43,7 +43,7 @@ export function Header() {
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line/80 bg-stone/95 backdrop-blur-md">
+    <header className="sticky top-0 z-40 border-b border-line/80 bg-paper/95 backdrop-blur-md">
       <div className="wrap flex h-[4.5rem] items-center justify-between gap-4 lg:h-20">
         <Link href="/" aria-label={`${brand.name} home`} className="shrink-0 rounded-sm">
           <Logo priority />
@@ -62,8 +62,8 @@ export function Header() {
                 aria-current={current ? "page" : undefined}
                 className={`rounded-sm px-3 py-2 text-sm font-medium transition-colors ${
                   current
-                    ? "bg-ink text-teal"
-                    : "text-ink/80 hover:bg-line/60 hover:text-ink"
+                    ? "text-ink"
+                    : "text-ink/65 hover:bg-stone hover:text-ink"
                 }`}
               >
                 {item.label}

@@ -7,7 +7,7 @@ export function BikeHeroArt() {
       aria-label="Illustration of a bicycle in front of a shield"
     >
       <rect width="640" height="520" fill="none" />
-      <ellipse cx="430" cy="248" rx="168" ry="176" fill="#161616" />
+      <ellipse cx="430" cy="248" rx="168" ry="176" fill="#243044" />
       <path
         d="M430 98 534 140v72c0 70-48 110-104 126-56-16-104-56-104-126v-72L430 98z"
         fill="none"
@@ -16,7 +16,7 @@ export function BikeHeroArt() {
       />
       <g
         fill="none"
-        stroke="#f3f1ec"
+        stroke="#eef2f6"
         strokeLinecap="round"
         strokeLinejoin="round"
       >
