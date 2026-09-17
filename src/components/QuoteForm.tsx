@@ -143,7 +143,7 @@ export function QuoteForm() {
       ref={formRef}
       noValidate
       onSubmit={onSubmit}
-      className="rounded-[2rem] border border-line bg-paper p-5 shadow-[0_20px_50px_-32px_rgba(18,52,40,0.45)] sm:p-8"
+      className="rounded-[2rem] border border-line bg-paper px-5 pt-5 pb-8 shadow-[0_20px_50px_-32px_rgba(18,52,40,0.45)] sm:px-8 sm:pt-8 sm:pb-10"
     >
       <p ref={liveRef} className="sr-only" aria-live="polite">
         {status.kind === "submitting" ? "Sending your request" : ""}
@@ -349,7 +349,7 @@ export function QuoteForm() {
       <button
         type="submit"
         disabled={status.kind === "submitting"}
-        className="mt-5 inline-flex w-full items-center justify-center rounded-full bg-copper px-6 py-3.5 text-sm font-semibold text-white hover:bg-copper-dark disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto"
+        className="mt-6 inline-flex min-h-12 w-full items-center justify-center rounded-full bg-copper px-6 py-3.5 text-sm font-semibold text-white hover:bg-copper-dark disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto"
       >
         {status.kind === "submitting" ? "Sending…" : "Request a quote"}
       </button>
