@@ -2,19 +2,13 @@ import Image from "next/image";
 import { brand } from "@/lib/brand";
 
 const assets = {
-  /** Hybrid stacked lockup, transparent — light header. */
+  /** Primary mark: hybrid stacked lockup on a black plate. */
   lockup: {
     src: "/brand/rhino-logo.png",
     width: 656,
     height: 570,
   },
-  /** Same stacked lockup on black — footer and dark hero. */
-  onDark: {
-    src: "/brand/rhino-logo-on-black.png",
-    width: 656,
-    height: 570,
-  },
-  /** Rhino silhouette crop (no wordmark). */
+  /** Rhino silhouette crop (favicon). */
   mark: {
     src: "/brand/rhino-mark.png",
     width: 560,
@@ -42,7 +36,7 @@ export function Logo({
       width={asset.width}
       height={asset.height}
       unoptimized
-      className={className ?? "h-14 w-auto sm:h-16"}
+      className={className ?? "h-16 w-auto"}
       style={widthLed ? { height: "auto" } : { width: "auto" }}
       priority={priority}
     />
