@@ -1,25 +1,24 @@
 import Link from "next/link";
 import { Logo } from "@/components/Logo";
 import { brand, nav, quoteCta } from "@/lib/brand";
-import { sampleNotice } from "@/lib/content";
 
 export function Footer() {
   return (
-    <footer className="mt-auto border-t border-line bg-forest text-cream">
+    <footer className="mt-auto bg-navy text-stone">
       <div className="wrap grid gap-12 py-14 sm:grid-cols-2 lg:grid-cols-12">
         <div className="lg:col-span-5">
-          <Link href="/" className="inline-flex rounded-lg">
+          <Link href="/" className="inline-flex rounded-sm">
             <Logo inverted />
           </Link>
-          <p className="mt-5 max-w-sm text-[0.95rem] leading-relaxed text-cream/78">
-            {brand.name} is a bicycle insurance marketing prototype: theft,
-            damage, liability, and the parts you bolted on later. Built to feel
-            like a carrier site — not a live policy.
+          <p className="mt-5 max-w-sm text-[0.95rem] leading-relaxed text-stone/75">
+            {brand.tagline}. Independent advisors in Edinburg serving commercial
+            and individual clients across the Rio Grande Valley — including
+            bicycle insurance as a featured personal product.
           </p>
         </div>
 
         <div className="lg:col-span-3">
-          <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-leaf">
+          <h2 className="text-xs font-semibold tracking-[0.18em] text-gold uppercase">
             Explore
           </h2>
           <ul className="mt-4 space-y-2 text-sm">
@@ -39,33 +38,40 @@ export function Footer() {
         </div>
 
         <div className="lg:col-span-4">
-          <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-leaf">
-            Contact
+          <h2 className="text-xs font-semibold tracking-[0.18em] text-gold uppercase">
+            Visit us
           </h2>
-          <address className="mt-4 space-y-2 text-sm not-italic text-cream/80">
+          <address className="mt-4 space-y-2 text-sm not-italic text-stone/80">
             <p>
               <a className="hover:text-white" href={`mailto:${brand.email}`}>
                 {brand.email}
               </a>
             </p>
             <p>
-              <a className="hover:text-white" href={`tel:+14155550148`}>
+              <a className="hover:text-white" href={brand.phoneHref}>
                 {brand.phone}
               </a>
-              <span className="text-cream/55"> · {brand.hours}</span>
+              <span className="text-stone/50"> · {brand.hours}</span>
             </p>
-            <p>{brand.address}</p>
+            <p>
+              <a
+                className="hover:text-white"
+                href={brand.mapsHref}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {brand.address}
+              </a>
+            </p>
           </address>
         </div>
       </div>
       <div className="border-t border-white/10">
-        <div className="wrap flex flex-col gap-3 py-5 text-xs leading-relaxed text-cream/55 sm:flex-row sm:items-start sm:justify-between">
+        <div className="wrap flex flex-col gap-2 py-5 text-xs leading-relaxed text-stone/50 sm:flex-row sm:justify-between">
           <p>
-            © {new Date().getFullYear()} {brand.legalName}. Easy to rename —
-            brand strings live in{" "}
-            <code className="text-cream/75">src/lib/brand.ts</code>.
+            © {new Date().getFullYear()} {brand.legalName}.
           </p>
-          <p className="max-w-md sm:text-right">{sampleNotice}</p>
+          <p>Edinburg, Texas · Custom site replacing Squarespace.</p>
         </div>
       </div>
     </footer>

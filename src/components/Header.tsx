@@ -18,7 +18,7 @@ export function Header() {
   }
 
   useEffect(() => {
-    const mq = window.matchMedia("(min-width: 768px)");
+    const mq = window.matchMedia("(min-width: 1024px)");
     const onChange = () => {
       if (mq.matches) setOpen(false);
     };
@@ -43,13 +43,13 @@ export function Header() {
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line/70 bg-cream/85 backdrop-blur-md">
-      <div className="wrap flex h-16 items-center justify-between gap-4 sm:h-[4.25rem]">
-        <Link href="/" aria-label={`${brand.name} home`} className="rounded-lg">
+    <header className="sticky top-0 z-40 border-b border-line/80 bg-stone/90 backdrop-blur-md">
+      <div className="wrap flex h-16 items-center justify-between gap-4 lg:h-[4.25rem]">
+        <Link href="/" aria-label={`${brand.name} home`} className="rounded-sm">
           <Logo />
         </Link>
 
-        <nav aria-label="Primary" className="hidden items-center gap-1 md:flex">
+        <nav aria-label="Primary" className="hidden items-center gap-0.5 lg:flex">
           {nav.map((item) => {
             const current =
               item.href === "/"
@@ -60,10 +60,10 @@ export function Header() {
                 key={item.href}
                 href={item.href}
                 aria-current={current ? "page" : undefined}
-                className={`rounded-full px-3.5 py-2 text-sm font-medium transition-colors ${
+                className={`rounded-sm px-3 py-2 text-sm font-medium transition-colors ${
                   current
-                    ? "bg-forest text-cream"
-                    : "text-ink/80 hover:bg-sand/70 hover:text-ink"
+                    ? "bg-navy text-stone"
+                    : "text-ink/80 hover:bg-line/60 hover:text-ink"
                 }`}
               >
                 {item.label}
@@ -72,7 +72,7 @@ export function Header() {
           })}
           <Link
             href={quoteCta.href}
-            className="ml-2 rounded-full bg-copper px-4 py-2 text-sm font-semibold text-white shadow-[0_1px_0_rgba(255,255,255,0.25)_inset] transition-colors hover:bg-copper-dark"
+            className="ml-2 rounded-sm bg-gold px-4 py-2 text-sm font-semibold text-navy transition-colors hover:bg-gold-dark hover:text-stone"
           >
             {quoteCta.label}
           </Link>
@@ -80,7 +80,7 @@ export function Header() {
 
         <button
           type="button"
-          className="inline-flex size-11 items-center justify-center rounded-full border border-line bg-paper md:hidden"
+          className="inline-flex size-11 items-center justify-center rounded-sm border border-line bg-paper lg:hidden"
           aria-controls={panelId}
           aria-expanded={open}
           aria-label={open ? "Close menu" : "Open menu"}
@@ -110,23 +110,20 @@ export function Header() {
       </div>
 
       {open ? (
-        <div
-          id={panelId}
-          className="border-t border-line bg-paper md:hidden"
-        >
+        <div id={panelId} className="border-t border-line bg-paper lg:hidden">
           <nav aria-label="Mobile" className="wrap flex flex-col gap-1 py-4">
             {nav.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="rounded-2xl px-4 py-3 text-lg font-medium text-ink hover:bg-sand/60"
+                className="rounded-sm px-4 py-3 text-lg font-medium text-ink hover:bg-stone"
               >
                 {item.label}
               </Link>
             ))}
             <Link
               href={quoteCta.href}
-              className="mt-2 rounded-full bg-copper px-4 py-3 text-center text-base font-semibold text-white hover:bg-copper-dark"
+              className="mt-2 rounded-sm bg-gold px-4 py-3 text-center text-base font-semibold text-navy hover:bg-gold-dark hover:text-stone"
             >
               {quoteCta.label}
             </Link>

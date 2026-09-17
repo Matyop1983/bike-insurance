@@ -2,43 +2,40 @@ import type { Metadata } from "next";
 import { PageIntro, SampleCallout } from "@/components/CtaBand";
 import { QuoteForm } from "@/components/QuoteForm";
 import { sampleNotice } from "@/lib/content";
+import { parseQuoteType } from "@/lib/quote";
 
 export const metadata: Metadata = {
   title: "Get a quote",
   description:
-    "Request a PedalGuard bicycle insurance quote. Client-side validation, no payment, no live pricing.",
+    "Request a commercial, personal, or bicycle insurance quote from Rhino Insurance Advisors in Edinburg, TX.",
 };
 
-export default function QuotePage() {
+export default async function QuotePage({
+  searchParams,
+}: {
+  searchParams: Promise<{ type?: string }>;
+}) {
+  const params = await searchParams;
+  const initialType = parseQuoteType(params.type);
+
   return (
     <>
       <PageIntro
         kicker="Quote request"
-        title="Tell us about the bike. We’ll confirm we got it."
-        body="This is not a pricing engine. There is no checkout. The form checks required fields in your browser, then a small API route stores the request locally so you can wire email later."
+        title="Tell us what you need. We’ll confirm we got it."
+        body="Choose commercial, personal, or bicycle. This is not a pricing engine or checkout — an advisor follows up. Bicycle requests capture type, value, and coverage interests."
       />
-      <div className="wrap grid gap-10 pb-20 lg:grid-cols-[1fr_0.85fr] lg:items-start">
-        <QuoteForm />
-        <aside className="space-y-5 rounded-[2rem] border border-line bg-sand/40 p-6 sm:p-8">
+      <div className="wrap grid gap-10 pb-20 lg:grid-cols-[1.05fr_0.8fr] lg:items-start">
+        <QuoteForm initialType={initialType} />
+        <aside className="space-y-5 rounded-sm border border-line bg-stone p-6 sm:p-8">
           <SampleCallout>{sampleNotice}</SampleCallout>
           <div>
-            <h2 className="text-lg font-semibold text-forest">What we ask</h2>
-            <ul className="mt-3 space-y-2 text-sm leading-relaxed text-muted">
-              <li>Name and email so a partner can follow up</li>
-              <li>Phone only if you’d rather talk than type</li>
-              <li>Bike type and value range — enough to start, not a serial number</li>
-              <li>City or ZIP for regional eligibility later</li>
-              <li>Coverage checkboxes: theft, damage, liability, accessories</li>
-            </ul>
-          </div>
-          <div>
-            <h2 className="text-lg font-semibold text-forest">What happens</h2>
+            <h2 className="text-lg font-semibold text-navy">What happens</h2>
             <p className="mt-3 text-sm leading-relaxed text-muted">
-              You’ll see a success state and a reference ID. Submissions are
-              appended to{" "}
-              <code className="text-forest">data/quote-submissions.jsonl</code>{" "}
-              on the server. See the README to connect Resend, Postmark, or
-              another email API.
+              You’ll see a success state and a reference ID starting with RH-.
+              Submissions are appended to{" "}
+              <code className="text-navy">data/quote-submissions.jsonl</code>. Wire
+              email later so quoting@rhinoia.com gets a copy — see the README.
             </p>
           </div>
         </aside>

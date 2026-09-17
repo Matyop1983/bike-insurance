@@ -13,12 +13,14 @@ function isPayload(value: unknown): value is QuotePayload {
   if (!value || typeof value !== "object") return false;
   const record = value as Record<string, unknown>;
   return (
+    typeof record.quoteType === "string" &&
     typeof record.name === "string" &&
     typeof record.email === "string" &&
     typeof record.phone === "string" &&
+    typeof record.location === "string" &&
+    typeof record.businessName === "string" &&
     typeof record.bikeType === "string" &&
     typeof record.bikeValue === "string" &&
-    typeof record.location === "string" &&
     typeof record.message === "string" &&
     Array.isArray(record.coverage) &&
     record.coverage.every((item) => typeof item === "string")
@@ -49,7 +51,7 @@ export async function POST(request: Request) {
     );
   }
 
-  const id = `PG-${crypto.randomUUID().slice(0, 8).toUpperCase()}`;
+  const id = `RH-${crypto.randomUUID().slice(0, 8).toUpperCase()}`;
   const entry = {
     id,
     receivedAt: new Date().toISOString(),
@@ -64,6 +66,6 @@ export async function POST(request: Request) {
     "utf8",
   );
 
-  console.info("[quote]", id, normalized.email, normalized.bikeType);
+  console.info("[quote]", id, normalized.quoteType, normalized.email);
   return NextResponse.json({ ok: true, id });
 }

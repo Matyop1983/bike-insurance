@@ -2,12 +2,16 @@
 
 import { useRef, useState } from "react";
 import {
+  bicycleCoverages,
   bikeTypes,
   bikeValues,
-  coverageInterests,
+  commercialCoverages,
   emptyQuote,
+  personalCoverages,
+  quoteTypes,
   type QuoteFieldErrors,
   type QuotePayload,
+  type QuoteType,
   validateQuote,
 } from "@/lib/quote";
 
@@ -18,26 +22,44 @@ type Status =
   | { kind: "success"; id: string };
 
 const fieldClass =
-  "mt-1.5 w-full rounded-2xl border border-line bg-paper px-4 py-3 text-ink shadow-[inset_0_1px_0_rgba(255,255,255,0.6)] placeholder:text-muted/60";
+  "mt-1.5 w-full rounded-sm border border-line bg-paper px-4 py-3 text-ink placeholder:text-muted/60";
 
 function FieldError({ id, message }: { id: string; message?: string }) {
   if (!message) return null;
   return (
-    <p id={id} role="alert" className="mt-1.5 text-sm text-copper-dark">
+    <p id={id} role="alert" className="mt-1.5 text-sm text-gold-dark">
       {message}
     </p>
   );
 }
 
-export function QuoteForm() {
-  const [form, setForm] = useState<QuotePayload>(emptyQuote);
+function coverageList(type: QuoteType | "") {
+  if (type === "commercial") return commercialCoverages;
+  if (type === "personal") return personalCoverages;
+  if (type === "bicycle") return bicycleCoverages;
+  return [];
+}
+
+export function QuoteForm({ initialType = "" }: { initialType?: QuoteType | "" }) {
+  const [form, setForm] = useState<QuotePayload>(() => emptyQuote(initialType));
   const [errors, setErrors] = useState<QuoteFieldErrors>({});
   const [status, setStatus] = useState<Status>({ kind: "idle" });
   const formRef = useRef<HTMLFormElement>(null);
-  const liveRef = useRef<HTMLParagraphElement>(null);
 
   function update<K extends keyof QuotePayload>(key: K, value: QuotePayload[K]) {
     setForm((current) => ({ ...current, [key]: value }));
+  }
+
+  function setQuoteType(next: QuoteType) {
+    setForm((current) => ({
+      ...current,
+      quoteType: next,
+      coverage: [],
+      businessName: next === "commercial" ? current.businessName : "",
+      bikeType: next === "bicycle" ? current.bikeType : "",
+      bikeValue: next === "bicycle" ? current.bikeValue : "",
+    }));
+    setErrors({});
   }
 
   function toggleCoverage(value: string) {
@@ -54,12 +76,14 @@ export function QuoteForm() {
 
   function focusFirstError(nextErrors: QuoteFieldErrors) {
     const order: (keyof QuotePayload)[] = [
+      "quoteType",
       "name",
       "email",
       "phone",
+      "location",
+      "businessName",
       "bikeType",
       "bikeValue",
-      "location",
       "coverage",
       "message",
     ];
@@ -106,28 +130,28 @@ export function QuoteForm() {
   if (status.kind === "success") {
     return (
       <div
-        className="rounded-[2rem] border border-line bg-paper px-6 py-10 sm:px-10"
+        className="rounded-sm border border-line bg-paper px-6 py-10 sm:px-10"
         role="status"
       >
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-moss">
+        <p className="text-xs font-semibold tracking-[0.2em] text-gold-dark uppercase">
           Request received
         </p>
-        <h2 className="display mt-3 text-3xl text-forest sm:text-4xl">
-          You’re on the list.
+        <h2 className="display mt-3 text-3xl text-navy sm:text-4xl">
+          We’ll take it from here.
         </h2>
         <p className="mt-4 max-w-lg text-muted">
-          Thanks — we stored your quote request locally. In a live product this
-          is where a licensed partner would email a written quote. Nothing is
-          bound and no payment was taken.
+          Thanks — your quote request is saved with a reference ID. This is not a
+          binder and no payment was taken. An advisor can follow up at
+          quoting@rhinoia.com.
         </p>
-        <p className="mt-5 rounded-2xl bg-cream px-4 py-3 font-mono text-sm text-forest">
+        <p className="mt-5 rounded-sm bg-stone px-4 py-3 font-mono text-sm text-navy">
           Reference {status.id}
         </p>
         <button
           type="button"
-          className="mt-8 rounded-full bg-forest px-5 py-3 text-sm font-semibold text-cream hover:bg-moss"
+          className="mt-8 rounded-sm bg-navy px-5 py-3 text-sm font-semibold text-stone hover:bg-navy-mid"
           onClick={() => {
-            setForm(emptyQuote());
+            setForm(emptyQuote(form.quoteType));
             setErrors({});
             setStatus({ kind: "idle" });
           }}
@@ -138,29 +162,66 @@ export function QuoteForm() {
     );
   }
 
+  const options = coverageList(form.quoteType);
+
   return (
     <form
       ref={formRef}
       noValidate
       onSubmit={onSubmit}
-      className="rounded-[2rem] border border-line bg-paper px-5 pt-5 pb-8 shadow-[0_20px_50px_-32px_rgba(18,52,40,0.45)] sm:px-8 sm:pt-8 sm:pb-10"
+      className="rounded-sm border border-line bg-paper px-5 pt-5 pb-8 shadow-[0_24px_50px_-36px_rgba(15,28,46,0.45)] sm:px-8 sm:pt-8 sm:pb-10"
     >
-      <p ref={liveRef} className="sr-only" aria-live="polite">
+      <p className="sr-only" aria-live="polite">
         {status.kind === "submitting" ? "Sending your request" : ""}
       </p>
 
       {status.kind === "error" ? (
         <p
           role="alert"
-          className="mb-6 rounded-2xl border border-copper/30 bg-copper/8 px-4 py-3 text-sm text-copper-dark"
+          className="mb-6 rounded-sm border border-gold/40 bg-gold/10 px-4 py-3 text-sm text-navy"
         >
           {status.message}
         </p>
       ) : null}
 
-      <div className="grid gap-5 sm:grid-cols-2">
-        <div className="sm:col-span-1">
-          <label htmlFor="name" className="text-sm font-medium text-forest">
+      <fieldset>
+        <legend className="text-sm font-medium text-navy">Quote type</legend>
+        <div className="mt-3 grid gap-2 sm:grid-cols-3">
+          {quoteTypes.map((option) => {
+            const selected = form.quoteType === option.value;
+            return (
+              <label
+                key={option.value}
+                className={`cursor-pointer rounded-sm border px-4 py-3 ${
+                  selected
+                    ? "border-navy bg-navy text-stone"
+                    : "border-line bg-stone text-ink"
+                }`}
+              >
+                <input
+                  type="radio"
+                  name="quoteType"
+                  value={option.value}
+                  checked={selected}
+                  className="sr-only"
+                  onChange={() => setQuoteType(option.value)}
+                />
+                <span className="block text-sm font-semibold">{option.label}</span>
+                <span
+                  className={`mt-1 block text-xs ${selected ? "text-stone/70" : "text-muted"}`}
+                >
+                  {option.hint}
+                </span>
+              </label>
+            );
+          })}
+        </div>
+        <FieldError id="quoteType-error" message={errors.quoteType} />
+      </fieldset>
+
+      <div className="mt-6 grid gap-5 sm:grid-cols-2">
+        <div>
+          <label htmlFor="name" className="text-sm font-medium text-navy">
             Full name
           </label>
           <input
@@ -176,9 +237,8 @@ export function QuoteForm() {
           />
           <FieldError id="name-error" message={errors.name} />
         </div>
-
         <div>
-          <label htmlFor="email" className="text-sm font-medium text-forest">
+          <label htmlFor="email" className="text-sm font-medium text-navy">
             Email
           </label>
           <input
@@ -195,9 +255,8 @@ export function QuoteForm() {
           />
           <FieldError id="email-error" message={errors.email} />
         </div>
-
         <div>
-          <label htmlFor="phone" className="text-sm font-medium text-forest">
+          <label htmlFor="phone" className="text-sm font-medium text-navy">
             Phone <span className="font-normal text-muted">(optional)</span>
           </label>
           <input
@@ -213,9 +272,8 @@ export function QuoteForm() {
           />
           <FieldError id="phone-error" message={errors.phone} />
         </div>
-
         <div>
-          <label htmlFor="location" className="text-sm font-medium text-forest">
+          <label htmlFor="location" className="text-sm font-medium text-navy">
             City or ZIP
           </label>
           <input
@@ -224,7 +282,7 @@ export function QuoteForm() {
             autoComplete="postal-code"
             required
             className={fieldClass}
-            placeholder="Portland, OR or 97214"
+            placeholder="Edinburg, TX or 78539"
             value={form.location}
             aria-invalid={Boolean(errors.location)}
             aria-describedby={errors.location ? "location-error" : undefined}
@@ -232,99 +290,121 @@ export function QuoteForm() {
           />
           <FieldError id="location-error" message={errors.location} />
         </div>
-
-        <div>
-          <label htmlFor="bikeType" className="text-sm font-medium text-forest">
-            Bike type
-          </label>
-          <select
-            id="bikeType"
-            name="bikeType"
-            required
-            className={fieldClass}
-            value={form.bikeType}
-            aria-invalid={Boolean(errors.bikeType)}
-            aria-describedby={errors.bikeType ? "bikeType-error" : undefined}
-            onChange={(event) => update("bikeType", event.target.value)}
-          >
-            <option value="">Select type</option>
-            {bikeTypes.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-          <FieldError id="bikeType-error" message={errors.bikeType} />
-        </div>
-
-        <div>
-          <label htmlFor="bikeValue" className="text-sm font-medium text-forest">
-            Bike value
-          </label>
-          <select
-            id="bikeValue"
-            name="bikeValue"
-            required
-            className={fieldClass}
-            value={form.bikeValue}
-            aria-invalid={Boolean(errors.bikeValue)}
-            aria-describedby={errors.bikeValue ? "bikeValue-error" : undefined}
-            onChange={(event) => update("bikeValue", event.target.value)}
-          >
-            <option value="">Select range</option>
-            {bikeValues.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-          <FieldError id="bikeValue-error" message={errors.bikeValue} />
-        </div>
       </div>
 
-      <fieldset
-        className="mt-6"
-        aria-invalid={Boolean(errors.coverage)}
-        aria-describedby={
-          errors.coverage ? "coverage-error coverage-hint" : "coverage-hint"
-        }
-      >
-        <legend className="text-sm font-medium text-forest">
-          Coverage interests
-        </legend>
-        <p id="coverage-hint" className="mt-1 text-sm text-muted">
-          Pick everything you want priced. You can change this later.
-        </p>
-        <div className="mt-3 grid gap-2 sm:grid-cols-2">
-          {coverageInterests.map((option) => {
-            const checked = form.coverage.includes(option.value);
-            return (
-              <label
-                key={option.value}
-                className={`flex cursor-pointer items-center gap-3 rounded-2xl border px-4 py-3 text-sm font-medium ${
-                  checked
-                    ? "border-forest bg-forest/6 text-forest"
-                    : "border-line bg-cream text-ink"
-                }`}
-              >
-                <input
-                  type="checkbox"
-                  name="coverage"
-                  value={option.value}
-                  checked={checked}
-                  className="size-4 accent-forest"
-                  onChange={() => toggleCoverage(option.value)}
-                />
-                {option.label}
-              </label>
-            );
-          })}
+      {form.quoteType === "commercial" ? (
+        <div className="mt-5">
+          <label htmlFor="businessName" className="text-sm font-medium text-navy">
+            Business name
+          </label>
+          <input
+            id="businessName"
+            name="businessName"
+            autoComplete="organization"
+            className={fieldClass}
+            value={form.businessName}
+            aria-invalid={Boolean(errors.businessName)}
+            aria-describedby={errors.businessName ? "businessName-error" : undefined}
+            onChange={(event) => update("businessName", event.target.value)}
+          />
+          <FieldError id="businessName-error" message={errors.businessName} />
         </div>
-        <FieldError id="coverage-error" message={errors.coverage} />
-      </fieldset>
+      ) : null}
+
+      {form.quoteType === "bicycle" ? (
+        <div className="mt-5 grid gap-5 sm:grid-cols-2">
+          <div>
+            <label htmlFor="bikeType" className="text-sm font-medium text-navy">
+              Bike type
+            </label>
+            <select
+              id="bikeType"
+              name="bikeType"
+              className={fieldClass}
+              value={form.bikeType}
+              aria-invalid={Boolean(errors.bikeType)}
+              aria-describedby={errors.bikeType ? "bikeType-error" : undefined}
+              onChange={(event) => update("bikeType", event.target.value)}
+            >
+              <option value="">Select type</option>
+              {bikeTypes.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+            <FieldError id="bikeType-error" message={errors.bikeType} />
+          </div>
+          <div>
+            <label htmlFor="bikeValue" className="text-sm font-medium text-navy">
+              Bike value
+            </label>
+            <select
+              id="bikeValue"
+              name="bikeValue"
+              className={fieldClass}
+              value={form.bikeValue}
+              aria-invalid={Boolean(errors.bikeValue)}
+              aria-describedby={errors.bikeValue ? "bikeValue-error" : undefined}
+              onChange={(event) => update("bikeValue", event.target.value)}
+            >
+              <option value="">Select range</option>
+              {bikeValues.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+            <FieldError id="bikeValue-error" message={errors.bikeValue} />
+          </div>
+        </div>
+      ) : null}
+
+      {form.quoteType ? (
+        <fieldset
+          className="mt-6"
+          aria-invalid={Boolean(errors.coverage)}
+          aria-describedby={
+            errors.coverage ? "coverage-error coverage-hint" : "coverage-hint"
+          }
+        >
+          <legend className="text-sm font-medium text-navy">
+            Coverage interests
+          </legend>
+          <p id="coverage-hint" className="mt-1 text-sm text-muted">
+            Pick everything you want us to look at. You can change this later.
+          </p>
+          <div className="mt-3 grid gap-2 sm:grid-cols-2">
+            {options.map((option) => {
+              const checked = form.coverage.includes(option.value);
+              return (
+                <label
+                  key={option.value}
+                  className={`flex cursor-pointer items-center gap-3 rounded-sm border px-4 py-3 text-sm font-medium ${
+                    checked
+                      ? "border-navy bg-navy/5 text-navy"
+                      : "border-line bg-stone text-ink"
+                  }`}
+                >
+                  <input
+                    type="checkbox"
+                    name="coverage"
+                    value={option.value}
+                    checked={checked}
+                    className="size-4 accent-navy"
+                    onChange={() => toggleCoverage(option.value)}
+                  />
+                  {option.label}
+                </label>
+              );
+            })}
+          </div>
+          <FieldError id="coverage-error" message={errors.coverage} />
+        </fieldset>
+      ) : null}
 
       <div className="mt-6">
-        <label htmlFor="message" className="text-sm font-medium text-forest">
+        <label htmlFor="message" className="text-sm font-medium text-navy">
           Anything else? <span className="font-normal text-muted">(optional)</span>
         </label>
         <textarea
@@ -332,7 +412,7 @@ export function QuoteForm() {
           name="message"
           rows={4}
           className={`${fieldClass} resize-y`}
-          placeholder="Second bike, e-bike class, lock type, commuting vs weekend…"
+          placeholder="Payroll, vehicle count, e-bike class, lock type…"
           value={form.message}
           aria-invalid={Boolean(errors.message)}
           aria-describedby={errors.message ? "message-error" : undefined}
@@ -342,14 +422,14 @@ export function QuoteForm() {
       </div>
 
       <p className="mt-6 text-sm text-muted">
-        Submitting does not start coverage and is not a price. We’ll only use
-        this information to follow up on the request.
+        Submitting does not start coverage and is not a price. We’ll only use this
+        information to follow up on the request.
       </p>
 
       <button
         type="submit"
         disabled={status.kind === "submitting"}
-        className="mt-6 inline-flex min-h-12 w-full items-center justify-center rounded-full bg-copper px-6 py-3.5 text-sm font-semibold text-white hover:bg-copper-dark disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto"
+        className="mt-6 inline-flex min-h-12 w-full items-center justify-center rounded-sm bg-gold px-6 py-3.5 text-sm font-semibold text-navy hover:bg-gold-dark hover:text-stone disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto"
       >
         {status.kind === "submitting" ? "Sending…" : "Request a quote"}
       </button>

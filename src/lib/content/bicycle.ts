@@ -1,15 +1,12 @@
-import { brand } from "./brand";
+import { brand } from "../brand";
 
-export const sampleNotice =
-  "Sample marketing copy for demonstration only. This is not an offer of insurance, a binder, or a licensed product.";
-
-export const coverageTypes = [
+export const bikeCoverages = [
   {
     id: "theft",
     title: "Theft",
-    kicker: "The bike leaves without you",
+    kicker: "When the bike leaves without you",
     summary:
-      "Replacement help when your bike is stolen from home, a locked garage, or while secured in public.",
+      "Replacement help when your bicycle is stolen from home, a locked garage, or while secured in public.",
     typicalLimit: "Up to the declared bicycle value",
     sampleDeductible: "$250",
     included: [
@@ -90,61 +87,51 @@ export const coverageTypes = [
   },
 ] as const;
 
-export const howItWorksSteps = [
+export const bikeHowItWorks = [
   {
     n: "01",
     title: "Tell us about the bike",
-    body: "Share the rider, the bicycle type and value range, where you keep it, and which coverages you care about. Takes a few minutes — no account required.",
+    body: "Share the rider, bicycle type and value range, where you keep it, and which coverages you care about. No account required.",
   },
   {
     n: "02",
-    title: "We review the request",
-    body: "A licensed partner (in a real deployment) would check eligibility, ask about locks or prior claims if needed, and send a written quote. In this sample, we confirm we received the form.",
+    title: "Rhino reviews the request",
+    body: "An advisor checks eligibility, may ask about locks or prior claims, and follows up with options. Submitting this website form is a request — not a price and not a binder.",
   },
   {
     n: "03",
-    title: "You choose whether to bind",
-    body: "Nothing is in force until you accept terms, pay a premium, and receive declarations. A quote request is not coverage.",
+    title: "You decide whether to bind",
+    body: "Nothing is in force until you accept terms, pay the premium, and receive declarations. A quote request is not coverage.",
   },
 ] as const;
 
-export const faqs = [
+export const bikeFaqs = [
   {
-    q: `Is ${brand.name} a real insurance company?`,
-    a: `This site is a product marketing prototype. ${brand.name} is a working name, and the policy language is realistic sample copy — not a licensed product, not a binder, and not advice. A production version would be issued by an admitted or surplus-lines carrier through a licensed agency.`,
+    q: `Does ${brand.shortName} manufacture the bicycle policy?`,
+    a: `${brand.name} is an independent agency. We help you find and request coverage through appointed carriers. Sample wording on this page is educational — the issued policy controls.`,
   },
   {
     q: "Does homeowners or renters insurance already cover my bike?",
-    a: "Often only partly. Those policies may treat a bicycle as personal property with a low sublimit, a high deductible, and little or no coverage away from home or for liability while riding. Dedicated bicycle insurance is meant to fill those gaps — especially for bikes worth more than a couple of thousand dollars.",
+    a: "Often only partly. Those policies may treat a bicycle as personal property with a low sublimit, a high deductible, and little coverage away from home or for liability while riding. Dedicated bicycle insurance is meant to fill those gaps.",
   },
   {
     q: "Do I need a specific lock?",
-    a: "In a typical theft form, yes. Sample wording assumes a sold-secure or equivalently rated lock when the bike is in public, and a locked building at home. Keep the receipt and, after a theft, the cut lock if you still have it.",
+    a: "On a typical theft form, yes. Sample wording assumes a sold-secure or equivalently rated lock in public, and a locked building at home. Keep the receipt and, after a theft, the cut lock if you still have it.",
   },
   {
     q: "Are e-bikes eligible?",
-    a: "Class 1 and 2 e-bikes are commonly eligible; throttle-only or high-speed conversions often need underwriting review or are excluded. Use the quote form’s bike type field and mention motor/class in the message.",
+    a: "Class 1 and 2 e-bikes are commonly eligible; throttle-only or high-speed conversions often need underwriting review. Choose e-bike on the quote form and mention motor class in the notes.",
   },
   {
-    q: "What is not covered?",
-    a: "Typical exclusions (sample): wear and tear, mechanical breakdown, racing without an endorsement, unlocked public theft, commercial delivery, and injury to the rider. Read the coverage page for the placeholder wording.",
-  },
-  {
-    q: "How are claims handled in a real product?",
-    a: "You would report the loss, provide photos, a police report for theft, and proof of ownership. The carrier would inspect or request estimates, apply the deductible, and repair or pay value. This demo has no claims portal.",
+    q: "What is usually not covered?",
+    a: "Typical exclusions (sample): wear and tear, mechanical breakdown, racing without an endorsement, unlocked public theft, commercial delivery, and injury to the rider. Read the coverage sections below for placeholder wording.",
   },
   {
     q: "Will I get a price when I submit the form?",
-    a: "Not in this version. There is no rating engine. Submitting the form stores the request locally and shows a confirmation. Wiring an email provider and an underwriting partner is documented in the README.",
+    a: "Not automatically. There is no live rating engine on this site. You’ll receive a confirmation ID, and our team follows up at quoting@rhinoia.com.",
   },
   {
     q: "Can I insure more than one bike?",
-    a: "A production policy would usually schedule multiple bicycles on one account. For this demo, describe additional bikes in the message field or submit a second request.",
+    a: "A production policy can usually schedule multiple bicycles. Describe additional bikes in the message field or submit a second request.",
   },
-] as const;
-
-export const homeStats = [
-  { value: "$11", label: "Sample monthly from*", hint: "Not a real rate" },
-  { value: "4", label: "Coverage building blocks", hint: "Theft to accessories" },
-  { value: "24h", label: "Target quote follow-up", hint: "When email is wired" },
 ] as const;

@@ -1,3 +1,22 @@
+export function RhinoHeroArt() {
+  return (
+    <svg
+      viewBox="0 0 560 480"
+      className="h-auto w-full"
+      role="img"
+      aria-label="Stylized rhino mark"
+    >
+      <rect width="560" height="480" fill="none" />
+      <circle cx="300" cy="230" r="168" fill="#1b2f48" />
+      <path
+        fill="#c4a35a"
+        d="M92 318c8-92 78-178 198-214 16-5 34 8 28 26l-16 38c44 3 80 26 100 58 9 14-3 32-20 32h-34l-14 38c34 8 58 30 66 58 6 22-10 38-32 38H172c-48 0-84-34-80-74z"
+      />
+      <circle cx="248" cy="248" r="16" fill="#0f1c2e" />
+    </svg>
+  );
+}
+
 export function BikeHeroArt() {
   return (
     <svg
@@ -6,22 +25,17 @@ export function BikeHeroArt() {
       role="img"
       aria-label="Illustration of a bicycle in front of a shield"
     >
-      <rect width="640" height="520" rx="0" fill="none" />
-      <ellipse cx="430" cy="248" rx="168" ry="176" fill="#1b4636" />
-      <path
-        d="M430 78c78 0 148 48 148 148 0 92-62 148-148 172-86-24-148-80-148-172 0-100 70-148 148-148z"
-        fill="#f4efe6"
-        opacity="0.08"
-      />
+      <rect width="640" height="520" fill="none" />
+      <ellipse cx="430" cy="248" rx="168" ry="176" fill="#1b2f48" />
       <path
         d="M430 98 534 140v72c0 70-48 110-104 126-56-16-104-56-104-126v-72L430 98z"
         fill="none"
-        stroke="#e4d8c4"
+        stroke="#c4a35a"
         strokeWidth="3"
       />
       <g
         fill="none"
-        stroke="#f4efe6"
+        stroke="#f3f1ec"
         strokeLinecap="round"
         strokeLinejoin="round"
       >
@@ -29,20 +43,15 @@ export function BikeHeroArt() {
         <circle cx="188" cy="348" r="12" strokeWidth="5" />
         <circle cx="452" cy="348" r="86" strokeWidth="8" />
         <circle cx="452" cy="348" r="12" strokeWidth="5" />
-        <path
-          d="M188 348h132l78-168h86"
-          strokeWidth="8"
-        />
+        <path d="M188 348h132l78-168h86" strokeWidth="8" />
         <path d="M320 348 250 180l72-42" strokeWidth="8" />
         <path d="M250 180h118" strokeWidth="8" />
         <path d="M322 138h54" strokeWidth="7" />
         <path d="M376 138v22" strokeWidth="7" />
         <circle cx="250" cy="180" r="16" strokeWidth="6" />
-        <path d="M218 348c22-38 58-38 80 0" strokeWidth="5" opacity="0.7" />
-        <path d="M414 348c22-38 58-38 80 0" strokeWidth="5" opacity="0.7" />
       </g>
-      <circle cx="188" cy="348" r="4" fill="#c45c26" />
-      <circle cx="452" cy="348" r="4" fill="#c45c26" />
+      <circle cx="188" cy="348" r="4" fill="#c4a35a" />
+      <circle cx="452" cy="348" r="4" fill="#c4a35a" />
     </svg>
   );
 }
@@ -130,14 +139,14 @@ export function IconBag() {
   );
 }
 
-const icons = {
+const bikeIcons = {
   theft: IconLock,
   damage: IconCrash,
   liability: IconShield,
   accessories: IconBag,
 } as const;
 
-export function CoverageIcon({ id }: { id: keyof typeof icons }) {
-  const Icon = icons[id];
+export function CoverageIcon({ id }: { id: keyof typeof bikeIcons }) {
+  const Icon = bikeIcons[id];
   return <Icon />;
 }

@@ -1,18 +1,17 @@
 "use client";
 
 import { useId, useState } from "react";
-import { faqs } from "@/lib/content";
 
 export function FaqAccordion({
-  items = faqs,
+  items,
 }: {
-  items?: readonly { q: string; a: string }[];
+  items: readonly { q: string; a: string }[];
 }) {
   const baseId = useId();
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <div className="divide-y divide-line rounded-[1.75rem] border border-line bg-paper">
+    <div className="divide-y divide-line rounded-sm border border-line bg-paper">
       {items.map((item, index) => {
         const panelId = `${baseId}-panel-${index}`;
         const buttonId = `${baseId}-button-${index}`;
@@ -25,14 +24,14 @@ export function FaqAccordion({
                 id={buttonId}
                 aria-controls={panelId}
                 aria-expanded={isOpen}
-                className="flex w-full items-start justify-between gap-4 py-5 text-left text-base font-semibold text-forest sm:text-lg"
+                className="flex w-full items-start justify-between gap-4 py-5 text-left text-base font-semibold text-navy sm:text-lg"
                 onClick={() => setOpen(isOpen ? null : index)}
               >
                 <span>{item.q}</span>
                 <span
                   aria-hidden="true"
-                  className={`mt-1 inline-flex size-7 shrink-0 items-center justify-center rounded-full border border-line text-sm transition-transform ${
-                    isOpen ? "rotate-45 bg-sand" : ""
+                  className={`mt-1 inline-flex size-7 shrink-0 items-center justify-center rounded-sm border border-line text-sm transition-transform ${
+                    isOpen ? "rotate-45 bg-stone" : ""
                   }`}
                 >
                   +

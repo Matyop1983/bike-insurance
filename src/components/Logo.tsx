@@ -1,5 +1,25 @@
 import { brand } from "@/lib/brand";
 
+export function RhinoMark({ className = "size-10" }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 40 40"
+      className={className}
+      aria-hidden="true"
+    >
+      <rect width="40" height="40" rx="5" fill="currentColor" />
+      <path
+        fill="#c4a35a"
+        d="M8 26.4c.5-5.6 4.4-10.8 11.4-13 .9-.3 2 .5 1.7 1.5l-.9 2.2c2.6.2 4.7 1.5 5.9 3.5.5.8-.2 1.8-1.2 1.8h-2l-.8 2.2c2 .5 3.4 1.8 3.9 3.4.4 1.2-.6 2.2-1.8 2.2H12.6C9.8 30.2 7.8 28.2 8 26.4z"
+      />
+      <path
+        fill="currentColor"
+        d="M17.6 20.4c.7 0 1.3.6 1.3 1.4s-.6 1.4-1.3 1.4-1.3-.6-1.3-1.4.6-1.4 1.3-1.4z"
+      />
+    </svg>
+  );
+}
+
 export function Logo({
   compact = false,
   inverted = false,
@@ -7,57 +27,22 @@ export function Logo({
   compact?: boolean;
   inverted?: boolean;
 }) {
-  const shield = inverted ? "#123428" : "#f4efe6";
-  const line = inverted ? "#f4efe6" : "#123428";
-
   return (
     <span
-      className={`inline-flex items-center gap-2.5 ${inverted ? "text-cream" : "text-forest"}`}
+      className={`inline-flex items-center gap-2.5 ${inverted ? "text-stone" : "text-navy"}`}
     >
-      <svg
-        viewBox="0 0 40 40"
-        className="size-9 shrink-0"
-        aria-hidden="true"
-      >
-        <rect width="40" height="40" rx="11" fill="currentColor" />
-        <path
-          fill={shield}
-          d="M20 7.2 31 11.6v7.6c0 7.4-5.1 11.7-11 13.3-5.9-1.6-11-5.9-11-13.3v-7.6L20 7.2z"
-        />
-        <circle
-          cx="15.4"
-          cy="23.2"
-          r="3.8"
-          fill="none"
-          stroke={line}
-          strokeWidth="1.7"
-        />
-        <circle
-          cx="25.4"
-          cy="23.2"
-          r="3.8"
-          fill="none"
-          stroke={line}
-          strokeWidth="1.7"
-        />
-        <path
-          d="M15.4 23.2h5.1l2.9-6.2h3.3M20.5 23.2 18.1 17l2.7-1.7M17.9 16.8h4.4"
-          fill="none"
-          stroke={line}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="1.7"
-        />
-      </svg>
+      <RhinoMark className="size-10 shrink-0" />
       <span className="leading-tight">
-        <span className="block font-semibold tracking-tight">{brand.name}</span>
+        <span className="block text-[0.95rem] font-semibold tracking-tight">
+          {brand.shortName}
+        </span>
         {!compact ? (
           <span
-            className={`block text-[0.7rem] font-medium uppercase tracking-[0.16em] ${
-              inverted ? "text-cream/55" : "text-muted"
+            className={`block text-[0.68rem] font-medium tracking-[0.14em] uppercase ${
+              inverted ? "text-gold" : "text-muted"
             }`}
           >
-            Bike insurance
+            Insurance Advisors
           </span>
         ) : null}
       </span>

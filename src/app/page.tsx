@@ -1,108 +1,68 @@
 import Link from "next/link";
 import { CtaBand } from "@/components/CtaBand";
-import { FaqAccordion } from "@/components/FaqAccordion";
-import { BikeHeroArt, CoverageIcon } from "@/components/illustrations";
+import { RhinoHeroArt } from "@/components/illustrations";
 import { brand, quoteCta } from "@/lib/brand";
-import {
-  coverageTypes,
-  faqs,
-  homeStats,
-  howItWorksSteps,
-  sampleNotice,
-} from "@/lib/content";
+import { homePillars, testimonials } from "@/lib/content";
 
 export default function HomePage() {
   return (
     <>
-      <section className="wrap grid items-center gap-10 pt-10 pb-16 lg:grid-cols-[1.1fr_0.9fr] lg:pt-14 lg:pb-20">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-moss">
-            Bicycle insurance
-          </p>
-          <h1 className="display mt-4 text-[2.65rem] leading-[1.05] text-forest sm:text-6xl">
-            The lock isn’t
-            <br className="hidden sm:block" /> the whole plan.
-          </h1>
-          <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted">
-            {brand.name} covers theft, crash damage, liability, and the
-            accessories you actually ride with — so a cut U-lock or a wet
-            descent doesn’t end the season. Request a quote. No account, no
-            payment in this demo.
-          </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-            <Link
-              href={quoteCta.href}
-              className="inline-flex items-center justify-center rounded-full bg-copper px-6 py-3 text-sm font-semibold text-white hover:bg-copper-dark"
-            >
-              {quoteCta.label}
-            </Link>
-            <Link
-              href="/coverage"
-              className="inline-flex items-center justify-center rounded-full border border-forest/20 bg-paper px-6 py-3 text-sm font-semibold text-forest hover:bg-sand/60"
-            >
-              See what’s covered
-            </Link>
+      <section className="bg-navy text-stone">
+        <div className="wrap grid items-center gap-10 py-14 lg:grid-cols-[1.15fr_0.85fr] lg:py-20">
+          <div>
+            <p className="text-xs font-semibold tracking-[0.22em] text-gold uppercase">
+              Edinburg, Texas
+            </p>
+            <h1 className="display mt-4 text-[2.5rem] leading-[1.08] text-balance sm:text-5xl lg:text-6xl">
+              {brand.tagline}.
+            </h1>
+            <p className="mt-6 max-w-xl text-lg leading-relaxed text-stone/75">
+              {brand.integrity} Commercial coverage, individual policies, and a
+              featured bicycle insurance product — with an advisor you can actually
+              reach.
+            </p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <Link
+                href="/business-insurance"
+                className="inline-flex items-center justify-center rounded-sm bg-gold px-6 py-3 text-sm font-semibold text-navy hover:bg-gold-dark hover:text-stone"
+              >
+                Business insurance
+              </Link>
+              <Link
+                href={quoteCta.href}
+                className="inline-flex items-center justify-center rounded-sm border border-stone/25 px-6 py-3 text-sm font-semibold text-stone hover:bg-white/10"
+              >
+                {quoteCta.label}
+              </Link>
+            </div>
           </div>
-          <p className="mt-6 max-w-lg text-xs leading-relaxed text-muted/80">
-            {sampleNotice}
-          </p>
-        </div>
-
-        <div className="grain relative overflow-hidden rounded-[2rem] bg-forest px-4 pt-8 text-cream sm:px-8">
-          <BikeHeroArt />
-          <div className="relative z-10 -mt-6 grid grid-cols-3 gap-px overflow-hidden rounded-t-[1.5rem] bg-white/10">
-            {homeStats.map((stat) => (
-              <div key={stat.label} className="bg-forest/40 px-3 py-4 sm:px-4">
-                <p className="display text-2xl text-cream sm:text-3xl">
-                  {stat.value}
-                </p>
-                <p className="mt-1 text-[0.7rem] leading-snug text-cream/70 sm:text-xs">
-                  {stat.label}
-                </p>
-              </div>
-            ))}
+          <div className="px-4 sm:px-8">
+            <RhinoHeroArt />
           </div>
         </div>
       </section>
 
-      <section className="wrap pb-20">
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-moss">
-              Building blocks
-            </p>
-            <h2 className="display mt-2 text-3xl text-forest sm:text-4xl">
-              Four coverages, one bicycle.
-            </h2>
-          </div>
-          <Link
-            href="/coverage"
-            className="text-sm font-semibold text-copper hover:text-copper-dark"
-          >
-            Full sample wording →
-          </Link>
-        </div>
-        <ul className="mt-8 grid gap-4 sm:grid-cols-2">
-          {coverageTypes.map((item) => (
-            <li key={item.id}>
+      <section className="wrap py-16 sm:py-20">
+        <p className="text-xs font-semibold tracking-[0.2em] text-gold-dark uppercase">
+          What we help with
+        </p>
+        <h2 className="display mt-2 max-w-2xl text-3xl text-navy sm:text-4xl">
+          Commercial strength. Personal attention. A bicycle product that isn’t an
+          afterthought.
+        </h2>
+        <ul className="mt-10 grid gap-4 lg:grid-cols-3">
+          {homePillars.map((item) => (
+            <li key={item.href}>
               <Link
-                href={`/coverage#${item.id}`}
-                className="group flex h-full flex-col rounded-[1.6rem] border border-line bg-paper p-6 transition-colors hover:border-forest/30 hover:bg-white"
+                href={item.href}
+                className="flex h-full flex-col rounded-sm border border-line bg-paper p-6 hover:border-navy/30"
               >
-                <span className="inline-flex size-12 items-center justify-center rounded-2xl bg-cream text-forest">
-                  <CoverageIcon id={item.id} />
-                </span>
-                <h3 className="mt-4 text-xl font-semibold text-forest">
-                  {item.title}
-                </h3>
-                <p className="mt-1 text-xs font-medium uppercase tracking-[0.14em] text-muted">
-                  {item.kicker}
-                </p>
+                <h3 className="text-xl font-semibold text-navy">{item.title}</h3>
                 <p className="mt-3 flex-1 text-sm leading-relaxed text-muted">
-                  {item.summary}
+                  {item.body}
                 </p>
-                <span className="mt-4 text-sm font-semibold text-copper group-hover:text-copper-dark">
-                  Details
+                <span className="mt-5 text-sm font-semibold text-gold-dark">
+                  Learn more
                 </span>
               </Link>
             </li>
@@ -110,66 +70,74 @@ export default function HomePage() {
         </ul>
       </section>
 
-      <section className="bg-sand/45 py-16">
+      <section className="bg-navy-mid py-16 text-stone">
         <div className="wrap">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-moss">
-            How it works
+          <p className="text-xs font-semibold tracking-[0.2em] text-gold uppercase">
+            See what our clients are saying
           </p>
-          <h2 className="display mt-2 max-w-xl text-3xl text-forest sm:text-4xl">
-            Three steps. Coverage only after you say yes.
+          <h2 className="display mt-2 text-3xl sm:text-4xl">
+            Relationships first — that’s the point of the mission.
           </h2>
-          <ol className="mt-10 grid gap-6 lg:grid-cols-3">
-            {howItWorksSteps.map((step) => (
-              <li
-                key={step.n}
-                className="rounded-[1.6rem] bg-paper px-6 py-7"
-              >
-                <p className="display text-4xl text-leaf">{step.n}</p>
-                <h3 className="mt-3 text-xl font-semibold text-forest">
-                  {step.title}
-                </h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted">
-                  {step.body}
+          <ul className="mt-10 grid gap-4 lg:grid-cols-3">
+            {testimonials.map((item) => (
+              <li key={item.name} className="rounded-sm bg-navy px-6 py-7">
+                <p className="text-[0.95rem] leading-relaxed text-stone/85">
+                  “{item.quote}”
                 </p>
+                <p className="mt-5 text-sm font-semibold text-gold">{item.name}</p>
+                <p className="text-xs text-stone/55">{item.role}</p>
               </li>
             ))}
-          </ol>
-          <Link
-            href="/how-it-works"
-            className="mt-8 inline-block text-sm font-semibold text-copper hover:text-copper-dark"
+          </ul>
+          <p className="mt-6 text-xs text-stone/45">
+            Placeholder testimonials for this custom site until live quotes are
+            confirmed.
+          </p>
+        </div>
+      </section>
+
+      <section className="wrap grid gap-8 py-16 sm:grid-cols-2 sm:py-20">
+        <div>
+          <p className="text-xs font-semibold tracking-[0.2em] text-gold-dark uppercase">
+            Visit us
+          </p>
+          <h2 className="display mt-2 text-3xl text-navy">
+            Fountain Plaza, Edinburg
+          </h2>
+          <p className="mt-4 text-muted">{brand.address}</p>
+          <p className="mt-1 text-muted">Hours {brand.hours}</p>
+          <p className="mt-1">
+            <a className="font-semibold text-navy hover:text-gold-dark" href={brand.phoneHref}>
+              {brand.phone}
+            </a>
+          </p>
+          <a
+            href={brand.mapsHref}
+            target="_blank"
+            rel="noreferrer"
+            className="mt-6 inline-flex text-sm font-semibold text-gold-dark hover:text-navy"
           >
-            What happens after you submit →
+            Open in maps
+          </a>
+        </div>
+        <div className="rounded-sm bg-navy px-6 py-8 text-stone">
+          <h2 className="display text-2xl">Let’s get started</h2>
+          <p className="mt-3 text-stone/75">
+            Request a commercial, personal, or bicycle quote. An advisor follows up
+            — this site does not bind coverage online.
+          </p>
+          <Link
+            href={quoteCta.href}
+            className="mt-6 inline-flex rounded-sm bg-gold px-5 py-3 text-sm font-semibold text-navy hover:bg-gold-dark hover:text-stone"
+          >
+            I want to learn more
           </Link>
         </div>
       </section>
 
-      <section className="wrap py-20">
-        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-moss">
-              Questions
-            </p>
-            <h2 className="display mt-2 text-3xl text-forest sm:text-4xl">
-              Straight answers before you request a quote.
-            </h2>
-            <p className="mt-4 text-muted">
-              Including the honest one: this is a marketing prototype, not a
-              licensed insurer.
-            </p>
-            <Link
-              href="/faq"
-              className="mt-6 inline-block text-sm font-semibold text-copper hover:text-copper-dark"
-            >
-              All FAQs →
-            </Link>
-          </div>
-          <FaqAccordion items={faqs.slice(0, 4)} />
-        </div>
-      </section>
-
       <CtaBand
-        title="Ready when the bike is."
-        body="Tell us the type, the value range, and what you want covered. We’ll confirm we received it — and in production, a partner would send a written quote."
+        title="Ready when you are."
+        body="Tell us whether you need commercial, personal, or bicycle coverage. We’ll confirm we received it."
       />
     </>
   );

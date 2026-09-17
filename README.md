@@ -1,18 +1,17 @@
-# PedalGuard
+# Rhino Insurance Advisors
 
-Marketing site for a bicycle insurance product (working name: **PedalGuard**). Trustworthy, outdoor-lifestyle look with insurance-style sample copy — not a live carrier, not a pricing engine, and not a claims portal.
+Custom [Next.js](https://nextjs.org) site for **Rhino Insurance Advisors** (Edinburg, TX), intended to replace the current Squarespace site at [rhinoinsuranceadvisors.com](https://www.rhinoinsuranceadvisors.com/).
 
-Rename the product by editing `src/lib/brand.ts` (name, contact, nav) and `src/lib/content.ts` (coverage, FAQ, how-it-works copy).
+Bicycle insurance is a **featured personal product** on this site — not a separate brand. Brand, nav, and contact live in `src/lib/brand.ts`. Coverage copy lives in `src/lib/content/`.
 
 ## Pages
 
-- `/` — hero, coverage snapshot, 3-step overview, FAQ preview
-- `/coverage` — theft, damage, liability, accessories (placeholder policy language, clearly marked sample)
-- `/how-it-works` — the same three steps, plus what happens after submit
-- `/faq` — accordion answers
-- `/quote` — quote request form
-
-Contact details live in the footer.
+- `/` — agency home (commercial + individual, bicycle featured, testimonials, visit strip)
+- `/about` — mission and service-with-integrity
+- `/business-insurance` — GL, E&O, workers’ comp, umbrella, commercial auto, builders risk, property
+- `/bicycle-insurance` — theft, damage, liability, accessories + how it works + FAQ
+- `/quote` — unified quote request (`?type=commercial|personal|bicycle`)
+- `/contact` — phone, email, address, hours
 
 ## Run locally
 
@@ -25,8 +24,6 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
-Other scripts:
-
 ```bash
 npm run build
 npm run start
@@ -35,45 +32,39 @@ npm run lint
 
 ## Quote form (no payments)
 
-The form validates in the browser (required name, email, bike type, value range, city/ZIP, at least one coverage checkbox; phone and message are optional). On submit it `POST`s JSON to `/api/quote`.
+The form validates in the browser. Quote type is required:
 
-The API re-validates, logs the request, and **appends one JSON line** to:
+- **Commercial** — business name + commercial coverage checkboxes
+- **Personal** — personal-line coverage interests
+- **Bicycle** — bike type, value range, and theft/damage/liability/accessories
+
+On submit it `POST`s JSON to `/api/quote`. The API re-validates, logs the request, and appends one JSON line to:
 
 ```text
 data/quote-submissions.jsonl
 ```
 
-That file is gitignored. You should see a success state with a reference ID such as `PG-A1B2C3D4`.
-
-This is not a quote: there is no rating, no bind, and no checkout.
+That file is gitignored. Success shows a reference ID such as `RH-A1B2C3D4`. This is not a binder and not a price.
 
 ### Wiring email later
 
-Replace or extend `src/app/api/quote/route.ts` after a successful write:
+Extend `src/app/api/quote/route.ts` after a successful write:
 
-1. Add an API key via environment variable (for example `RESEND_API_KEY` or `POSTMARK_SERVER_TOKEN`). Do not commit secrets.
-2. Send a confirmation to the requester and an internal copy to `brand.email` in `src/lib/brand.ts`.
-3. Keep the JSONL (or swap it for a database) as a backup of the payload.
-4. Only then add a licensed-agency workflow: underwriting questions, documents, and a real premium.
+1. Add an API key via environment variable (`RESEND_API_KEY`, `POSTMARK_SERVER_TOKEN`, etc.). Do not commit secrets.
+2. Email the requester and an internal copy to `quoting@rhinoia.com`.
+3. Keep the JSONL (or a database) as a backup.
 
-Sketch with [Resend](https://resend.com/docs/send-with-nodejs):
+## Deploy and DNS (later)
 
-```ts
-await resend.emails.send({
-  from: "PedalGuard <quotes@your-domain>",
-  to: normalized.email,
-  subject: `We received your quote request (${id})`,
-  text: "Thanks — a specialist will follow up. This is not a binder.",
-});
-```
+This repo does not change DNS. When you are ready to replace Squarespace:
 
-## Next steps (intentionally out of v1)
+1. Deploy this app (Vercel, Netlify, or similar).
+2. Point `rhinoinsuranceadvisors.com` (and `www`) at the new host.
+3. Keep Squarespace until the cutover is tested.
 
-- Licensed carrier / MGA appointment and real underwriting
-- Rating engine and bindable quotes
-- Payments and policy documents
-- Auth, account area, and claims
-- CMS for coverage copy
+## Out of scope for v1
+
+Auth, payments, live rating/underwriting, claims portal, CMS, and Squarespace export tooling.
 
 ## Stack
 
