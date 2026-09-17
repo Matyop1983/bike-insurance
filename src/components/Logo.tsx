@@ -2,20 +2,13 @@ import { brand } from "@/lib/brand";
 
 export function RhinoMark({ className = "size-10" }: { className?: string }) {
   return (
-    <svg
-      viewBox="0 0 40 40"
-      className={className}
-      aria-hidden="true"
-    >
+    <svg viewBox="0 0 40 40" className={className} aria-hidden="true">
       <rect width="40" height="40" rx="5" fill="currentColor" />
       <path
         fill="#c4a35a"
-        d="M8 26.4c.5-5.6 4.4-10.8 11.4-13 .9-.3 2 .5 1.7 1.5l-.9 2.2c2.6.2 4.7 1.5 5.9 3.5.5.8-.2 1.8-1.2 1.8h-2l-.8 2.2c2 .5 3.4 1.8 3.9 3.4.4 1.2-.6 2.2-1.8 2.2H12.6C9.8 30.2 7.8 28.2 8 26.4z"
+        d="M9 28.2c-.2-5.4 3.4-10.2 10.2-12.4L23.4 7.6c.4-.8 1.6-.5 1.6.4l-.6 6.6c2.5.5 4.6 2.2 5.7 4.4.6 1.1-.3 2.2-1.5 2.2h-2.1l-.7 2.6c1.7.5 2.8 1.7 3.2 3.2.4 1.3-.6 2.4-1.9 2.4H13.1c-2.4 0-4-1.4-4.1-3.2z"
       />
-      <path
-        fill="currentColor"
-        d="M17.6 20.4c.7 0 1.3.6 1.3 1.4s-.6 1.4-1.3 1.4-1.3-.6-1.3-1.4.6-1.4 1.3-1.4z"
-      />
+      <circle cx="18.2" cy="21.6" r="1.5" fill="currentColor" />
     </svg>
   );
 }
