@@ -27,7 +27,7 @@ export default function BicycleInsurancePage() {
       />
 
       <div className="wrap grid items-center gap-10 pb-16 lg:grid-cols-[0.9fr_1.1fr]">
-        <div className="overflow-hidden rounded-sm bg-navy px-4 pt-6">
+        <div className="overflow-hidden rounded-sm bg-ink px-4 pt-6">
           <BikeHeroArt />
         </div>
         <div>
@@ -35,9 +35,9 @@ export default function BicycleInsurancePage() {
           <ol className="mt-6 space-y-4" id="how-it-works">
             {bikeHowItWorks.map((step) => (
               <li key={step.n} className="flex gap-4">
-                <span className="display text-3xl text-gold-dark">{step.n}</span>
+                <span className="display text-3xl text-teal-dark">{step.n}</span>
                 <div>
-                  <h2 className="font-semibold text-navy">{step.title}</h2>
+                  <h2 className="font-semibold text-ink">{step.title}</h2>
                   <p className="mt-1 text-sm leading-relaxed text-muted">{step.body}</p>
                 </div>
               </li>
@@ -45,7 +45,7 @@ export default function BicycleInsurancePage() {
           </ol>
           <Link
             href="/quote?type=bicycle"
-            className="mt-8 inline-flex rounded-sm bg-gold px-5 py-3 text-sm font-semibold text-navy hover:bg-gold-dark hover:text-stone"
+            className="mt-8 inline-flex rounded-sm bg-teal px-5 py-3 text-sm font-semibold text-ink hover:bg-teal-dark"
           >
             Request a bicycle quote
           </Link>
@@ -53,7 +53,7 @@ export default function BicycleInsurancePage() {
       </div>
 
       <section className="wrap space-y-6 pb-16">
-        <h2 className="display text-3xl text-navy">Coverage building blocks</h2>
+        <h2 className="display text-3xl text-ink">Coverage building blocks</h2>
         {bikeCoverages.map((item) => (
           <article
             key={item.id}
@@ -62,10 +62,10 @@ export default function BicycleInsurancePage() {
           >
             <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
               <div>
-                <span className="inline-flex size-12 items-center justify-center rounded-sm bg-stone text-navy">
+                <span className="inline-flex size-12 items-center justify-center rounded-sm bg-stone text-ink">
                   <CoverageIcon id={item.id} />
                 </span>
-                <h3 className="display mt-4 text-3xl text-navy">{item.title}</h3>
+                <h3 className="display mt-4 text-3xl text-ink">{item.title}</h3>
                 <p className="mt-1 text-sm font-medium tracking-[0.14em] text-muted uppercase">
                   {item.kicker}
                 </p>
@@ -73,37 +73,37 @@ export default function BicycleInsurancePage() {
               <dl className="grid gap-3 rounded-sm bg-stone px-5 py-4 text-sm sm:min-w-[16rem]">
                 <div>
                   <dt className="text-muted">Typical limit (sample)</dt>
-                  <dd className="font-semibold text-navy">{item.typicalLimit}</dd>
+                  <dd className="font-semibold text-ink">{item.typicalLimit}</dd>
                 </div>
                 <div>
                   <dt className="text-muted">Sample deductible</dt>
-                  <dd className="font-semibold text-navy">{item.sampleDeductible}</dd>
+                  <dd className="font-semibold text-ink">{item.sampleDeductible}</dd>
                 </div>
               </dl>
             </div>
             <p className="mt-5 max-w-3xl text-muted">{item.summary}</p>
             <div className="mt-8 grid gap-6 lg:grid-cols-2">
               <div>
-                <h4 className="text-sm font-semibold tracking-[0.16em] text-gold-dark uppercase">
+                <h4 className="text-sm font-semibold tracking-[0.16em] text-teal-dark uppercase">
                   Often included
                 </h4>
                 <ul className="mt-3 space-y-2 text-sm leading-relaxed">
                   {item.included.map((line) => (
                     <li key={line} className="flex gap-2">
-                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-gold" />
+                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-teal" />
                       <span>{line}</span>
                     </li>
                   ))}
                 </ul>
               </div>
               <div>
-                <h4 className="text-sm font-semibold tracking-[0.16em] text-gold-dark uppercase">
+                <h4 className="text-sm font-semibold tracking-[0.16em] text-teal-dark uppercase">
                   Often excluded
                 </h4>
                 <ul className="mt-3 space-y-2 text-sm leading-relaxed">
                   {item.excluded.map((line) => (
                     <li key={line} className="flex gap-2">
-                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-navy" />
+                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-ink" />
                       <span>{line}</span>
                     </li>
                   ))}
@@ -111,7 +111,7 @@ export default function BicycleInsurancePage() {
               </div>
             </div>
             <blockquote className="mt-8 rounded-sm border border-dashed border-line bg-stone/70 px-5 py-4 text-sm leading-relaxed text-muted">
-              <p className="text-xs font-semibold tracking-[0.16em] text-gold-dark uppercase">
+              <p className="text-xs font-semibold tracking-[0.16em] text-teal-dark uppercase">
                 Sample policy language
               </p>
               <p className="mt-2">{item.sampleLanguage}</p>
@@ -121,7 +121,7 @@ export default function BicycleInsurancePage() {
       </section>
 
       <section id="faq" className="wrap scroll-mt-28 pb-16">
-        <h2 className="display mb-6 text-3xl text-navy">Bicycle insurance FAQ</h2>
+        <h2 className="display mb-6 text-3xl text-ink">Bicycle insurance FAQ</h2>
         <FaqAccordion items={bikeFaqs} />
       </section>
 

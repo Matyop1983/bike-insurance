@@ -27,7 +27,7 @@ const fieldClass =
 function FieldError({ id, message }: { id: string; message?: string }) {
   if (!message) return null;
   return (
-    <p id={id} role="alert" className="mt-1.5 text-sm text-gold-dark">
+    <p id={id} role="alert" className="mt-1.5 text-sm text-teal-dark">
       {message}
     </p>
   );
@@ -133,10 +133,10 @@ export function QuoteForm({ initialType = "" }: { initialType?: QuoteType | "" }
         className="rounded-sm border border-line bg-paper px-6 py-10 sm:px-10"
         role="status"
       >
-        <p className="text-xs font-semibold tracking-[0.2em] text-gold-dark uppercase">
+        <p className="text-xs font-semibold tracking-[0.2em] text-teal-dark uppercase">
           Request received
         </p>
-        <h2 className="display mt-3 text-3xl text-navy sm:text-4xl">
+        <h2 className="display mt-3 text-3xl text-ink sm:text-4xl">
           We’ll take it from here.
         </h2>
         <p className="mt-4 max-w-lg text-muted">
@@ -144,12 +144,12 @@ export function QuoteForm({ initialType = "" }: { initialType?: QuoteType | "" }
           binder and no payment was taken. An advisor can follow up at
           quoting@rhinoia.com.
         </p>
-        <p className="mt-5 rounded-sm bg-stone px-4 py-3 font-mono text-sm text-navy">
+        <p className="mt-5 rounded-sm bg-stone px-4 py-3 font-mono text-sm text-ink">
           Reference {status.id}
         </p>
         <button
           type="button"
-          className="mt-8 rounded-sm bg-navy px-5 py-3 text-sm font-semibold text-stone hover:bg-navy-mid"
+          className="mt-8 rounded-sm bg-ink px-5 py-3 text-sm font-semibold text-stone hover:bg-ink-mid"
           onClick={() => {
             setForm(emptyQuote(form.quoteType));
             setErrors({});
@@ -169,7 +169,7 @@ export function QuoteForm({ initialType = "" }: { initialType?: QuoteType | "" }
       ref={formRef}
       noValidate
       onSubmit={onSubmit}
-      className="rounded-sm border border-line bg-paper px-5 pt-5 pb-8 shadow-[0_24px_50px_-36px_rgba(15,28,46,0.45)] sm:px-8 sm:pt-8 sm:pb-10"
+      className="rounded-sm border border-line bg-paper px-5 pt-5 pb-8 shadow-[0_24px_50px_-36px_rgba(0,0,0,0.35)] sm:px-8 sm:pt-8 sm:pb-10"
     >
       <p className="sr-only" aria-live="polite">
         {status.kind === "submitting" ? "Sending your request" : ""}
@@ -178,14 +178,14 @@ export function QuoteForm({ initialType = "" }: { initialType?: QuoteType | "" }
       {status.kind === "error" ? (
         <p
           role="alert"
-          className="mb-6 rounded-sm border border-gold/40 bg-gold/10 px-4 py-3 text-sm text-navy"
+          className="mb-6 rounded-sm border border-teal/40 bg-teal/10 px-4 py-3 text-sm text-ink"
         >
           {status.message}
         </p>
       ) : null}
 
       <fieldset>
-        <legend className="text-sm font-medium text-navy">Quote type</legend>
+        <legend className="text-sm font-medium text-ink">Quote type</legend>
         <div className="mt-3 grid gap-2 sm:grid-cols-3">
           {quoteTypes.map((option) => {
             const selected = form.quoteType === option.value;
@@ -194,7 +194,7 @@ export function QuoteForm({ initialType = "" }: { initialType?: QuoteType | "" }
                 key={option.value}
                 className={`cursor-pointer rounded-sm border px-4 py-3 ${
                   selected
-                    ? "border-navy bg-navy text-stone"
+                    ? "border-ink bg-ink text-stone"
                     : "border-line bg-stone text-ink"
                 }`}
               >
@@ -221,7 +221,7 @@ export function QuoteForm({ initialType = "" }: { initialType?: QuoteType | "" }
 
       <div className="mt-6 grid gap-5 sm:grid-cols-2">
         <div>
-          <label htmlFor="name" className="text-sm font-medium text-navy">
+          <label htmlFor="name" className="text-sm font-medium text-ink">
             Full name
           </label>
           <input
@@ -238,7 +238,7 @@ export function QuoteForm({ initialType = "" }: { initialType?: QuoteType | "" }
           <FieldError id="name-error" message={errors.name} />
         </div>
         <div>
-          <label htmlFor="email" className="text-sm font-medium text-navy">
+          <label htmlFor="email" className="text-sm font-medium text-ink">
             Email
           </label>
           <input
@@ -256,7 +256,7 @@ export function QuoteForm({ initialType = "" }: { initialType?: QuoteType | "" }
           <FieldError id="email-error" message={errors.email} />
         </div>
         <div>
-          <label htmlFor="phone" className="text-sm font-medium text-navy">
+          <label htmlFor="phone" className="text-sm font-medium text-ink">
             Phone <span className="font-normal text-muted">(optional)</span>
           </label>
           <input
@@ -273,7 +273,7 @@ export function QuoteForm({ initialType = "" }: { initialType?: QuoteType | "" }
           <FieldError id="phone-error" message={errors.phone} />
         </div>
         <div>
-          <label htmlFor="location" className="text-sm font-medium text-navy">
+          <label htmlFor="location" className="text-sm font-medium text-ink">
             City or ZIP
           </label>
           <input
@@ -294,7 +294,7 @@ export function QuoteForm({ initialType = "" }: { initialType?: QuoteType | "" }
 
       {form.quoteType === "commercial" ? (
         <div className="mt-5">
-          <label htmlFor="businessName" className="text-sm font-medium text-navy">
+          <label htmlFor="businessName" className="text-sm font-medium text-ink">
             Business name
           </label>
           <input
@@ -314,7 +314,7 @@ export function QuoteForm({ initialType = "" }: { initialType?: QuoteType | "" }
       {form.quoteType === "bicycle" ? (
         <div className="mt-5 grid gap-5 sm:grid-cols-2">
           <div>
-            <label htmlFor="bikeType" className="text-sm font-medium text-navy">
+            <label htmlFor="bikeType" className="text-sm font-medium text-ink">
               Bike type
             </label>
             <select
@@ -336,7 +336,7 @@ export function QuoteForm({ initialType = "" }: { initialType?: QuoteType | "" }
             <FieldError id="bikeType-error" message={errors.bikeType} />
           </div>
           <div>
-            <label htmlFor="bikeValue" className="text-sm font-medium text-navy">
+            <label htmlFor="bikeValue" className="text-sm font-medium text-ink">
               Bike value
             </label>
             <select
@@ -368,7 +368,7 @@ export function QuoteForm({ initialType = "" }: { initialType?: QuoteType | "" }
             errors.coverage ? "coverage-error coverage-hint" : "coverage-hint"
           }
         >
-          <legend className="text-sm font-medium text-navy">
+          <legend className="text-sm font-medium text-ink">
             Coverage interests
           </legend>
           <p id="coverage-hint" className="mt-1 text-sm text-muted">
@@ -382,7 +382,7 @@ export function QuoteForm({ initialType = "" }: { initialType?: QuoteType | "" }
                   key={option.value}
                   className={`flex cursor-pointer items-center gap-3 rounded-sm border px-4 py-3 text-sm font-medium ${
                     checked
-                      ? "border-navy bg-navy/5 text-navy"
+                      ? "border-ink bg-ink/5 text-ink"
                       : "border-line bg-stone text-ink"
                   }`}
                 >
@@ -391,7 +391,7 @@ export function QuoteForm({ initialType = "" }: { initialType?: QuoteType | "" }
                     name="coverage"
                     value={option.value}
                     checked={checked}
-                    className="size-4 accent-navy"
+                    className="size-4 accent-ink"
                     onChange={() => toggleCoverage(option.value)}
                   />
                   {option.label}
@@ -404,7 +404,7 @@ export function QuoteForm({ initialType = "" }: { initialType?: QuoteType | "" }
       ) : null}
 
       <div className="mt-6">
-        <label htmlFor="message" className="text-sm font-medium text-navy">
+        <label htmlFor="message" className="text-sm font-medium text-ink">
           Anything else? <span className="font-normal text-muted">(optional)</span>
         </label>
         <textarea
@@ -429,7 +429,7 @@ export function QuoteForm({ initialType = "" }: { initialType?: QuoteType | "" }
       <button
         type="submit"
         disabled={status.kind === "submitting"}
-        className="mt-6 inline-flex min-h-12 w-full items-center justify-center rounded-sm bg-gold px-6 py-3.5 text-sm font-semibold text-navy hover:bg-gold-dark hover:text-stone disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto"
+        className="mt-6 inline-flex min-h-12 w-full items-center justify-center rounded-sm bg-teal px-6 py-3.5 text-sm font-semibold text-ink hover:bg-teal-dark disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto"
       >
         {status.kind === "submitting" ? "Sending…" : "Request a quote"}
       </button>

@@ -18,7 +18,7 @@ export default function AboutPage() {
 
       <div className="wrap grid gap-8 pb-16 lg:grid-cols-2">
         <article className="rounded-sm border border-line bg-paper p-7">
-          <h2 className="text-xl font-semibold text-navy">Service with integrity</h2>
+          <h2 className="text-xl font-semibold text-ink">Service with integrity</h2>
           <p className="mt-4 leading-relaxed text-muted">{brand.integrity}</p>
           <p className="mt-4 leading-relaxed text-muted">
             That means explaining what a policy does and does not do, matching
@@ -27,7 +27,7 @@ export default function AboutPage() {
           </p>
         </article>
         <article className="rounded-sm border border-line bg-paper p-7">
-          <h2 className="text-xl font-semibold text-navy">A relationship first</h2>
+          <h2 className="text-xl font-semibold text-ink">A relationship first</h2>
           <p className="mt-4 leading-relaxed text-muted">
             The mission is deliberate: help secure your future, and build a
             relationship no digit can compare to. Quotes, documents, and this

@@ -4,11 +4,11 @@ import { brand, nav, quoteCta } from "@/lib/brand";
 
 export function Footer() {
   return (
-    <footer className="mt-auto bg-navy text-stone">
+    <footer className="mt-auto bg-ink text-stone">
       <div className="wrap grid gap-12 py-14 sm:grid-cols-2 lg:grid-cols-12">
         <div className="lg:col-span-5">
           <Link href="/" className="inline-flex rounded-sm">
-            <Logo inverted />
+            <Logo className="h-16 w-auto sm:h-[4.5rem]" />
           </Link>
           <p className="mt-5 max-w-sm text-[0.95rem] leading-relaxed text-stone/75">
             {brand.tagline}. Independent advisors in Edinburg serving commercial
@@ -18,7 +18,7 @@ export function Footer() {
         </div>
 
         <div className="lg:col-span-3">
-          <h2 className="text-xs font-semibold tracking-[0.18em] text-gold uppercase">
+          <h2 className="text-xs font-semibold tracking-[0.18em] text-teal uppercase">
             Explore
           </h2>
           <ul className="mt-4 space-y-2 text-sm">
@@ -38,7 +38,7 @@ export function Footer() {
         </div>
 
         <div className="lg:col-span-4">
-          <h2 className="text-xs font-semibold tracking-[0.18em] text-gold uppercase">
+          <h2 className="text-xs font-semibold tracking-[0.18em] text-teal uppercase">
             Visit us
           </h2>
           <address className="mt-4 space-y-2 text-sm not-italic text-stone/80">

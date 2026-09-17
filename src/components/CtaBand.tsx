@@ -15,7 +15,7 @@ export function CtaBand({
 }) {
   return (
     <section className="wrap pb-20">
-      <div className="relative overflow-hidden rounded-sm bg-navy px-6 py-10 text-stone sm:px-10 sm:py-12">
+      <div className="relative overflow-hidden rounded-sm bg-ink px-6 py-10 text-stone sm:px-10 sm:py-12">
         <div className="relative z-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div className="max-w-xl">
             <h2 className="display text-3xl leading-tight text-balance sm:text-4xl">
@@ -25,7 +25,7 @@ export function CtaBand({
           </div>
           <Link
             href={href}
-            className="inline-flex shrink-0 items-center justify-center rounded-sm bg-gold px-6 py-3 text-sm font-semibold text-navy hover:bg-gold-dark hover:text-stone"
+            className="inline-flex shrink-0 items-center justify-center rounded-sm bg-teal px-6 py-3 text-sm font-semibold text-ink hover:bg-teal-dark"
           >
             {label}
           </Link>
@@ -46,10 +46,10 @@ export function PageIntro({
 }) {
   return (
     <header className="wrap max-w-3xl pt-12 pb-10 sm:pt-16">
-      <p className="text-xs font-semibold tracking-[0.2em] text-gold-dark uppercase">
+      <p className="text-xs font-semibold tracking-[0.2em] text-teal-dark uppercase">
         {kicker}
       </p>
-      <h1 className="display mt-3 text-4xl leading-[1.1] text-balance text-navy sm:text-5xl">
+      <h1 className="display mt-3 text-4xl leading-[1.1] text-balance text-ink sm:text-5xl">
         {title}
       </h1>
       <p className="mt-5 text-lg leading-relaxed text-muted">{body}</p>

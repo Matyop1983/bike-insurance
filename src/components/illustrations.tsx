@@ -1,22 +1,3 @@
-export function RhinoHeroArt() {
-  return (
-    <svg
-      viewBox="0 0 560 480"
-      className="h-auto w-full"
-      role="img"
-      aria-label="Stylized rhino mark"
-    >
-      <rect width="560" height="480" fill="none" />
-      <circle cx="300" cy="230" r="168" fill="#1b2f48" />
-      <path
-        fill="#c4a35a"
-        d="M108 332c-4-78 48-152 148-186L292 86c6-12 24-8 24 6l-8 96c38 8 70 34 86 68 10 18-4 34-24 34h-32l-10 38c26 8 44 26 50 48 6 20-10 36-30 36H168c-36 0-58-20-60-46z"
-      />
-      <circle cx="248" cy="248" r="16" fill="#0f1c2e" />
-    </svg>
-  );
-}
-
 export function BikeHeroArt() {
   return (
     <svg
@@ -26,11 +7,11 @@ export function BikeHeroArt() {
       aria-label="Illustration of a bicycle in front of a shield"
     >
       <rect width="640" height="520" fill="none" />
-      <ellipse cx="430" cy="248" rx="168" ry="176" fill="#1b2f48" />
+      <ellipse cx="430" cy="248" rx="168" ry="176" fill="#161616" />
       <path
         d="M430 98 534 140v72c0 70-48 110-104 126-56-16-104-56-104-126v-72L430 98z"
         fill="none"
-        stroke="#c4a35a"
+        stroke="#00d9c7"
         strokeWidth="3"
       />
       <g
@@ -50,8 +31,8 @@ export function BikeHeroArt() {
         <path d="M376 138v22" strokeWidth="7" />
         <circle cx="250" cy="180" r="16" strokeWidth="6" />
       </g>
-      <circle cx="188" cy="348" r="4" fill="#c4a35a" />
-      <circle cx="452" cy="348" r="4" fill="#c4a35a" />
+      <circle cx="188" cy="348" r="4" fill="#00d9c7" />
+      <circle cx="452" cy="348" r="4" fill="#00d9c7" />
     </svg>
   );
 }

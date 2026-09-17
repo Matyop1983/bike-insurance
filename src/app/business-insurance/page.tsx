@@ -25,7 +25,7 @@ export default function BusinessInsurancePage() {
             <a
               key={item.id}
               href={`#${item.id}`}
-              className="rounded-sm border border-line bg-paper px-3 py-1.5 text-sm font-medium text-navy hover:border-navy"
+              className="rounded-sm border border-line bg-paper px-3 py-1.5 text-sm font-medium text-ink hover:border-ink"
             >
               {item.title}
             </a>
@@ -40,12 +40,12 @@ export default function BusinessInsurancePage() {
             id={item.id}
             className="scroll-mt-28 rounded-sm border border-line bg-paper p-6 sm:p-8"
           >
-            <h2 className="display text-3xl text-navy">{item.title}</h2>
+            <h2 className="display text-3xl text-ink">{item.title}</h2>
             <p className="mt-4 max-w-3xl leading-relaxed text-muted">{item.summary}</p>
             <ul className="mt-5 space-y-2 text-sm leading-relaxed text-ink/85">
               {item.details.map((line) => (
                 <li key={line} className="flex gap-2">
-                  <span className="mt-2 size-1.5 shrink-0 rounded-full bg-gold" />
+                  <span className="mt-2 size-1.5 shrink-0 rounded-full bg-teal" />
                   <span>{line}</span>
                 </li>
               ))}
@@ -56,11 +56,11 @@ export default function BusinessInsurancePage() {
 
       <div className="wrap pb-10 text-sm text-muted">
         Looking for personal lines?{" "}
-        <Link className="font-semibold text-navy hover:text-gold-dark" href="/quote?type=personal">
+        <Link className="font-semibold text-ink hover:text-teal-dark" href="/quote?type=personal">
           Request a personal quote
         </Link>
         . For bikes, see{" "}
-        <Link className="font-semibold text-navy hover:text-gold-dark" href="/bicycle-insurance">
+        <Link className="font-semibold text-ink hover:text-teal-dark" href="/bicycle-insurance">
           bicycle insurance
         </Link>
         .

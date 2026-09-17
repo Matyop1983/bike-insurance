@@ -30,11 +30,11 @@ export default async function QuotePage({
         <aside className="space-y-5 rounded-sm border border-line bg-stone p-6 sm:p-8">
           <SampleCallout>{sampleNotice}</SampleCallout>
           <div>
-            <h2 className="text-lg font-semibold text-navy">What happens</h2>
+            <h2 className="text-lg font-semibold text-ink">What happens</h2>
             <p className="mt-3 text-sm leading-relaxed text-muted">
               You’ll see a success state and a reference ID starting with RH-.
               Submissions are appended to{" "}
-              <code className="text-navy">data/quote-submissions.jsonl</code>. Wire
+              <code className="text-ink">data/quote-submissions.jsonl</code>. Wire
               email later so quoting@rhinoia.com gets a copy — see the README.
             </p>
           </div>

@@ -24,7 +24,7 @@ export function FaqAccordion({
                 id={buttonId}
                 aria-controls={panelId}
                 aria-expanded={isOpen}
-                className="flex w-full items-start justify-between gap-4 py-5 text-left text-base font-semibold text-navy sm:text-lg"
+                className="flex w-full items-start justify-between gap-4 py-5 text-left text-base font-semibold text-ink sm:text-lg"
                 onClick={() => setOpen(isOpen ? null : index)}
               >
                 <span>{item.q}</span>

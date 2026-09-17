@@ -43,10 +43,10 @@ export function Header() {
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line/80 bg-stone/90 backdrop-blur-md">
-      <div className="wrap flex h-16 items-center justify-between gap-4 lg:h-[4.25rem]">
+    <header className="sticky top-0 z-40 border-b border-line/80 bg-stone/95 backdrop-blur-md">
+      <div className="wrap flex h-[4.5rem] items-center justify-between gap-4 lg:h-20">
         <Link href="/" aria-label={`${brand.name} home`} className="rounded-sm">
-          <Logo />
+          <Logo priority />
         </Link>
 
         <nav aria-label="Primary" className="hidden items-center gap-0.5 lg:flex">
@@ -62,7 +62,7 @@ export function Header() {
                 aria-current={current ? "page" : undefined}
                 className={`rounded-sm px-3 py-2 text-sm font-medium transition-colors ${
                   current
-                    ? "bg-navy text-stone"
+                    ? "bg-ink text-teal"
                     : "text-ink/80 hover:bg-line/60 hover:text-ink"
                 }`}
               >
@@ -72,7 +72,7 @@ export function Header() {
           })}
           <Link
             href={quoteCta.href}
-            className="ml-2 rounded-sm bg-gold px-4 py-2 text-sm font-semibold text-navy transition-colors hover:bg-gold-dark hover:text-stone"
+            className="ml-2 rounded-sm bg-teal px-4 py-2 text-sm font-semibold text-ink transition-colors hover:bg-teal-dark"
           >
             {quoteCta.label}
           </Link>
@@ -123,7 +123,7 @@ export function Header() {
             ))}
             <Link
               href={quoteCta.href}
-              className="mt-2 rounded-sm bg-gold px-4 py-3 text-center text-base font-semibold text-navy hover:bg-gold-dark hover:text-stone"
+              className="mt-2 rounded-sm bg-teal px-4 py-3 text-center text-base font-semibold text-ink hover:bg-teal-dark"
             >
               {quoteCta.label}
             </Link>
