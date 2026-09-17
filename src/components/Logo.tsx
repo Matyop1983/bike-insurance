@@ -34,13 +34,16 @@ export function Logo({
   priority = false,
 }: LogoProps) {
   const asset = assets[variant];
+  const widthLed = Boolean(className?.includes("w-full"));
   return (
     <Image
       src={asset.src}
       alt={brand.name}
       width={asset.width}
       height={asset.height}
-      className={className ?? "h-12 w-auto sm:h-14"}
+      unoptimized
+      className={className ?? "h-14 w-auto sm:h-16"}
+      style={widthLed ? { height: "auto" } : { width: "auto" }}
       priority={priority}
     />
   );
