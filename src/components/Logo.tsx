@@ -2,20 +2,23 @@ import Image from "next/image";
 import { brand } from "@/lib/brand";
 
 const assets = {
-  horizontal: {
-    src: "/brand/rhino-logo-horizontal.png",
-    width: 1716,
-    height: 400,
-  },
-  stacked: {
+  /** Cleaned stacked wordmark, transparent — for light headers. */
+  lockup: {
     src: "/brand/rhino-logo.png",
-    width: 664,
-    height: 488,
+    width: 1000,
+    height: 854,
   },
+  /** Same stacked mark on black — for dark footer/hero if a plate is useful. */
+  onDark: {
+    src: "/brand/rhino-logo-on-black.png",
+    width: 1000,
+    height: 854,
+  },
+  /** Rhino silhouette crop (no wordmark). */
   mark: {
     src: "/brand/rhino-mark.png",
-    width: 367,
-    height: 233,
+    width: 939,
+    height: 532,
   },
 } as const;
 
@@ -25,14 +28,8 @@ type LogoProps = {
   priority?: boolean;
 };
 
-const defaults: Record<keyof typeof assets, string> = {
-  horizontal: "h-10 w-auto sm:h-11 lg:h-12",
-  stacked: "h-16 w-auto sm:h-20",
-  mark: "h-10 w-auto",
-};
-
 export function Logo({
-  variant = "horizontal",
+  variant = "lockup",
   className,
   priority = false,
 }: LogoProps) {
@@ -43,7 +40,7 @@ export function Logo({
       alt={brand.name}
       width={asset.width}
       height={asset.height}
-      className={className ?? defaults[variant]}
+      className={className ?? "h-12 w-auto sm:h-14"}
       priority={priority}
     />
   );

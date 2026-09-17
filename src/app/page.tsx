@@ -36,8 +36,8 @@ export default function HomePage() {
               </Link>
             </div>
           </div>
-          <div className="hidden justify-center px-2 sm:px-6 lg:flex">
-            <Logo variant="stacked" className="h-auto w-full max-w-[22rem]" />
+          <div className="flex justify-center px-2 sm:px-6">
+            <Logo className="h-auto w-full max-w-[13rem] sm:max-w-[18rem] lg:max-w-[22rem]" />
           </div>
         </div>
       </section>
