@@ -2,7 +2,7 @@ import Image from "next/image";
 import { brand } from "@/lib/brand";
 
 const assets = {
-  /** Primary mark: hybrid stacked lockup on a black plate. */
+  /** Primary mark: hybrid stacked lockup, teal on transparent (no black plate). */
   lockup: {
     src: "/brand/rhino-logo.png",
     width: 656,
