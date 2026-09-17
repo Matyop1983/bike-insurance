@@ -37,7 +37,7 @@ export default function HomePage() {
             </div>
           </div>
           <div className="hidden justify-center px-2 sm:px-6 lg:flex">
-            <Logo className="h-auto w-full max-w-[22rem]" />
+            <Logo variant="stacked" className="h-auto w-full max-w-[22rem]" />
           </div>
         </div>
       </section>

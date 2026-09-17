@@ -44,9 +44,9 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-line/80 bg-stone/95 backdrop-blur-md">
-      <div className="wrap flex h-[4.5rem] items-center justify-between gap-4 lg:h-20">
+      <div className="wrap flex h-16 items-center justify-between gap-4 lg:h-[4.25rem]">
         <Link href="/" aria-label={`${brand.name} home`} className="rounded-sm">
-          <Logo priority />
+          <Logo variant="horizontal" priority />
         </Link>
 
         <nav aria-label="Primary" className="hidden items-center gap-0.5 lg:flex">
