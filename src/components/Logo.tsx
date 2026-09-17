@@ -2,23 +2,23 @@ import Image from "next/image";
 import { brand } from "@/lib/brand";
 
 const assets = {
-  /** Cleaned stacked wordmark, transparent — for light headers. */
+  /** Hybrid stacked lockup, transparent — light header. */
   lockup: {
     src: "/brand/rhino-logo.png",
-    width: 1000,
-    height: 854,
+    width: 656,
+    height: 570,
   },
-  /** Same stacked mark on black — for dark footer/hero if a plate is useful. */
+  /** Same stacked lockup on black — footer and dark hero. */
   onDark: {
     src: "/brand/rhino-logo-on-black.png",
-    width: 1000,
-    height: 854,
+    width: 656,
+    height: 570,
   },
   /** Rhino silhouette crop (no wordmark). */
   mark: {
     src: "/brand/rhino-mark.png",
-    width: 939,
-    height: 532,
+    width: 560,
+    height: 311,
   },
 } as const;
 

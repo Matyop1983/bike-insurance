@@ -8,7 +8,7 @@ export function Footer() {
       <div className="wrap grid gap-12 py-14 sm:grid-cols-2 lg:grid-cols-12">
         <div className="lg:col-span-5">
           <Link href="/" className="inline-flex rounded-sm">
-            <Logo className="h-16 w-auto sm:h-[4.5rem]" />
+            <Logo variant="onDark" className="h-16 w-auto sm:h-[4.5rem]" />
           </Link>
           <p className="mt-5 max-w-sm text-[0.95rem] leading-relaxed text-stone/75">
             {brand.tagline}. Independent advisors in Edinburg serving commercial

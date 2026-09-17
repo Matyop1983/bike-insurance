@@ -37,7 +37,10 @@ export default function HomePage() {
             </div>
           </div>
           <div className="flex justify-center px-2 sm:px-6">
-            <Logo className="h-auto w-full max-w-[13rem] sm:max-w-[18rem] lg:max-w-[22rem]" />
+            <Logo
+              variant="onDark"
+              className="h-auto w-full max-w-[13rem] sm:max-w-[18rem] lg:max-w-[22rem]"
+            />
           </div>
         </div>
       </section>
