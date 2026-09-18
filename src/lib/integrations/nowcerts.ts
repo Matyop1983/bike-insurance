@@ -12,6 +12,7 @@ export const DEFAULT_NOWCERTS_AGENCY_ID =
 export const DEFAULT_NOWCERTS_ENDPOINT =
   "https://api.nowcerts.com/api/PushJsonQuoteApplications";
 
+/** Human-readable keys for the NowCerts mapping UI (inner `json` string). */
 export type NowCertsQuotePayload = {
   AgencyID: string;
   "Form Name": string;
@@ -30,11 +31,24 @@ export type NowCertsQuotePayload = {
   Source: string;
 };
 
+/**
+ * PushJsonQuoteApplications expects AgencyID / FormName on the envelope and
+ * the labeled fields as a JSON *string* in `json`. A flat object posts as
+ * HTTP 200 `{"status":1,"message":"Error!"}` and is not inserted.
+ */
+export type NowCertsEnvelope = {
+  AgencyID: string;
+  FormName: string;
+  "Form Name": string;
+  json: string;
+};
+
 export type DeliveryResult = {
   ok: boolean;
   skipped?: boolean;
   status?: number;
   message: string;
+  amsId?: string;
 };
 
 export function nowCertsAgencyId(): string {
@@ -68,6 +82,45 @@ export function buildNowCertsPayload(
   };
 }
 
+export function buildNowCertsEnvelope(
+  fields: NowCertsQuotePayload,
+): NowCertsEnvelope {
+  return {
+    AgencyID: fields.AgencyID,
+    FormName: fields["Form Name"],
+    "Form Name": fields["Form Name"],
+    json: JSON.stringify(fields),
+  };
+}
+
+export function parseNowCertsBody(text: string): {
+  ok: boolean;
+  message: string;
+  amsId?: string;
+} {
+  const trimmed = text.trim();
+  try {
+    const parsed = JSON.parse(trimmed) as Record<string, unknown>;
+    const rawMessage =
+      (typeof parsed.message === "string" && parsed.message) ||
+      (typeof parsed.Message === "string" && parsed.Message) ||
+      trimmed;
+    const amsIdMatch = rawMessage.match(/database id:\s*([0-9a-f-]{36})/i);
+    const inserted = /successfully inserted/i.test(rawMessage);
+    const errorOnly = /^error!?$/i.test(rawMessage.trim());
+    return {
+      ok: inserted && !errorOnly,
+      message: rawMessage.slice(0, 300),
+      amsId: amsIdMatch?.[1],
+    };
+  } catch {
+    return {
+      ok: false,
+      message: (trimmed || "NowCerts returned a non-JSON body").slice(0, 300),
+    };
+  }
+}
+
 export async function pushNowCertsQuote(
   payload: NowCertsQuotePayload,
 ): Promise<DeliveryResult> {
@@ -81,31 +134,42 @@ export async function pushNowCertsQuote(
       headers.Authorization = `Bearer ${apiKey}`;
     }
 
+    const envelope = buildNowCertsEnvelope(payload);
     const response = await fetch(nowCertsEndpoint(), {
       method: "POST",
       headers,
-      body: JSON.stringify(payload),
+      body: JSON.stringify(envelope),
       signal: AbortSignal.timeout(12_000),
     });
     const text = await response.text();
-    if (!response.ok) {
+    const parsed = parseNowCertsBody(text);
+
+    if (!response.ok || !parsed.ok) {
       console.error(
         "[nowcerts]",
         payload["Reference ID"],
         response.status,
-        text.slice(0, 500),
+        parsed.message,
       );
       return {
         ok: false,
         status: response.status,
-        message: text.slice(0, 300) || `NowCerts HTTP ${response.status}`,
+        message: parsed.message || `NowCerts HTTP ${response.status}`,
       };
     }
-    console.info("[nowcerts]", payload["Reference ID"], "ok", response.status);
+
+    console.info(
+      "[nowcerts]",
+      payload["Reference ID"],
+      "ok",
+      response.status,
+      parsed.amsId ?? parsed.message,
+    );
     return {
       ok: true,
       status: response.status,
-      message: text.slice(0, 300) || "accepted",
+      message: parsed.message,
+      amsId: parsed.amsId,
     };
   } catch (error) {
     const message = error instanceof Error ? error.message : "NowCerts request failed";

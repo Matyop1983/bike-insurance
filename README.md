@@ -63,7 +63,7 @@ Config (see `.env.example`):
 - `Form Name` (stable mapping key) — `Rhino Website Quote Request`
 - Optional `NOWCERTS_ENDPOINT` / `NOWCERTS_API_KEY` if NowCerts ever requires them
 
-Payload keys are human-readable for the mapping UI, including `AgencyID`, `Form Name`, `Applicant Name`, `Email`, `Phone Number`, `Coverage Type`, `Business Name`, `City or ZIP`, `Coverage Interests` (includes Builders risk when selected), `Bike Type`, `Bike Value Range`, `Message`, `Reference ID`, `Submitted At`, and `Source`.
+The webhook body is `{ AgencyID, FormName, json }` where `json` is a string of those labeled fields (a flat JSON object is rejected by NowCerts with HTTP 200 `{"status":1,"message":"Error!"}`). Inner keys are human-readable for the mapping UI: `AgencyID`, `Form Name`, `Applicant Name`, `Email`, `Phone Number`, `Coverage Type`, `Business Name`, `City or ZIP`, `Coverage Interests` (includes Builders risk when selected), `Bike Type`, `Bike Value Range`, `Message`, `Reference ID`, `Submitted At`, and `Source`. Success is an AMS message containing `successfully inserted` (not HTTP 200 alone).
 
 After the first real or test submit:
 
@@ -72,7 +72,7 @@ After the first real or test submit:
 3. **Map** each left-column form label to an AMS field.
 4. Click **Save and Merge**. Future submits with the same Form Name reuse that mapping.
 
-If NowCerts is down, the JSONL line is still written and the visitor still sees the RH- ID. Check server logs (`[nowcerts]`) and the follow-up `delivery` JSONL line.
+If NowCerts is down or returns `Error!`, the JSONL line is still written and the visitor still sees the RH- ID. The JSON response flags `nowcerts: "failed"` for ops. Check server logs (`[nowcerts]`) and the follow-up `delivery` JSONL line.
 
 ### Email notification
 

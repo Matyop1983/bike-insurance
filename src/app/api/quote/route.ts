@@ -100,5 +100,12 @@ export async function POST(request: Request) {
     ok: true,
     id,
     // User-facing success is based on the local save. Integrations are best-effort.
+    nowcerts: nowcerts.ok ? "ok" : "failed",
+    email: email.skipped ? "pending-env" : email.ok ? "ok" : "failed",
+    ...(nowcerts.ok
+      ? {}
+      : {
+          note: "Quote saved locally. NowCerts insert failed — check delivery logs.",
+        }),
   });
 }
