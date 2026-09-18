@@ -49,7 +49,7 @@ export function Header() {
           <Logo priority />
         </Link>
 
-        <nav aria-label="Primary" className="hidden items-center gap-0.5 lg:flex">
+        <nav aria-label="Primary" className="hidden items-center gap-0 lg:flex">
           {nav.map((item) => {
             const current =
               item.href === "/"
@@ -60,7 +60,7 @@ export function Header() {
                 key={item.href}
                 href={item.href}
                 aria-current={current ? "page" : undefined}
-                className={`rounded-sm px-3 py-2 text-sm font-medium transition-colors ${
+                className={`rounded-sm px-2.5 py-2 text-sm font-medium transition-colors ${
                   current
                     ? "text-ink"
                     : "text-ink/65 hover:bg-stone hover:text-ink"

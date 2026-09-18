@@ -57,6 +57,7 @@ export const businessCoverages = [
   {
     id: "builders-risk",
     title: "Builders Risk",
+    pageHref: "/builders-risk",
     summary:
       "Covers property in the course of construction — typically at the job site, in off-site storage, and in transit.",
     details: [

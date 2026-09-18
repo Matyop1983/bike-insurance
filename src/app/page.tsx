@@ -17,9 +17,9 @@ export default function HomePage() {
               {brand.tagline}.
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted">
-              {brand.integrity} Commercial coverage, individual policies, and a
-              featured bicycle insurance product — with an advisor you can actually
-              reach.
+              {brand.integrity} Commercial coverage, individual policies, a
+              featured builders risk product, and bicycle insurance — with an
+              advisor you can actually reach.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link
@@ -47,10 +47,10 @@ export default function HomePage() {
           What we help with
         </p>
         <h2 className="display mt-2 max-w-2xl text-3xl text-ink sm:text-4xl">
-          Commercial strength. Personal attention. A bicycle product that isn’t an
+          Commercial strength. Personal attention. Products that aren’t an
           afterthought.
         </h2>
-        <ul className="mt-10 grid gap-4 lg:grid-cols-3">
+        <ul className="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
           {homePillars.map((item) => (
             <li key={item.href}>
               <Link

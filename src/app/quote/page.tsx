@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { PageIntro, SampleCallout } from "@/components/CtaBand";
 import { QuoteForm } from "@/components/QuoteForm";
 import { sampleNotice } from "@/lib/content";
-import { parseQuoteType } from "@/lib/quote";
+import { parseCoverageParam, parseQuoteType } from "@/lib/quote";
 
 export const metadata: Metadata = {
   title: "Get a quote",
@@ -13,20 +13,21 @@ export const metadata: Metadata = {
 export default async function QuotePage({
   searchParams,
 }: {
-  searchParams: Promise<{ type?: string }>;
+  searchParams: Promise<{ type?: string; coverage?: string | string[] }>;
 }) {
   const params = await searchParams;
   const initialType = parseQuoteType(params.type);
+  const initialCoverage = parseCoverageParam(params.coverage, initialType);
 
   return (
     <>
       <PageIntro
         kicker="Quote request"
         title="Tell us what you need. We’ll confirm we got it."
-        body="Choose commercial, personal, or bicycle. This is not a pricing engine or checkout — an advisor follows up. Bicycle requests capture type, value, and coverage interests."
+        body="Choose commercial, personal, or bicycle. Commercial includes builders risk. This is not a pricing engine or checkout — an advisor follows up."
       />
       <div className="wrap grid gap-10 pb-20 lg:grid-cols-[1.05fr_0.8fr] lg:items-start">
-        <QuoteForm initialType={initialType} />
+        <QuoteForm initialType={initialType} initialCoverage={initialCoverage} />
         <aside className="space-y-5 rounded-sm border border-line bg-paper p-6 sm:p-8">
           <SampleCallout>{sampleNotice}</SampleCallout>
           <div>

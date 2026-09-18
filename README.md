@@ -2,15 +2,16 @@
 
 Custom [Next.js](https://nextjs.org) site for **Rhino Insurance Advisors** (Edinburg, TX), intended to replace the current Squarespace site at [rhinoinsuranceadvisors.com](https://www.rhinoinsuranceadvisors.com/).
 
-Bicycle insurance is a **featured personal product** on this site — not a separate brand. Brand, nav, and contact live in `src/lib/brand.ts`. Coverage copy lives in `src/lib/content/`.
+Bicycle insurance is a **featured personal product** on this site — not a separate brand. Builders risk is a **featured commercial product**. Brand, nav, and contact live in `src/lib/brand.ts`. Coverage copy lives in `src/lib/content/`.
 
 ## Pages
 
-- `/` — agency home (commercial + individual, bicycle featured, testimonials, visit strip)
+- `/` — agency home (commercial + individual, builders risk and bicycle featured, testimonials, visit strip)
 - `/about` — mission and service-with-integrity
 - `/business-insurance` — GL, E&O, workers’ comp, umbrella, commercial auto, builders risk, property
+- `/builders-risk` — course-of-construction coverage (contractors, owners, renovations)
 - `/bicycle-insurance` — theft, damage, liability, accessories + how it works + FAQ
-- `/quote` — unified quote request (`?type=commercial|personal|bicycle`)
+- `/quote` — unified quote request (`?type=commercial|personal|bicycle`, optional `&coverage=builders-risk`)
 - `/contact` — phone, email, address, hours
 
 ## Run locally

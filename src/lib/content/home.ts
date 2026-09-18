@@ -23,7 +23,12 @@ export const homePillars = [
   {
     href: "/business-insurance",
     title: "Business insurance",
-    body: "General liability, E&O, workers’ comp, umbrella, commercial auto, builders risk, and property — explained without the runaround.",
+    body: "General liability, E&O, workers’ comp, umbrella, commercial auto, and property — explained without the runaround.",
+  },
+  {
+    href: "/builders-risk",
+    title: "Builders risk",
+    body: "Course-of-construction coverage for contractors, owners, and renovations — the job site, materials, storage, and transit.",
   },
   {
     href: "/quote?type=personal",

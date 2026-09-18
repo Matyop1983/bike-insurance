@@ -94,6 +94,24 @@ function coverageOptionsFor(type: QuoteType | "") {
   return [];
 }
 
+export function parseCoverageParam(
+  value: string | string[] | undefined | null,
+  type: QuoteType | "",
+): string[] {
+  const raw = Array.isArray(value) ? value.join(",") : (value ?? "");
+  const allowed = new Set<string>(
+    coverageOptionsFor(type).map((option) => option.value),
+  );
+  return [
+    ...new Set(
+      raw
+        .split(",")
+        .map((item) => item.trim())
+        .filter((item) => allowed.has(item)),
+    ),
+  ];
+}
+
 export function validateQuote(input: QuotePayload): QuoteFieldErrors {
   const errors: QuoteFieldErrors = {};
   const name = input.name.trim();

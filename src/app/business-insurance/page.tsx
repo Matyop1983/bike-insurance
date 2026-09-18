@@ -20,11 +20,28 @@ export default function BusinessInsurancePage() {
 
       <div className="wrap pb-8">
         <SampleCallout>{educationalNotice}</SampleCallout>
+        <Link
+          href="/builders-risk"
+          className="mt-6 flex h-full flex-col rounded-sm border border-line bg-paper p-6 hover:border-ink/30 sm:p-8"
+        >
+          <p className="text-xs font-semibold tracking-[0.2em] text-teal-dark uppercase">
+            Featured commercial product
+          </p>
+          <h2 className="display mt-2 text-3xl text-ink">Builders Risk</h2>
+          <p className="mt-3 max-w-3xl text-muted">
+            Course-of-construction coverage for contractors, owners, and
+            renovations — the building under construction, materials, off-site
+            storage, and transit. Educational overview, not a binder.
+          </p>
+          <span className="mt-5 text-sm font-semibold text-teal-dark">
+            Read the builders risk overview
+          </span>
+        </Link>
         <nav aria-label="Coverage types" className="mt-6 flex flex-wrap gap-2">
           {businessCoverages.map((item) => (
             <a
               key={item.id}
-              href={`#${item.id}`}
+              href={"pageHref" in item && item.pageHref ? item.pageHref : `#${item.id}`}
               className="rounded-sm border border-line bg-paper px-3 py-1.5 text-sm font-medium text-ink hover:border-ink"
             >
               {item.title}
@@ -50,6 +67,14 @@ export default function BusinessInsurancePage() {
                 </li>
               ))}
             </ul>
+            {"pageHref" in item && item.pageHref ? (
+              <Link
+                href={item.pageHref}
+                className="mt-6 inline-flex text-sm font-semibold text-teal-dark hover:text-ink"
+              >
+                Full builders risk overview
+              </Link>
+            ) : null}
           </article>
         ))}
       </div>

@@ -11,3 +11,4 @@ export {
   bikeHowItWorks,
 } from "./bicycle";
 export { homePillars, testimonials } from "./home";
+export { buildersRiskQuoteHref } from "./builders-risk";

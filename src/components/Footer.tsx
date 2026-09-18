@@ -13,7 +13,8 @@ export function Footer() {
           <p className="mt-5 max-w-sm text-[0.95rem] leading-relaxed text-stone/75">
             {brand.tagline}. Independent advisors in Edinburg serving commercial
             and individual clients across the Rio Grande Valley — including
-            bicycle insurance as a featured personal product.
+            bicycle insurance as a featured personal product and builders risk as
+            a featured commercial product.
           </p>
         </div>
 

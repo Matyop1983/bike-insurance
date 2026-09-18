@@ -40,8 +40,20 @@ function coverageList(type: QuoteType | "") {
   return [];
 }
 
-export function QuoteForm({ initialType = "" }: { initialType?: QuoteType | "" }) {
-  const [form, setForm] = useState<QuotePayload>(() => emptyQuote(initialType));
+export function QuoteForm({
+  initialType = "",
+  initialCoverage = [],
+}: {
+  initialType?: QuoteType | "";
+  initialCoverage?: string[];
+}) {
+  const [form, setForm] = useState<QuotePayload>(() => {
+    const next = emptyQuote(initialType);
+    if (initialCoverage.length) {
+      next.coverage = initialCoverage;
+    }
+    return next;
+  });
   const [errors, setErrors] = useState<QuoteFieldErrors>({});
   const [status, setStatus] = useState<Status>({ kind: "idle" });
   const formRef = useRef<HTMLFormElement>(null);
