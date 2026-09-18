@@ -1,6 +1,11 @@
 import { mkdir, appendFile } from "node:fs/promises";
 import path from "node:path";
 import { NextResponse } from "next/server";
+import { notifyQuoteByEmail } from "@/lib/integrations/notify";
+import {
+  buildNowCertsPayload,
+  pushNowCertsQuote,
+} from "@/lib/integrations/nowcerts";
 import {
   normalizeQuote,
   type QuotePayload,
@@ -52,20 +57,48 @@ export async function POST(request: Request) {
   }
 
   const id = `RH-${crypto.randomUUID().slice(0, 8).toUpperCase()}`;
+  const receivedAt = new Date().toISOString();
   const entry = {
     id,
-    receivedAt: new Date().toISOString(),
+    receivedAt,
     ...normalized,
   };
 
   const dir = path.join(process.cwd(), "data");
   await mkdir(dir, { recursive: true });
+  const logPath = path.join(dir, "quote-submissions.jsonl");
+  await appendFile(logPath, `${JSON.stringify(entry)}\n`, "utf8");
+
+  const nowcertsPayload = buildNowCertsPayload(normalized, { id, receivedAt });
+  const nowcerts = await pushNowCertsQuote(nowcertsPayload);
+  const email = await notifyQuoteByEmail(normalized, { id, receivedAt });
+
   await appendFile(
-    path.join(dir, "quote-submissions.jsonl"),
-    `${JSON.stringify(entry)}\n`,
+    logPath,
+    `${JSON.stringify({
+      type: "delivery",
+      id,
+      at: new Date().toISOString(),
+      nowcerts,
+      email,
+    })}\n`,
     "utf8",
   );
 
-  console.info("[quote]", id, normalized.quoteType, normalized.email);
-  return NextResponse.json({ ok: true, id });
+  console.info(
+    "[quote]",
+    id,
+    normalized.quoteType,
+    normalized.email,
+    "nowcerts",
+    nowcerts.ok ? "ok" : nowcerts.skipped ? "skipped" : "failed",
+    "email",
+    email.ok ? "ok" : email.skipped ? "pending-env" : "failed",
+  );
+
+  return NextResponse.json({
+    ok: true,
+    id,
+    // User-facing success is based on the local save. Integrations are best-effort.
+  });
 }

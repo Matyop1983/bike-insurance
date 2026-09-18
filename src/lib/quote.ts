@@ -181,3 +181,28 @@ export function normalizeQuote(input: QuotePayload): QuotePayload {
     message: input.message.trim(),
   };
 }
+
+function findLabel(
+  options: readonly { value: string; label: string }[],
+  value: string,
+): string {
+  return options.find((option) => option.value === value)?.label ?? value;
+}
+
+export function quoteTypeLabel(value: QuotePayload["quoteType"]): string {
+  if (!value) return "";
+  return findLabel(quoteTypes, value);
+}
+
+export function coverageLabels(input: QuotePayload): string {
+  const options = coverageOptionsFor(input.quoteType);
+  return input.coverage.map((item) => findLabel(options, item)).join(", ");
+}
+
+export function bikeTypeLabel(value: string): string {
+  return value ? findLabel(bikeTypes, value) : "";
+}
+
+export function bikeValueLabel(value: string): string {
+  return value ? findLabel(bikeValues, value) : "";
+}

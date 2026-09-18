@@ -39,7 +39,7 @@ The form validates in the browser. Quote type is required:
 - **Personal** — personal-line coverage interests
 - **Bicycle** — bike type, value range, and theft/damage/liability/accessories
 
-On submit it `POST`s JSON to `/api/quote`. The API re-validates, logs the request, and appends one JSON line to:
+On submit it `POST`s JSON to `/api/quote`. The API re-validates, appends one JSON line to:
 
 ```text
 data/quote-submissions.jsonl
@@ -47,13 +47,36 @@ data/quote-submissions.jsonl
 
 That file is gitignored. Success shows a reference ID such as `RH-A1B2C3D4`. This is not a binder and not a price.
 
-### Wiring email later
+The same request is then pushed to NowCerts / Momentum AMS (soft-fail: the visitor still gets the RH- ID if the local save succeeded). An internal email to `Matthew@Rhinoia.com` is sent when Resend env vars are set.
 
-Extend `src/app/api/quote/route.ts` after a successful write:
+## NowCerts / Momentum AMS
 
-1. Add an API key via environment variable (`RESEND_API_KEY`, `POSTMARK_SERVER_TOKEN`, etc.). Do not commit secrets.
-2. Email the requester and an internal copy to `quoting@rhinoia.com`.
-3. Keep the JSONL (or a database) as a backup.
+Quote applications POST to:
+
+```text
+https://api.nowcerts.com/api/PushJsonQuoteApplications
+```
+
+Config (see `.env.example`):
+
+- `NOWCERTS_AGENCY_ID` — defaults to `f3f521d1-ac53-4e82-9865-b9642378d129` for this agency
+- `Form Name` (stable mapping key) — `Rhino Website Quote Request`
+- Optional `NOWCERTS_ENDPOINT` / `NOWCERTS_API_KEY` if NowCerts ever requires them
+
+Payload keys are human-readable for the mapping UI, including `AgencyID`, `Form Name`, `Applicant Name`, `Email`, `Phone Number`, `Coverage Type`, `Business Name`, `City or ZIP`, `Coverage Interests` (includes Builders risk when selected), `Bike Type`, `Bike Value Range`, `Message`, `Reference ID`, `Submitted At`, and `Source`.
+
+After the first real or test submit:
+
+1. In NowCerts / Momentum AMS go to **Prospects/Leads → Quote Applications**.
+2. Open the submission and click **Edit**.
+3. **Map** each left-column form label to an AMS field.
+4. Click **Save and Merge**. Future submits with the same Form Name reuse that mapping.
+
+If NowCerts is down, the JSONL line is still written and the visitor still sees the RH- ID. Check server logs (`[nowcerts]`) and the follow-up `delivery` JSONL line.
+
+### Email notification
+
+Set `RESEND_API_KEY` and `QUOTE_NOTIFY_FROM` (verified Resend sender). `QUOTE_NOTIFY_TO` defaults to `Matthew@Rhinoia.com`. If those env vars are missing, NowCerts still runs and the log notes that email is pending.
 
 ## Deploy and DNS (later)
 

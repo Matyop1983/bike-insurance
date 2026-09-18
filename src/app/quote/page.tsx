@@ -34,9 +34,9 @@ export default async function QuotePage({
             <h2 className="text-lg font-semibold text-ink">What happens</h2>
             <p className="mt-3 text-sm leading-relaxed text-muted">
               You’ll see a success state and a reference ID starting with RH-.
-              Submissions are appended to{" "}
-              <code className="text-ink">data/quote-submissions.jsonl</code>. Wire
-              email later so quoting@rhinoia.com gets a copy — see the README.
+              Submissions are saved locally, pushed to NowCerts / Momentum AMS,
+              and emailed to the agency when Resend is configured — see the
+              README.
             </p>
           </div>
         </aside>
