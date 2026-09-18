@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-barlow), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-source-serif), ui-serif, Georgia, "Times New Roman",
+    serif;
+
+  /* Palette #2: cool gray surfaces, navy/charcoal type, logo teal CTAs */
+  --color-ink: #1a2433;
+  --color-ink-mid: #243044;
+  --color-teal: #00d9c7;
+  --color-teal-dark: #00b3a4;
+  --color-stone: #eef2f6;
+  --color-paper: #ffffff;
+  --color-muted: #5a6573;
+  --color-line: #d5dee6;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  background-color: var(--color-stone);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  background-image: radial-gradient(
+    ellipse 70% 45% at 100% 0%,
+    rgba(0, 217, 199, 0.08),
+    transparent 55%
+  );
+}
+
+::selection {
+  background: var(--color-ink);
+  color: var(--color-teal);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-teal-dark);
+  outline-offset: 3px;
+}
+
+.wrap {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 70rem;
+  padding-inline: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .wrap {
+    padding-inline: 2rem;
+  }
+}
+
+.display {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+}
