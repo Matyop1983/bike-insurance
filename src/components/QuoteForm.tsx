@@ -1,10 +1,8 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { brand } from "@/lib/brand";
 import {
-  bicycleCoverages,
-  bikeTypes,
-  bikeValues,
   commercialCoverages,
   emptyQuote,
   personalCoverages,
@@ -36,7 +34,6 @@ function FieldError({ id, message }: { id: string; message?: string }) {
 function coverageList(type: QuoteType | "") {
   if (type === "commercial") return commercialCoverages;
   if (type === "personal") return personalCoverages;
-  if (type === "bicycle") return bicycleCoverages;
   return [];
 }
 
@@ -68,8 +65,6 @@ export function QuoteForm({
       quoteType: next,
       coverage: [],
       businessName: next === "commercial" ? current.businessName : "",
-      bikeType: next === "bicycle" ? current.bikeType : "",
-      bikeValue: next === "bicycle" ? current.bikeValue : "",
     }));
     setErrors({});
   }
@@ -94,8 +89,6 @@ export function QuoteForm({
       "phone",
       "location",
       "businessName",
-      "bikeType",
-      "bikeValue",
       "coverage",
       "message",
     ];
@@ -149,13 +142,19 @@ export function QuoteForm({
           Request received
         </p>
         <h2 className="display mt-3 text-3xl text-ink sm:text-4xl">
-          We’ll take it from here.
+          We’ll call you back.
         </h2>
         <p className="mt-4 max-w-lg text-muted">
-          Thanks — your quote request is saved with a reference ID. This is not a
-          binder and no payment was taken. An advisor can follow up at
-          quoting@rhinoia.com.
+          Thanks — your callback request is saved with a reference ID. This is
+          not a price, a binder, or coverage, and no payment was taken. You can
+          also call {brand.phone} now, {brand.hours}.
         </p>
+        <a
+          href={brand.phoneHref}
+          className="mt-5 inline-flex rounded-sm bg-teal px-5 py-3 text-sm font-semibold text-ink hover:bg-teal-dark"
+        >
+          Call {brand.phone}
+        </a>
         <p className="mt-5 rounded-sm bg-stone px-4 py-3 font-mono text-sm text-ink">
           Reference {status.id}
         </p>
@@ -168,7 +167,7 @@ export function QuoteForm({
             setStatus({ kind: "idle" });
           }}
         >
-          Submit another request
+          Submit another callback request
         </button>
       </div>
     );
@@ -197,8 +196,8 @@ export function QuoteForm({
       ) : null}
 
       <fieldset>
-        <legend className="text-sm font-medium text-ink">Quote type</legend>
-        <div className="mt-3 grid gap-2 sm:grid-cols-3">
+        <legend className="text-sm font-medium text-ink">What should we call you about?</legend>
+        <div className="mt-3 grid gap-2 sm:grid-cols-2">
           {quoteTypes.map((option) => {
             const selected = form.quoteType === option.value;
             return (
@@ -323,55 +322,6 @@ export function QuoteForm({
         </div>
       ) : null}
 
-      {form.quoteType === "bicycle" ? (
-        <div className="mt-5 grid gap-5 sm:grid-cols-2">
-          <div>
-            <label htmlFor="bikeType" className="text-sm font-medium text-ink">
-              Bike type
-            </label>
-            <select
-              id="bikeType"
-              name="bikeType"
-              className={fieldClass}
-              value={form.bikeType}
-              aria-invalid={Boolean(errors.bikeType)}
-              aria-describedby={errors.bikeType ? "bikeType-error" : undefined}
-              onChange={(event) => update("bikeType", event.target.value)}
-            >
-              <option value="">Select type</option>
-              {bikeTypes.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
-            <FieldError id="bikeType-error" message={errors.bikeType} />
-          </div>
-          <div>
-            <label htmlFor="bikeValue" className="text-sm font-medium text-ink">
-              Bike value
-            </label>
-            <select
-              id="bikeValue"
-              name="bikeValue"
-              className={fieldClass}
-              value={form.bikeValue}
-              aria-invalid={Boolean(errors.bikeValue)}
-              aria-describedby={errors.bikeValue ? "bikeValue-error" : undefined}
-              onChange={(event) => update("bikeValue", event.target.value)}
-            >
-              <option value="">Select range</option>
-              {bikeValues.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
-            <FieldError id="bikeValue-error" message={errors.bikeValue} />
-          </div>
-        </div>
-      ) : null}
-
       {form.quoteType ? (
         <fieldset
           className="mt-6"
@@ -424,7 +374,7 @@ export function QuoteForm({
           name="message"
           rows={4}
           className={`${fieldClass} resize-y`}
-          placeholder="Payroll, vehicle count, e-bike class, lock type…"
+          placeholder="Payroll, vehicle count, project address…"
           value={form.message}
           aria-invalid={Boolean(errors.message)}
           aria-describedby={errors.message ? "message-error" : undefined}
@@ -434,16 +384,17 @@ export function QuoteForm({
       </div>
 
       <p className="mt-6 text-sm text-muted">
-        Submitting does not start coverage and is not a price. We’ll only use this
-        information to follow up on the request.
+        This form does not show a price and does not bind coverage. Call{" "}
+        {brand.phone} if you want to talk through a quote now. We’ll only use
+        these details to call you back.
       </p>
 
       <button
         type="submit"
         disabled={status.kind === "submitting"}
-        className="mt-6 inline-flex min-h-12 w-full items-center justify-center rounded-sm bg-teal px-6 py-3.5 text-sm font-semibold text-ink hover:bg-teal-dark disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto"
+        className="mt-6 inline-flex min-h-12 w-full items-center justify-center rounded-sm border border-line bg-paper px-6 py-3.5 text-sm font-semibold text-ink hover:bg-stone disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto"
       >
-        {status.kind === "submitting" ? "Sending…" : "Request a quote"}
+        {status.kind === "submitting" ? "Sending…" : "Request a callback"}
       </button>
     </form>
   );

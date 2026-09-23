@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageIntro } from "@/components/CtaBand";
-import { brand, quoteCta } from "@/lib/brand";
+import { brand, callbackCta } from "@/lib/brand";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -13,8 +13,8 @@ export default function ContactPage() {
     <>
       <PageIntro
         kicker="Contact"
-        title="Call, email, or come by Fountain Plaza."
-        body="We’re in the office Monday–Friday, 8AM–5PM. For a coverage review, use the quote form so we have the details in writing."
+        title="Call us for a quote."
+        body={`${brand.name} is in Edinburg, Monday–Friday, 8AM–5PM. Call ${brand.phone} and an advisor will talk through coverage with you. Leaving details online is optional — it is not a live price or a binder.`}
       />
 
       <div className="wrap grid gap-6 pb-20 lg:grid-cols-3">
@@ -65,17 +65,26 @@ export default function ContactPage() {
 
       <section className="wrap pb-20">
         <div className="rounded-sm bg-ink px-6 py-10 text-stone sm:px-10">
-          <h2 className="display text-3xl">Prefer to start with a quote?</h2>
+          <h2 className="display text-3xl">Call {brand.phone}</h2>
           <p className="mt-3 max-w-xl text-stone/75">
-            Commercial, personal, or bicycle — the same form, with bike-specific
-            fields when you need them.
+            That’s the way to get a quote. {brand.hours}. If you’d rather we
+            call you, leave your details — commercial or personal. That form is
+            optional and does not show a price.
           </p>
-          <Link
-            href={quoteCta.href}
-            className="mt-6 inline-flex rounded-sm bg-teal px-6 py-3 text-sm font-semibold text-ink hover:bg-teal-dark"
-          >
-            {quoteCta.label}
-          </Link>
+          <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <a
+              href={brand.phoneHref}
+              className="inline-flex rounded-sm bg-teal px-6 py-3 text-sm font-semibold text-ink hover:bg-teal-dark"
+            >
+              Call us for a quote
+            </a>
+            <Link
+              href={callbackCta.href}
+              className="inline-flex rounded-sm border border-white/25 px-6 py-3 text-sm font-semibold text-stone hover:bg-white/10"
+            >
+              {callbackCta.label}
+            </Link>
+          </div>
         </div>
       </section>
     </>

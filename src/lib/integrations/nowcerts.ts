@@ -1,6 +1,4 @@
 import {
-  bikeTypeLabel,
-  bikeValueLabel,
   coverageLabels,
   quoteTypeLabel,
   type QuotePayload,
@@ -23,8 +21,6 @@ export type NowCertsQuotePayload = {
   "Business Name": string;
   "City or ZIP": string;
   "Coverage Interests": string;
-  "Bike Type": string;
-  "Bike Value Range": string;
   Message: string;
   "Reference ID": string;
   "Submitted At": string;
@@ -73,12 +69,10 @@ export function buildNowCertsPayload(
     "Business Name": quote.businessName,
     "City or ZIP": quote.location,
     "Coverage Interests": coverageLabels(quote),
-    "Bike Type": bikeTypeLabel(quote.bikeType),
-    "Bike Value Range": bikeValueLabel(quote.bikeValue),
     Message: quote.message,
     "Reference ID": meta.id,
     "Submitted At": meta.receivedAt,
-    Source: "Rhino website quote form",
+    Source: "Rhino website callback form",
   };
 }
 

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { CtaBand, PageIntro } from "@/components/CtaBand";
-import { brand } from "@/lib/brand";
+import { brand, callbackCta } from "@/lib/brand";
 
 export const metadata: Metadata = {
   title: "About",
@@ -41,8 +41,10 @@ export default function AboutPage() {
       </div>
 
       <CtaBand
-        title="Talk with Rhino."
-        body="Commercial, personal, or bicycle — start with a quote request and we’ll follow up."
+        title="Call us for a quote."
+        body={`${brand.name}, Edinburg. ${brand.hours}. ${brand.phone}. Commercial or personal — we’ll talk it through.`}
+        secondaryHref={callbackCta.href}
+        secondaryLabel={callbackCta.label}
       />
     </>
   );

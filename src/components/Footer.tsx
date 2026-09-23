@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Logo } from "@/components/Logo";
-import { brand, nav, quoteCta } from "@/lib/brand";
+import { brand, callCta, callbackCta, nav } from "@/lib/brand";
 
 export function Footer() {
   return (
@@ -12,9 +12,8 @@ export function Footer() {
           </Link>
           <p className="mt-5 max-w-sm text-[0.95rem] leading-relaxed text-stone/75">
             {brand.tagline}. Independent advisors in Edinburg serving commercial
-            and individual clients across the Rio Grande Valley — including
-            bicycle insurance as a featured personal product and builders risk as
-            a featured commercial product.
+            and individual clients across the Rio Grande Valley — with builders
+            risk as a featured commercial product. Call {brand.phone} for a quote.
           </p>
         </div>
 
@@ -31,8 +30,13 @@ export function Footer() {
               </li>
             ))}
             <li>
-              <Link className="hover:text-white" href={quoteCta.href}>
-                {quoteCta.label}
+              <a className="font-semibold text-teal hover:text-white" href={callCta.href}>
+                {callCta.label}
+              </a>
+            </li>
+            <li>
+              <Link className="text-stone/70 hover:text-white" href={callbackCta.href}>
+                {callbackCta.label}
               </Link>
             </li>
           </ul>

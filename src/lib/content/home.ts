@@ -13,7 +13,7 @@ export const testimonials = [
   },
   {
     quote:
-      "I called about a bicycle I actually care about — not a throw-in on homeowners. They treated it like it mattered.",
+      "They walked us through home and auto on the phone and didn’t push extras we didn’t need. Straightforward.",
     name: "Chris P.",
     role: "Personal client, RGV",
   },
@@ -31,13 +31,8 @@ export const homePillars = [
     body: "Course-of-construction coverage for contractors, owners, and renovations — the job site, materials, storage, and transit.",
   },
   {
-    href: "/quote?type=personal",
+    href: "/contact",
     title: "Individual coverage",
-    body: "Personal lines for households and professionals who want an advisor, not a call-center script.",
-  },
-  {
-    href: "/bicycle-insurance",
-    title: "Bicycle insurance",
-    body: "A featured personal product: theft, damage, liability, and accessories for the bike you actually ride.",
+    body: "Personal lines for households and professionals who want an advisor, not a call-center script. Call the office and we’ll talk it through.",
   },
 ] as const;

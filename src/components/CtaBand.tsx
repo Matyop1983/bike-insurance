@@ -1,17 +1,44 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
-import { quoteCta } from "@/lib/brand";
+import { callCta } from "@/lib/brand";
+
+function CtaControl({
+  href,
+  className,
+  children,
+}: {
+  href: string;
+  className: string;
+  children: ReactNode;
+}) {
+  if (href.startsWith("/")) {
+    return (
+      <Link href={href} className={className}>
+        {children}
+      </Link>
+    );
+  }
+  return (
+    <a href={href} className={className}>
+      {children}
+    </a>
+  );
+}
 
 export function CtaBand({
   title,
   body,
-  href = quoteCta.href,
-  label = quoteCta.label,
+  href = callCta.href,
+  label = callCta.label,
+  secondaryHref,
+  secondaryLabel,
 }: {
   title: string;
   body: string;
   href?: string;
   label?: string;
+  secondaryHref?: string;
+  secondaryLabel?: string;
 }) {
   return (
     <section className="wrap pb-20">
@@ -23,12 +50,22 @@ export function CtaBand({
             </h2>
             <p className="mt-3 text-stone/75">{body}</p>
           </div>
-          <Link
-            href={href}
-            className="inline-flex shrink-0 items-center justify-center rounded-sm bg-teal px-6 py-3 text-sm font-semibold text-ink hover:bg-teal-dark"
-          >
-            {label}
-          </Link>
+          <div className="flex shrink-0 flex-col gap-3 sm:flex-row sm:items-center">
+            <CtaControl
+              href={href}
+              className="inline-flex items-center justify-center rounded-sm bg-teal px-6 py-3 text-sm font-semibold text-ink hover:bg-teal-dark"
+            >
+              {label}
+            </CtaControl>
+            {secondaryHref && secondaryLabel ? (
+              <CtaControl
+                href={secondaryHref}
+                className="inline-flex items-center justify-center rounded-sm border border-white/25 px-6 py-3 text-sm font-semibold text-stone hover:bg-white/10"
+              >
+                {secondaryLabel}
+              </CtaControl>
+            ) : null}
+          </div>
         </div>
       </div>
     </section>

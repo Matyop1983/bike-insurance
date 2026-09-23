@@ -10,7 +10,7 @@ export const brand = {
   mission:
     "Our mission is to help secure your future and build a relationship that no digit can compare to.",
   description:
-    "Independent insurance advisors in Edinburg, Texas. Commercial and individual coverage — including bicycle insurance — with service that puts the relationship first.",
+    "Independent insurance advisors in Edinburg, Texas. Commercial and individual coverage, including builders risk. Call the office for a quote.",
   integrity:
     "At Rhino, we’re focused on providing the highest level of service with integrity. Our team makes it easy to find the best commercial and individual insurance for your needs.",
   email: "quoting@rhinoia.com",
@@ -32,8 +32,17 @@ export const nav = [
   { href: "/about", label: "About" },
   { href: "/business-insurance", label: "Business" },
   { href: "/builders-risk", label: "Builders Risk" },
-  { href: "/bicycle-insurance", label: "Bicycle" },
   { href: "/contact", label: "Contact" },
 ] as const;
 
-export const quoteCta = { href: "/quote", label: "Get a quote" } as const;
+/** Primary conversion path: call the agency. */
+export const callCta = {
+  href: brand.phoneHref,
+  label: "Call us for a quote",
+} as const;
+
+/** Optional follow-up. Not a price and not a binder. */
+export const callbackCta = {
+  href: "/quote",
+  label: "Request a callback",
+} as const;

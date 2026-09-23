@@ -24,8 +24,6 @@ function isPayload(value: unknown): value is QuotePayload {
     typeof record.phone === "string" &&
     typeof record.location === "string" &&
     typeof record.businessName === "string" &&
-    typeof record.bikeType === "string" &&
-    typeof record.bikeValue === "string" &&
     typeof record.message === "string" &&
     Array.isArray(record.coverage) &&
     record.coverage.every((item) => typeof item === "string")

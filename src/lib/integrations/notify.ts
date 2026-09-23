@@ -27,14 +27,12 @@ export function formatQuoteNotification(
     `City or ZIP: ${quote.location}`,
     `Business Name: ${quote.businessName || "(none)"}`,
     `Coverage Interests: ${coverageLabels(quote) || "(none)"}`,
-    `Bike Type: ${quote.bikeType || "(none)"}`,
-    `Bike Value: ${quote.bikeValue || "(none)"}`,
     `Message: ${quote.message || "(none)"}`,
     "",
-    "This is a website quote request, not a binder.",
+    "This is a website callback request, not a price or a binder.",
   ];
   return {
-    subject: `Rhino quote request ${meta.id} (${quoteTypeLabel(quote.quoteType)})`,
+    subject: `Rhino callback request ${meta.id} (${quoteTypeLabel(quote.quoteType)})`,
     text: lines.join("\n"),
   };
 }

@@ -2,16 +2,17 @@
 
 Custom [Next.js](https://nextjs.org) site for **Rhino Insurance Advisors** (Edinburg, TX), intended to replace the current Squarespace site at [rhinoinsuranceadvisors.com](https://www.rhinoinsuranceadvisors.com/).
 
-Bicycle insurance is a **featured personal product** on this site — not a separate brand. Builders risk is a **featured commercial product**. Brand, nav, and contact live in `src/lib/brand.ts`. Coverage copy lives in `src/lib/content/`.
+Builders risk is a **featured commercial product**. Quotes start with a phone call to the Edinburg office, `(956) 609-6222`, Monday–Friday 8AM–5PM. The `/quote` page is an optional callback request — not a price and not a binder. Brand, nav, and contact live in `src/lib/brand.ts`. Coverage copy lives in `src/lib/content/`.
+
+Former bicycle routes (`/bicycle-insurance`, `/coverage`, `/how-it-works`, `/faq`) redirect to `/contact`.
 
 ## Pages
 
-- `/` — agency home (commercial + individual, builders risk and bicycle featured, testimonials, visit strip)
+- `/` — agency home (commercial + individual, builders risk featured, testimonials, visit strip). Primary CTA is the phone number.
 - `/about` — mission and service-with-integrity
 - `/business-insurance` — GL, E&O, workers’ comp, umbrella, commercial auto, builders risk, property
 - `/builders-risk` — course-of-construction coverage (contractors, owners, renovations)
-- `/bicycle-insurance` — theft, damage, liability, accessories + how it works + FAQ
-- `/quote` — unified quote request (`?type=commercial|personal|bicycle`, optional `&coverage=builders-risk`)
+- `/quote` — optional callback request (`?type=commercial|personal`, optional `&coverage=builders-risk`)
 - `/contact` — phone, email, address, hours
 
 ## Run locally
@@ -31,13 +32,12 @@ npm run start
 npm run lint
 ```
 
-## Quote form (no payments)
+## Callback form (no payments, no pricing)
 
-The form validates in the browser. Quote type is required:
+Calling the office is the way to get a quote. The form is optional and labeled as a callback request. It validates in the browser. Coverage type is required:
 
 - **Commercial** — business name + commercial coverage checkboxes
 - **Personal** — personal-line coverage interests
-- **Bicycle** — bike type, value range, and theft/damage/liability/accessories
 
 On submit it `POST`s JSON to `/api/quote`. The API re-validates, appends one JSON line to:
 
@@ -63,7 +63,7 @@ Config (see `.env.example`):
 - `Form Name` (stable mapping key) — `Rhino Website Quote Request`
 - Optional `NOWCERTS_ENDPOINT` / `NOWCERTS_API_KEY` if NowCerts ever requires them
 
-The webhook body is `{ AgencyID, FormName, json }` where `json` is a string of those labeled fields (a flat JSON object is rejected by NowCerts with HTTP 200 `{"status":1,"message":"Error!"}`). Inner keys are human-readable for the mapping UI: `AgencyID`, `Form Name`, `Applicant Name`, `Email`, `Phone Number`, `Coverage Type`, `Business Name`, `City or ZIP`, `Coverage Interests` (includes Builders risk when selected), `Bike Type`, `Bike Value Range`, `Message`, `Reference ID`, `Submitted At`, and `Source`. Success is an AMS message containing `successfully inserted` (not HTTP 200 alone).
+The webhook body is `{ AgencyID, FormName, json }` where `json` is a string of those labeled fields (a flat JSON object is rejected by NowCerts with HTTP 200 `{"status":1,"message":"Error!"}`). Inner keys are human-readable for the mapping UI: `AgencyID`, `Form Name`, `Applicant Name`, `Email`, `Phone Number`, `Coverage Type`, `Business Name`, `City or ZIP`, `Coverage Interests` (includes Builders risk when selected), `Message`, `Reference ID`, `Submitted At`, and `Source`. Success is an AMS message containing `successfully inserted` (not HTTP 200 alone).
 
 After the first real or test submit:
 

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { CtaBand, PageIntro, SampleCallout } from "@/components/CtaBand";
 import { FaqAccordion } from "@/components/FaqAccordion";
 import { BuildersRiskArt } from "@/components/illustrations";
-import { brand } from "@/lib/brand";
+import { brand, callCta, callbackCta } from "@/lib/brand";
 import { educationalNotice, sampleNotice } from "@/lib/content";
 import {
   buildersRiskAudiences,
@@ -49,12 +49,20 @@ export default function BuildersRiskPage() {
               </li>
             ))}
           </ol>
-          <Link
-            href={buildersRiskQuoteHref}
-            className="mt-8 inline-flex rounded-sm bg-teal px-5 py-3 text-sm font-semibold text-ink hover:bg-teal-dark"
-          >
-            Request a builders risk quote
-          </Link>
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <a
+              href={callCta.href}
+              className="inline-flex rounded-sm bg-teal px-5 py-3 text-sm font-semibold text-ink hover:bg-teal-dark"
+            >
+              {callCta.label}
+            </a>
+            <Link
+              href={buildersRiskQuoteHref}
+              className="text-sm font-semibold text-teal-dark hover:text-ink"
+            >
+              Or {callbackCta.label.toLowerCase()}
+            </Link>
+          </div>
         </div>
       </div>
 
@@ -132,21 +140,14 @@ export default function BuildersRiskPage() {
         >
           business insurance
         </Link>
-        . For bikes, see{" "}
-        <Link
-          className="font-semibold text-ink hover:text-teal-dark"
-          href="/bicycle-insurance"
-        >
-          bicycle insurance
-        </Link>
         .
       </div>
 
       <CtaBand
         title="Ask Rhino about the job."
-        body="The quote form opens as Commercial with Builders risk already selected. Add any other coverages you want us to look at."
-        href={buildersRiskQuoteHref}
-        label="Get a builders risk quote"
+        body={`Call ${brand.phone}, ${brand.hours}. We’ll talk through builders risk with you. Leaving details online only requests a callback — it is not a price or a binder.`}
+        secondaryHref={buildersRiskQuoteHref}
+        secondaryLabel={callbackCta.label}
       />
     </>
   );

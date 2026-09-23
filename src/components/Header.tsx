@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useId, useState } from "react";
 import { Logo } from "@/components/Logo";
-import { brand, nav, quoteCta } from "@/lib/brand";
+import { brand, callCta, nav } from "@/lib/brand";
 
 export function Header() {
   const pathname = usePathname();
@@ -70,12 +70,13 @@ export function Header() {
               </Link>
             );
           })}
-          <Link
-            href={quoteCta.href}
-            className="ml-2 rounded-sm bg-teal px-4 py-2 text-sm font-semibold text-ink transition-colors hover:bg-teal-dark"
+          <a
+            href={callCta.href}
+            className="ml-2 inline-flex flex-col items-center rounded-sm bg-teal px-4 py-1.5 text-sm leading-tight font-semibold text-ink transition-colors hover:bg-teal-dark"
           >
-            {quoteCta.label}
-          </Link>
+            <span>{callCta.label}</span>
+            <span className="text-xs font-medium">{brand.phone}</span>
+          </a>
         </nav>
 
         <button
@@ -121,12 +122,13 @@ export function Header() {
                 {item.label}
               </Link>
             ))}
-            <Link
-              href={quoteCta.href}
+            <a
+              href={callCta.href}
               className="mt-2 rounded-sm bg-teal px-4 py-3 text-center text-base font-semibold text-ink hover:bg-teal-dark"
             >
-              {quoteCta.label}
-            </Link>
+              {callCta.label}
+              <span className="mt-0.5 block text-sm font-medium">{brand.phone}</span>
+            </a>
           </nav>
         </div>
       ) : null}

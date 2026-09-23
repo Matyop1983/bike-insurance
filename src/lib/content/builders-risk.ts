@@ -53,8 +53,8 @@ export const buildersRiskHowItWorks = [
   },
   {
     n: "02",
-    title: "Rhino reviews the request",
-    body: "An advisor checks eligibility, may ask about construction type, theft exposure, or existing property coverage, and follows up with options. Submitting this website form is a request — not a price and not a binder.",
+    title: "Call, and Rhino reviews the job",
+    body: "Call the office to talk through eligibility, construction type, theft exposure, or existing property coverage. Leaving details online only asks us to call you back — it is not a price and not a binder.",
   },
   {
     n: "03",

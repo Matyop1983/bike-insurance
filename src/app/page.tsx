@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { CtaBand } from "@/components/CtaBand";
 import { Logo } from "@/components/Logo";
-import { brand, quoteCta } from "@/lib/brand";
+import { brand, callCta, callbackCta } from "@/lib/brand";
 import { homePillars, testimonials } from "@/lib/content";
 
 export default function HomePage() {
@@ -17,17 +17,17 @@ export default function HomePage() {
               {brand.tagline}.
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted">
-              {brand.integrity} Commercial coverage, individual policies, a
-              featured builders risk product, and bicycle insurance — with an
-              advisor you can actually reach.
+              {brand.integrity} Commercial coverage, individual policies, and
+              builders risk — call the Edinburg office and talk with an advisor.
             </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link
-                href={quoteCta.href}
-                className="inline-flex items-center justify-center rounded-sm bg-teal px-6 py-3 text-sm font-semibold text-ink hover:bg-teal-dark"
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+              <a
+                href={callCta.href}
+                className="inline-flex flex-col items-center justify-center rounded-sm bg-teal px-6 py-3 text-center text-sm font-semibold text-ink hover:bg-teal-dark sm:flex-row"
               >
-                {quoteCta.label}
-              </Link>
+                <span>{callCta.label}</span>
+                <span className="font-medium sm:ml-2">{brand.phone}</span>
+              </a>
               <Link
                 href="/business-insurance"
                 className="inline-flex items-center justify-center rounded-sm border border-line bg-paper px-6 py-3 text-sm font-semibold text-ink hover:bg-stone"
@@ -35,6 +35,13 @@ export default function HomePage() {
                 Business insurance
               </Link>
             </div>
+            <p className="mt-3 text-sm text-muted">
+              {brand.hours}. Prefer to leave details?{" "}
+              <Link className="font-semibold text-ink hover:text-teal-dark" href={callbackCta.href}>
+                {callbackCta.label}
+              </Link>{" "}
+              — optional, and not a price.
+            </p>
           </div>
           <div className="flex justify-center px-2 sm:px-6">
             <Logo className="h-auto w-full max-w-[13rem] sm:max-w-[18rem] lg:max-w-[22rem]" />
@@ -47,10 +54,9 @@ export default function HomePage() {
           What we help with
         </p>
         <h2 className="display mt-2 max-w-2xl text-3xl text-ink sm:text-4xl">
-          Commercial strength. Personal attention. Products that aren’t an
-          afterthought.
+          Commercial strength. Personal attention.
         </h2>
-        <ul className="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {homePillars.map((item) => (
             <li key={item.href}>
               <Link
@@ -90,8 +96,7 @@ export default function HomePage() {
             ))}
           </ul>
           <p className="mt-6 text-xs text-stone/45">
-            Placeholder testimonials for this custom site until live quotes are
-            confirmed.
+            Placeholder testimonials for this custom site.
           </p>
         </div>
       </section>
@@ -121,23 +126,26 @@ export default function HomePage() {
           </a>
         </div>
         <div className="rounded-sm bg-ink px-6 py-8 text-stone">
-          <h2 className="display text-2xl">Let’s get started</h2>
+          <h2 className="display text-2xl">Call us for a quote</h2>
           <p className="mt-3 text-stone/75">
-            Request a commercial, personal, or bicycle quote. An advisor follows up
-            — this site does not bind coverage online.
+            {brand.name}, Edinburg. {brand.hours}. We’ll talk through commercial
+            or personal coverage, including builders risk. Nothing is priced or
+            bound on this site.
           </p>
-          <Link
-            href={quoteCta.href}
+          <a
+            href={callCta.href}
             className="mt-6 inline-flex rounded-sm bg-teal px-5 py-3 text-sm font-semibold text-ink hover:bg-teal-dark"
           >
-            I want to learn more
-          </Link>
+            {brand.phone}
+          </a>
         </div>
       </section>
 
       <CtaBand
-        title="Ready when you are."
-        body="Tell us whether you need commercial, personal, or bicycle coverage. We’ll confirm we received it."
+        title="Call us for a quote."
+        body={`${brand.name}, Edinburg. ${brand.hours}. ${brand.phone}. If you can’t call right now, leave your details and we’ll call you back.`}
+        secondaryHref={callbackCta.href}
+        secondaryLabel={callbackCta.label}
       />
     </>
   );

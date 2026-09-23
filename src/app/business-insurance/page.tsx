@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CtaBand, PageIntro, SampleCallout } from "@/components/CtaBand";
+import { brand, callbackCta } from "@/lib/brand";
 import { businessCoverages, educationalNotice } from "@/lib/content";
 
 export const metadata: Metadata = {
@@ -81,20 +82,21 @@ export default function BusinessInsurancePage() {
 
       <div className="wrap pb-10 text-sm text-muted">
         Looking for personal lines?{" "}
+        <a className="font-semibold text-ink hover:text-teal-dark" href={brand.phoneHref}>
+          Call {brand.phone}
+        </a>
+        , or{" "}
         <Link className="font-semibold text-ink hover:text-teal-dark" href="/quote?type=personal">
-          Request a personal quote
+          leave your details for a callback
         </Link>
-        . For bikes, see{" "}
-        <Link className="font-semibold text-ink hover:text-teal-dark" href="/bicycle-insurance">
-          bicycle insurance
-        </Link>
-        .
+        . The form is optional and is not a price.
       </div>
 
       <CtaBand
         title="Need a commercial quote?"
-        body="Choose Commercial on the quote form and tell us which coverages to look at."
-        href="/quote?type=commercial"
+        body={`Call ${brand.phone} and tell us which coverages to look at. ${brand.hours}. The online form only asks us to call you back.`}
+        secondaryHref={`${callbackCta.href}?type=commercial`}
+        secondaryLabel={callbackCta.label}
       />
     </>
   );
