@@ -21,6 +21,26 @@ type Status =
 const fieldClass =
   "mt-1.5 w-full rounded-sm border border-line bg-paper px-4 py-3 text-ink placeholder:text-muted/60";
 
+const NETWORK_ERROR_MESSAGE = "Network error — check your connection and try again.";
+const SERVER_ERROR_MESSAGE = "Server error — we couldn’t save that request. Try again.";
+const SAVE_ERROR_MESSAGE = "We couldn’t save that request. Try again.";
+
+function messageForQuoteResponse(
+  response: { ok: boolean; status: number },
+  data: { id?: string; error?: string } | null,
+): { kind: "success"; id: string } | { kind: "error"; message: string } {
+  if (response.ok && data?.id) {
+    return { kind: "success", id: data.id };
+  }
+  if (data?.error) {
+    return { kind: "error", message: data.error };
+  }
+  if (!response.ok && response.status >= 500) {
+    return { kind: "error", message: SERVER_ERROR_MESSAGE };
+  }
+  return { kind: "error", message: SAVE_ERROR_MESSAGE };
+}
+
 function FieldError({ id, message }: { id: string; message?: string }) {
   if (!message) return null;
   return (
@@ -107,27 +127,25 @@ export function QuoteForm({
     }
 
     setStatus({ kind: "submitting" });
+    let response: Response;
     try {
-      const response = await fetch("/api/quote", {
+      response = await fetch("/api/quote", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
-      const data = (await response.json()) as { id?: string; error?: string };
-      if (!response.ok || !data.id) {
-        setStatus({
-          kind: "error",
-          message: data.error ?? "We couldn’t save that request. Try again.",
-        });
-        return;
-      }
-      setStatus({ kind: "success", id: data.id });
     } catch {
-      setStatus({
-        kind: "error",
-        message: "Network error — check your connection and try again.",
-      });
+      setStatus({ kind: "error", message: NETWORK_ERROR_MESSAGE });
+      return;
     }
+
+    let data: { id?: string; error?: string } | null = null;
+    try {
+      data = (await response.json()) as { id?: string; error?: string };
+    } catch {
+      data = null;
+    }
+    setStatus(messageForQuoteResponse(response, data));
   }
 
   if (status.kind === "success") {
