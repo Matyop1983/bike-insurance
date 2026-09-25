@@ -7,32 +7,38 @@ export const testimonials = [
   },
   {
     quote:
-      "We needed commercial auto sorted from the family cars. Rhino made the distinction clear and followed through.",
+      "We needed the business trucks written correctly. Rhino explained the commercial auto form and followed through.",
     name: "Ana R.",
     role: "Family business, Edinburg",
   },
   {
     quote:
-      "They walked us through home and auto on the phone and didn’t push extras we didn’t need. Straightforward.",
+      "We asked about term life for the mortgage. They explained the difference from permanent coverage and didn’t rush us.",
     name: "Chris P.",
-    role: "Personal client, RGV",
+    role: "Edinburg",
   },
 ] as const;
 
 export const homePillars = [
   {
     href: "/business-insurance",
-    title: "Business insurance",
-    body: "General liability, E&O, workers’ comp, umbrella, commercial auto, and property — explained without the runaround.",
+    title: "Commercial",
+    body: "General liability, E&O, workers’ comp, umbrella, and commercial auto — explained without the runaround.",
   },
   {
-    href: "/builders-risk",
-    title: "Builders risk",
-    body: "Course-of-construction coverage for contractors, owners, and renovations — the job site, materials, storage, and transit.",
+    href: "/life-insurance",
+    title: "Life Insurance",
+    body: "For families, mortgage protection, and business owners or a key person. Term and permanent, in general terms — call to talk it through.",
   },
   {
-    href: "/contact",
-    title: "Individual coverage",
-    body: "Personal lines for households and professionals who want an advisor, not a call-center script. Call the office and we’ll talk it through.",
+    href: "/group-benefits",
+    title: "Group Benefits",
+    body: "Employee benefits for local employers: group health, dental, vision, group life, and disability.",
   },
 ] as const;
+
+export const buildersRiskHomeLink = {
+  href: "/builders-risk",
+  title: "Builders risk",
+  body: "Course-of-construction coverage for contractors, owners, and renovations — the job site, materials, storage, and transit.",
+} as const;

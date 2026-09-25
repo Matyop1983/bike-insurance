@@ -5,5 +5,7 @@ export {
   businessCoverages,
   educationalNotice,
 } from "./business";
-export { homePillars, testimonials } from "./home";
+export { buildersRiskHomeLink, homePillars, testimonials } from "./home";
 export { buildersRiskQuoteHref } from "./builders-risk";
+export { lifeQuoteHref } from "./life";
+export { groupBenefitsQuoteHref } from "./group-benefits";

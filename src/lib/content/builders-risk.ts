@@ -14,7 +14,7 @@ export const buildersRiskAudiences = [
   },
   {
     title: "Renovations and additions",
-    body: "Major remodels, vertical expansions, and gut renovations can need course-of-construction coverage for the new work and the materials staged for it — even if the existing building already has a property policy.",
+    body: "Major remodels, vertical expansions, and gut renovations can need course-of-construction coverage for the new work and the materials staged for it — even when the standing structure is already insured.",
   },
 ] as const;
 
@@ -38,7 +38,7 @@ export const buildersRiskCovered = [
 ] as const;
 
 export const buildersRiskNotCovered = [
-  "Liability for injury or property damage to others — that is typically general liability, not builders risk.",
+  "Liability for injury or damage to someone else — that is typically general liability, not builders risk.",
   "Contractors’ tools, machinery, and mobile equipment — often inland marine / equipment floaters.",
   "Workers’ injuries — workers’ compensation, not this form.",
   "The existing building on a remodel, unless the policy is written to include it.",
@@ -54,7 +54,7 @@ export const buildersRiskHowItWorks = [
   {
     n: "02",
     title: "Call, and Rhino reviews the job",
-    body: "Call the office to talk through eligibility, construction type, theft exposure, or existing property coverage. Leaving details online only asks us to call you back — it is not a price and not a binder.",
+    body: "Call the office to talk through eligibility, construction type, or theft exposure. Leaving details online only asks us to call you back — it is not a price and not a binder.",
   },
   {
     n: "03",
@@ -66,7 +66,7 @@ export const buildersRiskHowItWorks = [
 export const buildersRiskFaqs = [
   {
     q: "Is builders risk the same as general liability?",
-    a: "No. Builders risk (course-of-construction) is first-party property coverage for the building and materials. General liability responds to claims that you injured someone or damaged someone else’s property. Most jobs need both, written separately.",
+    a: "No. Builders risk (course-of-construction) covers the building and materials while the work is underway. General liability responds to claims that you injured someone or damaged someone else’s building or belongings. Most jobs need both, written separately.",
   },
   {
     q: "Who usually buys the policy — the contractor or the owner?",
@@ -82,7 +82,7 @@ export const buildersRiskFaqs = [
   },
   {
     q: "When does coverage start and stop?",
-    a: "It is temporary. Sample wording starts when work or materials are at risk and ends at the earliest of completion, occupancy, acceptance, or the expiration date. Permanent property insurance should be in place before that happens.",
+    a: "It is temporary. Sample wording starts when work or materials are at risk and ends at the earliest of completion, occupancy, acceptance, or the expiration date. Coverage for the finished, occupied building has to be arranged before that happens. This page does not offer that completed-building coverage.",
   },
   {
     q: "Will I get a price when I submit the form?",

@@ -1,6 +1,9 @@
 export const quoteTypes = [
-  { value: "commercial", label: "Commercial", hint: "Business and contractor coverages" },
-  { value: "personal", label: "Personal", hint: "Household and individual lines" },
+  {
+    value: "commercial",
+    label: "Commercial",
+    hint: "Business insurance, life insurance, group benefits, and builders risk",
+  },
 ] as const;
 
 export type QuoteType = (typeof quoteTypes)[number]["value"];
@@ -12,15 +15,8 @@ export const commercialCoverages = [
   { value: "umbrella", label: "Umbrella" },
   { value: "commercial-auto", label: "Commercial auto" },
   { value: "builders-risk", label: "Builders risk" },
-  { value: "property", label: "Property" },
-] as const;
-
-export const personalCoverages = [
-  { value: "auto", label: "Personal auto" },
-  { value: "home", label: "Home / renters" },
-  { value: "umbrella", label: "Personal umbrella" },
-  { value: "life", label: "Life" },
-  { value: "other", label: "Other / not sure" },
+  { value: "life", label: "Life insurance" },
+  { value: "group-benefits", label: "Group benefits" },
 ] as const;
 
 export type QuotePayload = {
@@ -40,7 +36,7 @@ const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const phonePattern = /^[+()0-9.\-\s]{7,20}$/;
 
 export function parseQuoteType(value: string | undefined | null): QuoteType | "" {
-  if (value === "commercial" || value === "personal") {
+  if (value === "commercial") {
     return value;
   }
   return "";
@@ -59,7 +55,6 @@ export const emptyQuote = (quoteType: QuoteType | "" = ""): QuotePayload => ({
 
 function coverageOptionsFor(type: QuoteType | "") {
   if (type === "commercial") return commercialCoverages;
-  if (type === "personal") return personalCoverages;
   return [];
 }
 
@@ -89,7 +84,7 @@ export function validateQuote(input: QuotePayload): QuoteFieldErrors {
   const location = input.location.trim();
 
   if (!quoteTypes.some((option) => option.value === input.quoteType)) {
-    errors.quoteType = "Choose commercial or personal.";
+    errors.quoteType = "Choose commercial.";
   }
   if (name.length < 2) {
     errors.name = "Please enter your name.";

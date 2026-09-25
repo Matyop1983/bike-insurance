@@ -5,18 +5,18 @@ import { brand, callbackCta } from "@/lib/brand";
 import { businessCoverages, educationalNotice } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "Business Insurance",
+  title: "Commercial Insurance",
   description:
-    "General liability, professional liability, workers’ comp, umbrella, commercial auto, builders risk, and property — educational overviews from Rhino Insurance Advisors.",
+    "General liability, professional liability, workers’ comp, umbrella, commercial auto, and builders risk — educational overviews from Rhino Insurance Advisors.",
 };
 
 export default function BusinessInsurancePage() {
   return (
     <>
       <PageIntro
-        kicker="Business insurance"
+        kicker="Commercial"
         title="Coverage that fits how you actually work."
-        body="Seven building blocks most commercial clients ask about. Use this as a briefing with an advisor — not as a substitute for the policy."
+        body="Six building blocks most commercial clients ask about. Use this as a briefing with an advisor — not as a substitute for the policy."
       />
 
       <div className="wrap pb-8">
@@ -81,15 +81,26 @@ export default function BusinessInsurancePage() {
       </div>
 
       <div className="wrap pb-10 text-sm text-muted">
-        Looking for personal lines?{" "}
-        <a className="font-semibold text-ink hover:text-teal-dark" href={brand.phoneHref}>
-          Call {brand.phone}
-        </a>
-        , or{" "}
-        <Link className="font-semibold text-ink hover:text-teal-dark" href="/quote?type=personal">
-          leave your details for a callback
+        For an individual life policy, see{" "}
+        <Link
+          className="font-semibold text-ink hover:text-teal-dark"
+          href="/life-insurance"
+        >
+          life insurance
         </Link>
-        . The form is optional and is not a price.
+        . Employers asking about health, dental, vision, group life, or
+        disability can read{" "}
+        <Link
+          className="font-semibold text-ink hover:text-teal-dark"
+          href="/group-benefits"
+        >
+          group benefits
+        </Link>
+        . Or{" "}
+        <a className="font-semibold text-ink hover:text-teal-dark" href={brand.phoneHref}>
+          call {brand.phone}
+        </a>
+        . The callback form is optional and is not a price.
       </div>
 
       <CtaBand

@@ -16,7 +16,7 @@ export default async function QuotePage({
   searchParams: Promise<{ type?: string; coverage?: string | string[] }>;
 }) {
   const params = await searchParams;
-  const initialType = parseQuoteType(params.type);
+  const initialType = parseQuoteType(params.type) || "commercial";
   const initialCoverage = parseCoverageParam(params.coverage, initialType);
 
   return (
@@ -39,8 +39,9 @@ export default async function QuotePage({
         <div>
           <h2 className="text-xl font-semibold text-ink">Optional: request a callback</h2>
           <p className="mt-2 mb-6 text-sm leading-relaxed text-muted">
-            Commercial or personal, including builders risk. An advisor follows
-            up by phone. This is not live pricing.
+            Coverage interests include life insurance, group benefits, and
+            builders risk. An advisor follows up by phone. This is not live
+            pricing.
           </p>
           <QuoteForm initialType={initialType} initialCoverage={initialCoverage} />
         </div>

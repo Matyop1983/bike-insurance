@@ -13,6 +13,8 @@ const nextConfig: NextConfig = {
         destination: "/builders-risk",
         permanent: false,
       },
+      { source: "/personal-insurance", destination: "/", permanent: false },
+      { source: "/personal-insurance/:path*", destination: "/", permanent: false },
     ];
   },
 };
