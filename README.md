@@ -40,15 +40,15 @@ Calling the office is the way to get a quote. The form is optional and labeled a
 
 - **Commercial** — business name + coverage checkboxes (general liability, professional liability, workers’ comp, umbrella, commercial auto, builders risk, life insurance, and group benefits)
 
-On submit it `POST`s JSON to `/api/quote`. The API re-validates, appends one JSON line to:
+On submit it `POST`s JSON to `/api/quote`. The API re-validates, then best-effort appends one JSON line to:
 
 ```text
 data/quote-submissions.jsonl
 ```
 
-That file is gitignored. Success shows a reference ID such as `RH-A1B2C3D4`. This is not a binder and not a price.
+That file is gitignored. On a read-only filesystem (Vercel serverless functions can only write under `/tmp`), the file write is skipped and the submission is written to the server log instead. A failed log never blocks the request. Success shows a reference ID such as `RH-A1B2C3D4`. This is not a binder and not a price.
 
-The same request is then pushed to NowCerts / Momentum AMS (soft-fail: the visitor still gets the RH- ID if the local save succeeded). An internal email to `Matthew@Rhinoia.com` is sent when Resend env vars are set.
+The same request is then pushed to NowCerts / Momentum AMS. NowCerts and the local file are both best-effort: the visitor still gets the RH- ID for a valid submission. An internal email to `Matthew@Rhinoia.com` is sent when Resend env vars are set. If `RESEND_API_KEY` or `QUOTE_NOTIFY_FROM` is missing, email is skipped and the API reports `email: "pending-env"`.
 
 ## NowCerts / Momentum AMS
 
@@ -73,7 +73,7 @@ After the first real or test submit:
 3. **Map** each left-column form label to an AMS field.
 4. Click **Save and Merge**. Future submits with the same Form Name reuse that mapping.
 
-If NowCerts is down or returns `Error!`, the JSONL line is still written and the visitor still sees the RH- ID. The JSON response flags `nowcerts: "failed"` for ops. Check server logs (`[nowcerts]`) and the follow-up `delivery` JSONL line.
+If NowCerts is down or returns `Error!`, the visitor still sees the RH- ID. The JSON response flags `nowcerts: "failed"` for ops. Check server logs (`[nowcerts]`) and, when the filesystem is writable, the follow-up `delivery` JSONL line.
 
 ### Email notification
 
