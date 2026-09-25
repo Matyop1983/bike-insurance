@@ -27,7 +27,7 @@ export default function LifeInsurancePage() {
       <PageIntro
         kicker={`${brand.shortName} · Life insurance`}
         title="Life insurance, explained before anyone talks price."
-        body="For families, for a mortgage, and for business owners who need a personal policy or coverage on a key person. Term and permanent are the two shapes people ask about. This page is the vocabulary — call the office for a quote."
+        body="For families, for a mortgage, and for business owners who need an individual policy or coverage on a key person. Term and permanent are the two shapes people ask about. This page is the vocabulary — call the office for a quote."
       />
 
       <div className="wrap grid items-center gap-10 pb-16 lg:grid-cols-[0.9fr_1.1fr]">

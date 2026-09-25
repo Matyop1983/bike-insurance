@@ -7,7 +7,7 @@ import { businessCoverages, educationalNotice } from "@/lib/content";
 export const metadata: Metadata = {
   title: "Commercial Insurance",
   description:
-    "General liability, professional liability, workers’ comp, umbrella, commercial auto, builders risk, and property — educational overviews from Rhino Insurance Advisors.",
+    "General liability, professional liability, workers’ comp, umbrella, commercial auto, and builders risk — educational overviews from Rhino Insurance Advisors.",
 };
 
 export default function BusinessInsurancePage() {
@@ -16,7 +16,7 @@ export default function BusinessInsurancePage() {
       <PageIntro
         kicker="Commercial"
         title="Coverage that fits how you actually work."
-        body="Seven building blocks most commercial clients ask about. Use this as a briefing with an advisor — not as a substitute for the policy."
+        body="Six building blocks most commercial clients ask about. Use this as a briefing with an advisor — not as a substitute for the policy."
       />
 
       <div className="wrap pb-8">
@@ -81,12 +81,12 @@ export default function BusinessInsurancePage() {
       </div>
 
       <div className="wrap pb-10 text-sm text-muted">
-        Looking for personal lines? See{" "}
+        For an individual life policy, see{" "}
         <Link
           className="font-semibold text-ink hover:text-teal-dark"
-          href="/personal-insurance"
+          href="/life-insurance"
         >
-          personal insurance
+          life insurance
         </Link>
         . Employers asking about health, dental, vision, group life, or
         disability can read{" "}

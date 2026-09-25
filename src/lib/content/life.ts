@@ -1,7 +1,7 @@
 import { brand } from "../brand";
 
-/** Personal callback with life pre-selected. Not a price. */
-export const lifeQuoteHref = "/quote?type=personal&coverage=life" as const;
+/** Commercial callback with life pre-selected. Not a price. */
+export const lifeQuoteHref = "/quote?type=commercial&coverage=life" as const;
 
 /** Key-person and owner conversations start on the commercial callback. */
 export const lifeBusinessQuoteHref =
@@ -73,7 +73,7 @@ export const lifeFaqs = [
   },
   {
     q: "What is key person coverage?",
-    a: "It is life insurance a business asks about on someone whose death would hurt the company — often an owner or a specialist. It is not the same request as a personal policy meant for a family. Tell us which one you want and we will keep them separate.",
+    a: "It is life insurance a business asks about on someone whose death would hurt the company — often an owner or a specialist. It is not the same request as an individual policy meant for a family. Tell us which one you want and we will keep them separate.",
   },
   {
     q: "Will the callback form give me a price?",

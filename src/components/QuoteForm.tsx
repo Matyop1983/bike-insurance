@@ -5,7 +5,6 @@ import { brand } from "@/lib/brand";
 import {
   commercialCoverages,
   emptyQuote,
-  personalCoverages,
   quoteTypes,
   type QuoteFieldErrors,
   type QuotePayload,
@@ -33,7 +32,6 @@ function FieldError({ id, message }: { id: string; message?: string }) {
 
 function coverageList(type: QuoteType | "") {
   if (type === "commercial") return commercialCoverages;
-  if (type === "personal") return personalCoverages;
   return [];
 }
 

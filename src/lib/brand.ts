@@ -10,9 +10,9 @@ export const brand = {
   mission:
     "Our mission is to help secure your future and build a relationship that no digit can compare to.",
   description:
-    "Independent insurance advisors in Edinburg, Texas. Commercial, personal, life insurance, and group benefits for local employers. Call the office for a quote.",
+    "Independent insurance advisors in Edinburg, Texas. Commercial insurance, life insurance, and group benefits for local employers. Call the office for a quote.",
   integrity:
-    "At Rhino, we’re focused on providing the highest level of service with integrity. Our team makes it easy to find the best commercial and individual insurance for your needs.",
+    "At Rhino, we’re focused on providing the highest level of service with integrity. Our team makes it easy to find commercial coverage, life insurance, and group benefits that fit your needs.",
   email: "quoting@rhinoia.com",
   phone: "(956) 609-6222",
   phoneHref: "tel:+19566096222",
@@ -29,7 +29,6 @@ export const brand = {
 
 export const coverageNav = [
   { href: "/business-insurance", label: "Commercial" },
-  { href: "/personal-insurance", label: "Personal" },
   { href: "/life-insurance", label: "Life Insurance" },
   { href: "/group-benefits", label: "Group Benefits" },
 ] as const;

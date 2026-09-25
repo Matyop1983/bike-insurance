@@ -14,7 +14,7 @@ export const groupBenefitsAudiences = [
   },
   {
     title: "Employers who already call Rhino",
-    body: "If you already talk with us about liability, property, or workers’ comp, group benefits is a separate request about what you offer the people who work for you.",
+    body: "If you already talk with us about liability or workers’ comp, group benefits is a separate request about what you offer the people who work for you.",
   },
 ] as const;
 
@@ -42,7 +42,7 @@ export const groupBenefitLines = [
 ] as const;
 
 export const groupBenefitsNotThis = [
-  "An individual health, dental, or vision plan for a household. Call us about personal lines if that is the request.",
+  "An individual health, dental, or vision plan for a household. We do not place individual medical coverage.",
   "A rate, a contribution amount, or a promise that a carrier will offer a plan to your group.",
   "Enrollment on this website. Employees do not apply for benefits here.",
   "Workers’ compensation. That statutory coverage is discussed with your other commercial policies.",
@@ -70,7 +70,7 @@ export const groupBenefitsHowItWorks = [
 export const groupBenefitsFaqs = [
   {
     q: "Is this page for employees who need their own health plan?",
-    a: "No. Group benefits are sponsored by an employer. If you need a household conversation — auto, home, or individual life — call the office and say so. We will not treat an individual request as a group quote.",
+    a: "No. Group benefits are sponsored by an employer. An individual life policy is a different conversation, on the life insurance page. We do not place household auto or home coverage, and we will not treat an individual request as a group quote.",
   },
   {
     q: "Which benefits can we ask about?",
@@ -81,8 +81,8 @@ export const groupBenefitsFaqs = [
     a: `No. There is no rating on this website, and we do not publish sample rates. Call ${brand.phone} during office hours, or leave a callback request. A confirmation ID is not a quote.`,
   },
   {
-    q: "Is group life the same as personal life insurance?",
-    a: "No. Group life is an employer-sponsored benefit for eligible employees. Personal life insurance — for a family, a mortgage, or a key person — is a different conversation, with its own page.",
+    q: "Is group life the same as an individual life policy?",
+    a: "No. Group life is an employer-sponsored benefit for eligible employees. Individual life insurance — for a family, a mortgage, or a key person — is a different conversation, with its own page.",
   },
   {
     q: "Does disability replace workers’ comp?",

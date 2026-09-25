@@ -5,7 +5,6 @@ const paths = [
   "/",
   "/about",
   "/business-insurance",
-  "/personal-insurance",
   "/life-insurance",
   "/group-benefits",
   "/builders-risk",

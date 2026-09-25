@@ -7,15 +7,15 @@ export const testimonials = [
   },
   {
     quote:
-      "We needed commercial auto sorted from the family cars. Rhino made the distinction clear and followed through.",
+      "We needed the business trucks written correctly. Rhino explained the commercial auto form and followed through.",
     name: "Ana R.",
     role: "Family business, Edinburg",
   },
   {
     quote:
-      "They walked us through home and auto on the phone and didn’t push extras we didn’t need. Straightforward.",
+      "We asked about term life for the mortgage. They explained the difference from permanent coverage and didn’t rush us.",
     name: "Chris P.",
-    role: "Personal client, RGV",
+    role: "Edinburg",
   },
 ] as const;
 
@@ -23,12 +23,7 @@ export const homePillars = [
   {
     href: "/business-insurance",
     title: "Commercial",
-    body: "General liability, E&O, workers’ comp, umbrella, commercial auto, and property — explained without the runaround.",
-  },
-  {
-    href: "/personal-insurance",
-    title: "Personal",
-    body: "Auto, home, renters, and umbrella for households that want an advisor, not a call-center script.",
+    body: "General liability, E&O, workers’ comp, umbrella, and commercial auto — explained without the runaround.",
   },
   {
     href: "/life-insurance",

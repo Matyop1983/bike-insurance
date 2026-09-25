@@ -17,9 +17,7 @@ export default function HomePage() {
               {brand.tagline}.
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted">
-              {brand.integrity} Commercial, personal, life insurance, and group
-              benefits for local employers — call the Edinburg office and talk
-              with an advisor.
+              {brand.integrity} Call the Edinburg office and talk with an advisor.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
               <a
@@ -61,9 +59,9 @@ export default function HomePage() {
           What we help with
         </p>
         <h2 className="display mt-2 max-w-2xl text-3xl text-ink sm:text-4xl">
-          Commercial strength. Personal attention.
+          Commercial strength. Local attention.
         </h2>
-        <ul className="mt-10 grid gap-4 sm:grid-cols-2">
+        <ul className="mt-10 grid gap-4 lg:grid-cols-3">
           {homePillars.map((item) => (
             <li key={item.href}>
               <Link
@@ -157,9 +155,9 @@ export default function HomePage() {
           <h2 className="display text-2xl">Call us for a quote</h2>
           <p className="mt-3 text-stone/75">
             {brand.name}, Edinburg. {brand.hours}. We’ll talk through commercial,
-            personal, life insurance, or group benefits — and builders risk when
-            the job is still under construction. Nothing is priced or bound on
-            this site.
+            life insurance, or group benefits — and builders risk when the job
+            is still under construction. Nothing is priced or bound on this
+            site.
           </p>
           <a
             href={callCta.href}

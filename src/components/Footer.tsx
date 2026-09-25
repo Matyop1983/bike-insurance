@@ -12,10 +12,9 @@ export function Footer() {
           </Link>
           <p className="mt-5 max-w-sm text-[0.95rem] leading-relaxed text-stone/75">
             {brand.tagline}. Independent advisors in Edinburg serving commercial
-            and personal clients across the Rio Grande Valley, including life
-            insurance and group benefits for local employers. Builders risk is
-            available for course-of-construction jobs. Call {brand.phone} for a
-            quote.
+            clients across the Rio Grande Valley, including life insurance and
+            group benefits for local employers. Builders risk is available for
+            course-of-construction jobs. Call {brand.phone} for a quote.
           </p>
         </div>
 

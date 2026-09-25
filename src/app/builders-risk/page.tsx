@@ -27,7 +27,7 @@ export default function BuildersRiskPage() {
       <PageIntro
         kicker={`${brand.shortName} · Commercial product`}
         title="Builders risk, while the job is still a job."
-        body="Course-of-construction coverage for the building and the materials that will become it — at the site, in storage, and in transit. It is a Rhino commercial offering, not a substitute for general liability or a completed property policy."
+        body="Course-of-construction coverage for the building and the materials that will become it — at the site, in storage, and in transit. It is a Rhino commercial offering, not a substitute for general liability, and it is not coverage for a finished, occupied building."
       />
 
       <div className="wrap grid items-center gap-10 pb-16 lg:grid-cols-[0.9fr_1.1fr]">

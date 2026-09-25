@@ -39,7 +39,7 @@ export function LifeArt() {
       viewBox="0 0 640 520"
       className="h-auto w-full"
       role="img"
-      aria-label="Illustration of a household and a simple life-insurance mark"
+      aria-label="Illustration of a house and a simple life-insurance mark"
     >
       <rect width="640" height="520" fill="none" />
       <ellipse cx="390" cy="250" rx="175" ry="180" fill="#243044" />

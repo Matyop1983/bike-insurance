@@ -22,8 +22,8 @@ export default function AboutPage() {
           <p className="mt-4 leading-relaxed text-muted">{brand.integrity}</p>
           <p className="mt-4 leading-relaxed text-muted">
             That means explaining what a policy does and does not do, matching
-            commercial and individual coverage to how you actually operate, and
-            staying reachable after the binder goes out.
+            commercial coverage, life insurance, and group benefits to how you
+            actually operate, and staying reachable after the binder goes out.
           </p>
         </article>
         <article className="rounded-sm border border-line bg-paper p-7">
@@ -42,7 +42,7 @@ export default function AboutPage() {
 
       <CtaBand
         title="Call us for a quote."
-        body={`${brand.name}, Edinburg. ${brand.hours}. ${brand.phone}. Commercial, personal, life insurance, or group benefits — we’ll talk it through.`}
+        body={`${brand.name}, Edinburg. ${brand.hours}. ${brand.phone}. Commercial, life insurance, or group benefits — we’ll talk it through.`}
         secondaryHref={callbackCta.href}
         secondaryLabel={callbackCta.label}
       />
