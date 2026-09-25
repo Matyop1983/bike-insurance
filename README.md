@@ -2,17 +2,20 @@
 
 Custom [Next.js](https://nextjs.org) site for **Rhino Insurance Advisors** (Edinburg, TX), intended to replace the current Squarespace site at [rhinoinsuranceadvisors.com](https://www.rhinoinsuranceadvisors.com/).
 
-Builders risk is a **featured commercial product**. Quotes start with a phone call to the Edinburg office, `(956) 609-6222`, Monday–Friday 8AM–5PM. The `/quote` page is an optional callback request — not a price and not a binder. Brand, nav, and contact live in `src/lib/brand.ts`. Coverage copy lives in `src/lib/content/`.
+Commercial, personal, life insurance, and group benefits are the lines in the header and home hero. Builders risk stays available at `/builders-risk`, linked lower on the home page and in the footer — not in the top nav. Quotes start with a phone call to the Edinburg office, `(956) 609-6222`, Monday–Friday 8AM–5PM. The `/quote` page is an optional callback request — not a price and not a binder. Brand, nav, and contact live in `src/lib/brand.ts`. Coverage copy lives in `src/lib/content/`.
 
 Former bicycle routes (`/bicycle-insurance`, `/coverage`, `/how-it-works`, `/faq`) redirect to `/contact`.
 
 ## Pages
 
-- `/` — agency home (commercial + individual, builders risk featured, testimonials, visit strip). Primary CTA is the phone number.
+- `/` — agency home (commercial, personal, life insurance, group benefits in the hero; builders risk linked lower; testimonials, visit strip). Primary CTA is the phone number.
 - `/about` — mission and service-with-integrity
-- `/business-insurance` — GL, E&O, workers’ comp, umbrella, commercial auto, builders risk, property
-- `/builders-risk` — course-of-construction coverage (contractors, owners, renovations)
-- `/quote` — optional callback request (`?type=commercial|personal`, optional `&coverage=builders-risk`)
+- `/business-insurance` — commercial: GL, E&O, workers’ comp, umbrella, commercial auto, builders risk, property
+- `/personal-insurance` — personal auto, home, renters, umbrella
+- `/life-insurance` — families, mortgage protection, business owners and key person; term and permanent in general terms
+- `/group-benefits` — employer benefits: group health, dental, vision, group life, disability
+- `/builders-risk` — course-of-construction coverage (contractors, owners, renovations). Page and URL stay; not in the header.
+- `/quote` — optional callback request (`?type=commercial|personal`, optional `&coverage=` such as `builders-risk`, `life`, or `group-benefits`)
 - `/contact` — phone, email, address, hours
 
 ## Run locally
@@ -36,8 +39,8 @@ npm run lint
 
 Calling the office is the way to get a quote. The form is optional and labeled as a callback request. It validates in the browser. Coverage type is required:
 
-- **Commercial** — business name + commercial coverage checkboxes
-- **Personal** — personal-line coverage interests
+- **Commercial** — business name + commercial coverage checkboxes (includes builders risk, life insurance, and group benefits)
+- **Personal** — personal-line coverage interests (includes life insurance)
 
 On submit it `POST`s JSON to `/api/quote`. The API re-validates, appends one JSON line to:
 

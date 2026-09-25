@@ -10,7 +10,7 @@ export const brand = {
   mission:
     "Our mission is to help secure your future and build a relationship that no digit can compare to.",
   description:
-    "Independent insurance advisors in Edinburg, Texas. Commercial and individual coverage, including builders risk. Call the office for a quote.",
+    "Independent insurance advisors in Edinburg, Texas. Commercial, personal, life insurance, and group benefits for local employers. Call the office for a quote.",
   integrity:
     "At Rhino, we’re focused on providing the highest level of service with integrity. Our team makes it easy to find the best commercial and individual insurance for your needs.",
   email: "quoting@rhinoia.com",
@@ -27,11 +27,31 @@ export const brand = {
   liveSite: "https://www.rhinoinsuranceadvisors.com/",
 } as const;
 
+export const coverageNav = [
+  { href: "/business-insurance", label: "Commercial" },
+  { href: "/personal-insurance", label: "Personal" },
+  { href: "/life-insurance", label: "Life Insurance" },
+  { href: "/group-benefits", label: "Group Benefits" },
+] as const;
+
+/** Kept off the header. Still linked in the footer and lower on the home page. */
+export const buildersRiskNavItem = {
+  href: "/builders-risk",
+  label: "Builders Risk",
+} as const;
+
 export const nav = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
-  { href: "/business-insurance", label: "Business" },
-  { href: "/builders-risk", label: "Builders Risk" },
+  ...coverageNav,
+  { href: "/contact", label: "Contact" },
+] as const;
+
+export const footerLinks = [
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
+  ...coverageNav,
+  buildersRiskNavItem,
   { href: "/contact", label: "Contact" },
 ] as const;
 

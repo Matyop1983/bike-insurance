@@ -2,47 +2,47 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { CtaBand, PageIntro, SampleCallout } from "@/components/CtaBand";
 import { brand, callbackCta } from "@/lib/brand";
-import { businessCoverages, educationalNotice } from "@/lib/content";
+import { educationalNotice } from "@/lib/content";
+import { personalLines, personalQuoteHref } from "@/lib/content/personal";
 
 export const metadata: Metadata = {
-  title: "Commercial Insurance",
+  title: "Personal Insurance",
   description:
-    "General liability, professional liability, workers’ comp, umbrella, commercial auto, builders risk, and property — educational overviews from Rhino Insurance Advisors.",
+    "Personal auto, home, renters, and umbrella coverage from Rhino Insurance Advisors in Edinburg, TX. Educational overview — call for a quote. Not a rate or a binder.",
 };
 
-export default function BusinessInsurancePage() {
+export default function PersonalInsurancePage() {
   return (
     <>
       <PageIntro
-        kicker="Commercial"
-        title="Coverage that fits how you actually work."
-        body="Seven building blocks most commercial clients ask about. Use this as a briefing with an advisor — not as a substitute for the policy."
+        kicker="Personal insurance"
+        title="Household coverage, with an advisor on the phone."
+        body="Personal auto, home, renters, and umbrella — the lines households in the Valley usually ask about. Life insurance has its own page. Use this as a briefing, then call the office."
       />
 
       <div className="wrap pb-8">
         <SampleCallout>{educationalNotice}</SampleCallout>
         <Link
-          href="/builders-risk"
+          href="/life-insurance"
           className="mt-6 flex h-full flex-col rounded-sm border border-line bg-paper p-6 hover:border-ink/30 sm:p-8"
         >
           <p className="text-xs font-semibold tracking-[0.2em] text-teal-dark uppercase">
-            Featured commercial product
+            Related
           </p>
-          <h2 className="display mt-2 text-3xl text-ink">Builders Risk</h2>
+          <h2 className="display mt-2 text-3xl text-ink">Life Insurance</h2>
           <p className="mt-3 max-w-3xl text-muted">
-            Course-of-construction coverage for contractors, owners, and
-            renovations — the building under construction, materials, off-site
-            storage, and transit. Educational overview, not a binder.
+            Families, mortgage protection, and business owners or key person
+            coverage. Term and permanent, in general terms — not a rate.
           </p>
           <span className="mt-5 text-sm font-semibold text-teal-dark">
-            Read the builders risk overview
+            Read the life insurance overview
           </span>
         </Link>
-        <nav aria-label="Coverage types" className="mt-6 flex flex-wrap gap-2">
-          {businessCoverages.map((item) => (
+        <nav aria-label="Personal lines" className="mt-6 flex flex-wrap gap-2">
+          {personalLines.map((item) => (
             <a
               key={item.id}
-              href={"pageHref" in item && item.pageHref ? item.pageHref : `#${item.id}`}
+              href={`#${item.id}`}
               className="rounded-sm border border-line bg-paper px-3 py-1.5 text-sm font-medium text-ink hover:border-ink"
             >
               {item.title}
@@ -52,7 +52,7 @@ export default function BusinessInsurancePage() {
       </div>
 
       <div className="wrap space-y-6 pb-16">
-        {businessCoverages.map((item) => (
+        {personalLines.map((item) => (
           <article
             key={item.id}
             id={item.id}
@@ -68,45 +68,36 @@ export default function BusinessInsurancePage() {
                 </li>
               ))}
             </ul>
-            {"pageHref" in item && item.pageHref ? (
-              <Link
-                href={item.pageHref}
-                className="mt-6 inline-flex text-sm font-semibold text-teal-dark hover:text-ink"
-              >
-                Full builders risk overview
-              </Link>
-            ) : null}
           </article>
         ))}
       </div>
 
       <div className="wrap pb-10 text-sm text-muted">
-        Looking for personal lines? See{" "}
+        Looking for the business? See{" "}
         <Link
           className="font-semibold text-ink hover:text-teal-dark"
-          href="/personal-insurance"
+          href="/business-insurance"
         >
-          personal insurance
+          commercial insurance
         </Link>
-        . Employers asking about health, dental, vision, group life, or
-        disability can read{" "}
+        , or{" "}
         <Link
           className="font-semibold text-ink hover:text-teal-dark"
           href="/group-benefits"
         >
           group benefits
-        </Link>
-        . Or{" "}
+        </Link>{" "}
+        if you are an employer. You can also{" "}
         <a className="font-semibold text-ink hover:text-teal-dark" href={brand.phoneHref}>
           call {brand.phone}
         </a>
-        . The callback form is optional and is not a price.
+        .
       </div>
 
       <CtaBand
-        title="Need a commercial quote?"
-        body={`Call ${brand.phone} and tell us which coverages to look at. ${brand.hours}. The online form only asks us to call you back.`}
-        secondaryHref={`${callbackCta.href}?type=commercial`}
+        title="Need a personal quote?"
+        body={`Call ${brand.phone} and tell us which household policies to look at. ${brand.hours}. The online form only asks us to call you back.`}
+        secondaryHref={personalQuoteHref}
         secondaryLabel={callbackCta.label}
       />
     </>

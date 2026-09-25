@@ -68,8 +68,8 @@ export default function ContactPage() {
           <h2 className="display text-3xl">Call {brand.phone}</h2>
           <p className="mt-3 max-w-xl text-stone/75">
             That’s the way to get a quote. {brand.hours}. If you’d rather we
-            call you, leave your details — commercial or personal. That form is
-            optional and does not show a price.
+            call you, leave your details — commercial, personal, life insurance,
+            or group benefits. That form is optional and does not show a price.
           </p>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
             <a

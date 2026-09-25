@@ -39,8 +39,9 @@ export default async function QuotePage({
         <div>
           <h2 className="text-xl font-semibold text-ink">Optional: request a callback</h2>
           <p className="mt-2 mb-6 text-sm leading-relaxed text-muted">
-            Commercial or personal, including builders risk. An advisor follows
-            up by phone. This is not live pricing.
+            Commercial or personal. Coverage interests include life insurance,
+            group benefits, and builders risk. An advisor follows up by phone.
+            This is not live pricing.
           </p>
           <QuoteForm initialType={initialType} initialCoverage={initialCoverage} />
         </div>

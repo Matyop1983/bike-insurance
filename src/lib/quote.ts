@@ -1,5 +1,5 @@
 export const quoteTypes = [
-  { value: "commercial", label: "Commercial", hint: "Business and contractor coverages" },
+  { value: "commercial", label: "Commercial", hint: "Business, employee benefits, and contractor coverages" },
   { value: "personal", label: "Personal", hint: "Household and individual lines" },
 ] as const;
 
@@ -13,13 +13,15 @@ export const commercialCoverages = [
   { value: "commercial-auto", label: "Commercial auto" },
   { value: "builders-risk", label: "Builders risk" },
   { value: "property", label: "Property" },
+  { value: "life", label: "Life insurance" },
+  { value: "group-benefits", label: "Group benefits" },
 ] as const;
 
 export const personalCoverages = [
   { value: "auto", label: "Personal auto" },
   { value: "home", label: "Home / renters" },
   { value: "umbrella", label: "Personal umbrella" },
-  { value: "life", label: "Life" },
+  { value: "life", label: "Life insurance" },
   { value: "other", label: "Other / not sure" },
 ] as const;
 

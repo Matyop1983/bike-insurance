@@ -2,7 +2,7 @@ import Link from "next/link";
 import { CtaBand } from "@/components/CtaBand";
 import { Logo } from "@/components/Logo";
 import { brand, callCta, callbackCta } from "@/lib/brand";
-import { homePillars, testimonials } from "@/lib/content";
+import { buildersRiskHomeLink, homePillars, testimonials } from "@/lib/content";
 
 export default function HomePage() {
   return (
@@ -17,8 +17,9 @@ export default function HomePage() {
               {brand.tagline}.
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted">
-              {brand.integrity} Commercial coverage, individual policies, and
-              builders risk — call the Edinburg office and talk with an advisor.
+              {brand.integrity} Commercial, personal, life insurance, and group
+              benefits for local employers — call the Edinburg office and talk
+              with an advisor.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
               <a
@@ -28,13 +29,19 @@ export default function HomePage() {
                 <span>{callCta.label}</span>
                 <span className="font-medium sm:ml-2">{brand.phone}</span>
               </a>
-              <Link
-                href="/business-insurance"
-                className="inline-flex items-center justify-center rounded-sm border border-line bg-paper px-6 py-3 text-sm font-semibold text-ink hover:bg-stone"
-              >
-                Business insurance
-              </Link>
             </div>
+            <ul className="mt-6 flex flex-wrap gap-2" aria-label="Coverage lines">
+              {homePillars.map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className="inline-flex rounded-sm border border-line bg-paper px-3 py-1.5 text-sm font-semibold text-ink hover:border-ink"
+                  >
+                    {item.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
             <p className="mt-3 text-sm text-muted">
               {brand.hours}. Prefer to leave details?{" "}
               <Link className="font-semibold text-ink hover:text-teal-dark" href={callbackCta.href}>
@@ -56,7 +63,7 @@ export default function HomePage() {
         <h2 className="display mt-2 max-w-2xl text-3xl text-ink sm:text-4xl">
           Commercial strength. Personal attention.
         </h2>
-        <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-10 grid gap-4 sm:grid-cols-2">
           {homePillars.map((item) => (
             <li key={item.href}>
               <Link
@@ -74,6 +81,27 @@ export default function HomePage() {
             </li>
           ))}
         </ul>
+        <div className="mt-4">
+          <Link
+            href={buildersRiskHomeLink.href}
+            className="flex flex-col rounded-sm border border-line bg-paper p-6 hover:border-ink/30 sm:flex-row sm:items-center sm:justify-between sm:gap-8"
+          >
+            <div>
+              <p className="text-xs font-semibold tracking-[0.16em] text-teal-dark uppercase">
+                Also available
+              </p>
+              <h3 className="mt-2 text-xl font-semibold text-ink">
+                {buildersRiskHomeLink.title}
+              </h3>
+              <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted">
+                {buildersRiskHomeLink.body}
+              </p>
+            </div>
+            <span className="mt-4 shrink-0 text-sm font-semibold text-teal-dark sm:mt-0">
+              Learn more
+            </span>
+          </Link>
+        </div>
       </section>
 
       <section className="bg-ink-mid py-16 text-stone">
@@ -128,9 +156,10 @@ export default function HomePage() {
         <div className="rounded-sm bg-ink px-6 py-8 text-stone">
           <h2 className="display text-2xl">Call us for a quote</h2>
           <p className="mt-3 text-stone/75">
-            {brand.name}, Edinburg. {brand.hours}. We’ll talk through commercial
-            or personal coverage, including builders risk. Nothing is priced or
-            bound on this site.
+            {brand.name}, Edinburg. {brand.hours}. We’ll talk through commercial,
+            personal, life insurance, or group benefits — and builders risk when
+            the job is still under construction. Nothing is priced or bound on
+            this site.
           </p>
           <a
             href={callCta.href}

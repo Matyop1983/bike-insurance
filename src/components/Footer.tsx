@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Logo } from "@/components/Logo";
-import { brand, callCta, callbackCta, nav } from "@/lib/brand";
+import { brand, callCta, callbackCta, footerLinks } from "@/lib/brand";
 
 export function Footer() {
   return (
@@ -12,8 +12,10 @@ export function Footer() {
           </Link>
           <p className="mt-5 max-w-sm text-[0.95rem] leading-relaxed text-stone/75">
             {brand.tagline}. Independent advisors in Edinburg serving commercial
-            and individual clients across the Rio Grande Valley — with builders
-            risk as a featured commercial product. Call {brand.phone} for a quote.
+            and personal clients across the Rio Grande Valley, including life
+            insurance and group benefits for local employers. Builders risk is
+            available for course-of-construction jobs. Call {brand.phone} for a
+            quote.
           </p>
         </div>
 
@@ -22,7 +24,7 @@ export function Footer() {
             Explore
           </h2>
           <ul className="mt-4 space-y-2 text-sm">
-            {nav.map((item) => (
+            {footerLinks.map((item) => (
               <li key={item.href}>
                 <Link className="hover:text-white" href={item.href}>
                   {item.label}

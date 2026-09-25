@@ -22,17 +22,28 @@ export const testimonials = [
 export const homePillars = [
   {
     href: "/business-insurance",
-    title: "Business insurance",
+    title: "Commercial",
     body: "General liability, E&O, workers’ comp, umbrella, commercial auto, and property — explained without the runaround.",
   },
   {
-    href: "/builders-risk",
-    title: "Builders risk",
-    body: "Course-of-construction coverage for contractors, owners, and renovations — the job site, materials, storage, and transit.",
+    href: "/personal-insurance",
+    title: "Personal",
+    body: "Auto, home, renters, and umbrella for households that want an advisor, not a call-center script.",
   },
   {
-    href: "/contact",
-    title: "Individual coverage",
-    body: "Personal lines for households and professionals who want an advisor, not a call-center script. Call the office and we’ll talk it through.",
+    href: "/life-insurance",
+    title: "Life Insurance",
+    body: "For families, mortgage protection, and business owners or a key person. Term and permanent, in general terms — call to talk it through.",
+  },
+  {
+    href: "/group-benefits",
+    title: "Group Benefits",
+    body: "Employee benefits for local employers: group health, dental, vision, group life, and disability.",
   },
 ] as const;
+
+export const buildersRiskHomeLink = {
+  href: "/builders-risk",
+  title: "Builders risk",
+  body: "Course-of-construction coverage for contractors, owners, and renovations — the job site, materials, storage, and transit.",
+} as const;

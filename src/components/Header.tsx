@@ -60,7 +60,7 @@ export function Header() {
                 key={item.href}
                 href={item.href}
                 aria-current={current ? "page" : undefined}
-                className={`rounded-sm px-2.5 py-2 text-sm font-medium transition-colors ${
+                className={`rounded-sm px-1.5 py-2 text-[0.8125rem] font-medium transition-colors xl:px-2.5 xl:text-sm ${
                   current
                     ? "text-ink"
                     : "text-ink/65 hover:bg-stone hover:text-ink"
@@ -72,7 +72,7 @@ export function Header() {
           })}
           <a
             href={callCta.href}
-            className="ml-2 inline-flex flex-col items-center rounded-sm bg-teal px-4 py-1.5 text-sm leading-tight font-semibold text-ink transition-colors hover:bg-teal-dark"
+            className="ml-1.5 inline-flex shrink-0 flex-col items-center rounded-sm bg-teal px-3 py-1.5 text-sm leading-tight font-semibold text-ink transition-colors hover:bg-teal-dark xl:ml-2 xl:px-4"
           >
             <span>{callCta.label}</span>
             <span className="text-xs font-medium">{brand.phone}</span>
