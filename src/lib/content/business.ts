@@ -1,3 +1,6 @@
+/** Commercial callback. The page covers several lines, so coverage is not preselected. */
+export const commercialQuoteHref = "/quote?type=commercial" as const;
+
 export const educationalNotice =
   "Educational overview for discussion with an advisor — not a binder, not a complete list of terms, and not a promise of coverage. What applies depends on the policy issued.";
 
