@@ -30,14 +30,12 @@ export function Footer() {
                 </Link>
               </li>
             ))}
-            <li>
+            <li className="flex flex-wrap items-baseline gap-x-3 gap-y-1 pt-1">
               <a className="font-semibold text-teal hover:text-white" href={callCta.href}>
                 {callCta.label}
               </a>
-            </li>
-            <li>
-              <Link className="text-stone/70 hover:text-white" href={callbackCta.href}>
-                {callbackCta.label}
+              <Link className="text-stone/60 hover:text-white" href={callbackCta.href}>
+                {callbackCta.sideLabel}
               </Link>
             </li>
           </ul>

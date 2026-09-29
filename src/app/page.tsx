@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { CtaBand } from "@/components/CtaBand";
 import { Logo } from "@/components/Logo";
+import { SecondaryQuoteLink } from "@/components/QuoteAside";
 import { brand, callCta, callbackCta } from "@/lib/brand";
 import { buildersRiskHomeLink, homePillars, testimonials } from "@/lib/content";
 
@@ -27,6 +28,7 @@ export default function HomePage() {
                 <span>{callCta.label}</span>
                 <span className="font-medium sm:ml-2">{brand.phone}</span>
               </a>
+              <SecondaryQuoteLink />
             </div>
             <ul className="mt-6 flex flex-wrap gap-2" aria-label="Coverage lines">
               {homePillars.map((item) => (
@@ -41,11 +43,8 @@ export default function HomePage() {
               ))}
             </ul>
             <p className="mt-3 text-sm text-muted">
-              {brand.hours}. Prefer to leave details?{" "}
-              <Link className="font-semibold text-ink hover:text-teal-dark" href={callbackCta.href}>
-                {callbackCta.label}
-              </Link>{" "}
-              — optional, and not a price.
+              {brand.hours}. Requesting a quote online asks us to call you back —
+              it is not a price.
             </p>
           </div>
           <div className="flex justify-center px-2 sm:px-6">
@@ -159,12 +158,20 @@ export default function HomePage() {
             is still under construction. Nothing is priced or bound on this
             site.
           </p>
-          <a
-            href={callCta.href}
-            className="mt-6 inline-flex rounded-sm bg-teal px-5 py-3 text-sm font-semibold text-ink hover:bg-teal-dark"
-          >
-            {brand.phone}
-          </a>
+          <div className="mt-6 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
+            <a
+              href={callCta.href}
+              className="inline-flex rounded-sm bg-teal px-5 py-3 text-sm font-semibold text-ink hover:bg-teal-dark"
+            >
+              {brand.phone}
+            </a>
+            <Link
+              href={callbackCta.href}
+              className="text-sm font-semibold text-stone/75 underline decoration-white/25 underline-offset-4 hover:text-white"
+            >
+              {callbackCta.sideLabel}
+            </Link>
+          </div>
         </div>
       </section>
 

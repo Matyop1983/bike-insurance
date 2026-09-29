@@ -60,8 +60,13 @@ export const callCta = {
   label: "Call us for a quote",
 } as const;
 
-/** Optional follow-up. Not a price and not a binder. */
+/**
+ * Optional follow-up. A quote request is a callback — not a price and not a binder.
+ * `label` stays on the longer callback wording. `sideLabel` is the short link
+ * that sits beside the call button.
+ */
 export const callbackCta = {
   href: "/quote",
   label: "Request a callback",
+  sideLabel: "Request a quote",
 } as const;

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useId, useState } from "react";
 import { Logo } from "@/components/Logo";
-import { brand, callCta, nav } from "@/lib/brand";
+import { brand, callCta, callbackCta, nav } from "@/lib/brand";
 
 export function Header() {
   const pathname = usePathname();
@@ -70,6 +70,12 @@ export function Header() {
               </Link>
             );
           })}
+          <Link
+            href={callbackCta.href}
+            className="ml-2 shrink-0 rounded-sm px-1.5 py-2 text-[0.8125rem] font-semibold text-ink/60 hover:text-ink xl:px-2 xl:text-sm"
+          >
+            {callbackCta.sideLabel}
+          </Link>
           <a
             href={callCta.href}
             className="ml-1.5 inline-flex shrink-0 flex-col items-center rounded-sm bg-teal px-3 py-1.5 text-sm leading-tight font-semibold text-ink transition-colors hover:bg-teal-dark xl:ml-2 xl:px-4"
@@ -129,6 +135,12 @@ export function Header() {
               {callCta.label}
               <span className="mt-0.5 block text-sm font-medium">{brand.phone}</span>
             </a>
+            <Link
+              href={callbackCta.href}
+              className="rounded-sm px-4 py-2 text-center text-sm font-semibold text-ink/70 hover:text-ink"
+            >
+              {callbackCta.sideLabel}
+            </Link>
           </nav>
         </div>
       ) : null}

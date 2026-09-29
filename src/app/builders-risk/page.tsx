@@ -3,6 +3,7 @@ import Link from "next/link";
 import { CtaBand, PageIntro, SampleCallout } from "@/components/CtaBand";
 import { FaqAccordion } from "@/components/FaqAccordion";
 import { BuildersRiskArt } from "@/components/illustrations";
+import { CoverageWithQuote, SecondaryQuoteLink } from "@/components/QuoteAside";
 import { brand, callCta, callbackCta } from "@/lib/brand";
 import { educationalNotice, sampleNotice } from "@/lib/content";
 import {
@@ -30,43 +31,45 @@ export default function BuildersRiskPage() {
         body="Course-of-construction coverage for the building and the materials that will become it — at the site, in storage, and in transit. It is a Rhino commercial offering, not a substitute for general liability, and it is not coverage for a finished, occupied building."
       />
 
-      <div className="wrap grid items-center gap-10 pb-16 lg:grid-cols-[0.9fr_1.1fr]">
-        <div className="overflow-hidden rounded-sm bg-ink-mid px-4 pt-6">
-          <BuildersRiskArt />
-        </div>
-        <div>
-          <SampleCallout>{sampleNotice}</SampleCallout>
-          <ol className="mt-6 space-y-4">
-            {buildersRiskHowItWorks.map((step) => (
-              <li key={step.n} className="flex gap-4">
-                <span className="display text-3xl text-teal-dark">{step.n}</span>
-                <div>
-                  <h2 className="font-semibold text-ink">{step.title}</h2>
-                  <p className="mt-1 text-sm leading-relaxed text-muted">
-                    {step.body}
-                  </p>
-                </div>
-              </li>
-            ))}
-          </ol>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-            <a
-              href={callCta.href}
-              className="inline-flex rounded-sm bg-teal px-5 py-3 text-sm font-semibold text-ink hover:bg-teal-dark"
-            >
-              {callCta.label}
-            </a>
-            <Link
-              href={buildersRiskQuoteHref}
-              className="text-sm font-semibold text-teal-dark hover:text-ink"
-            >
-              Or {callbackCta.label.toLowerCase()}
-            </Link>
+      <CoverageWithQuote
+        quoteHref={buildersRiskQuoteHref}
+        lead={
+          <div className="pb-10">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+              <a
+                href={callCta.href}
+                className="inline-flex rounded-sm bg-teal px-5 py-3 text-sm font-semibold text-ink hover:bg-teal-dark"
+              >
+                {callCta.label}
+              </a>
+              <SecondaryQuoteLink href={buildersRiskQuoteHref} className="lg:hidden" />
+            </div>
+            <div className="mt-8 grid items-center gap-10 xl:grid-cols-[0.9fr_1.1fr]">
+              <div className="overflow-hidden rounded-sm bg-ink-mid px-4 pt-6">
+                <BuildersRiskArt />
+              </div>
+              <div>
+                <SampleCallout>{sampleNotice}</SampleCallout>
+                <ol className="mt-6 space-y-4">
+                  {buildersRiskHowItWorks.map((step) => (
+                    <li key={step.n} className="flex gap-4">
+                      <span className="display text-3xl text-teal-dark">{step.n}</span>
+                      <div>
+                        <h2 className="font-semibold text-ink">{step.title}</h2>
+                        <p className="mt-1 text-sm leading-relaxed text-muted">
+                          {step.body}
+                        </p>
+                      </div>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        }
+      >
 
-      <section className="wrap pb-16">
+      <section className="pb-16">
         <p className="text-xs font-semibold tracking-[0.2em] text-teal-dark uppercase">
           Who it’s for
         </p>
@@ -86,7 +89,7 @@ export default function BuildersRiskPage() {
         </ul>
       </section>
 
-      <section className="wrap space-y-6 pb-16">
+      <section className="space-y-6 pb-16">
         <h2 className="display text-3xl text-ink">What this form is for</h2>
         <p className="max-w-3xl text-muted">{educationalNotice}</p>
         <div className="grid gap-6 lg:grid-cols-2">
@@ -127,12 +130,12 @@ export default function BuildersRiskPage() {
         </blockquote>
       </section>
 
-      <section id="faq" className="wrap scroll-mt-28 pb-16">
+      <section id="faq" className="scroll-mt-28 pb-16">
         <h2 className="display mb-6 text-3xl text-ink">Builders risk FAQ</h2>
         <FaqAccordion items={buildersRiskFaqs} />
       </section>
 
-      <div className="wrap pb-10 text-sm text-muted">
+      <div className="pb-10 text-sm text-muted">
         Looking for the rest of your commercial program? See{" "}
         <Link
           className="font-semibold text-ink hover:text-teal-dark"
@@ -142,6 +145,7 @@ export default function BuildersRiskPage() {
         </Link>
         .
       </div>
+      </CoverageWithQuote>
 
       <CtaBand
         title="Ask Rhino about the job."

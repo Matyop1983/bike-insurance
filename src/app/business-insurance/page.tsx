@@ -1,8 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CtaBand, PageIntro, SampleCallout } from "@/components/CtaBand";
-import { brand, callbackCta } from "@/lib/brand";
-import { businessCoverages, educationalNotice } from "@/lib/content";
+import { CoverageWithQuote, SecondaryQuoteLink } from "@/components/QuoteAside";
+import { brand, callCta, callbackCta } from "@/lib/brand";
+import {
+  businessCoverages,
+  commercialQuoteHref,
+  educationalNotice,
+} from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Commercial Insurance",
@@ -19,39 +24,56 @@ export default function BusinessInsurancePage() {
         body="Six building blocks most commercial clients ask about. Use this as a briefing with an advisor — not as a substitute for the policy."
       />
 
-      <div className="wrap pb-8">
-        <SampleCallout>{educationalNotice}</SampleCallout>
-        <Link
-          href="/builders-risk"
-          className="mt-6 flex h-full flex-col rounded-sm border border-line bg-paper p-6 hover:border-ink/30 sm:p-8"
-        >
-          <p className="text-xs font-semibold tracking-[0.2em] text-teal-dark uppercase">
-            Featured commercial product
-          </p>
-          <h2 className="display mt-2 text-3xl text-ink">Builders Risk</h2>
-          <p className="mt-3 max-w-3xl text-muted">
-            Course-of-construction coverage for contractors, owners, and
-            renovations — the building under construction, materials, off-site
-            storage, and transit. Educational overview, not a binder.
-          </p>
-          <span className="mt-5 text-sm font-semibold text-teal-dark">
-            Read the builders risk overview
-          </span>
-        </Link>
-        <nav aria-label="Coverage types" className="mt-6 flex flex-wrap gap-2">
-          {businessCoverages.map((item) => (
-            <a
-              key={item.id}
-              href={"pageHref" in item && item.pageHref ? item.pageHref : `#${item.id}`}
-              className="rounded-sm border border-line bg-paper px-3 py-1.5 text-sm font-medium text-ink hover:border-ink"
-            >
-              {item.title}
-            </a>
-          ))}
-        </nav>
-      </div>
-
-      <div className="wrap space-y-6 pb-16">
+      <CoverageWithQuote
+        quoteHref={commercialQuoteHref}
+        lead={
+          <div className="pb-8">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+              <a
+                href={callCta.href}
+                className="inline-flex rounded-sm bg-teal px-5 py-3 text-sm font-semibold text-ink hover:bg-teal-dark"
+              >
+                {callCta.label}
+              </a>
+              <SecondaryQuoteLink href={commercialQuoteHref} className="lg:hidden" />
+            </div>
+            <div className="mt-8">
+              <SampleCallout>{educationalNotice}</SampleCallout>
+              <Link
+                href="/builders-risk"
+                className="mt-6 flex h-full flex-col rounded-sm border border-line bg-paper p-6 hover:border-ink/30 sm:p-8"
+              >
+                <p className="text-xs font-semibold tracking-[0.2em] text-teal-dark uppercase">
+                  Featured commercial product
+                </p>
+                <h2 className="display mt-2 text-3xl text-ink">Builders Risk</h2>
+                <p className="mt-3 max-w-3xl text-muted">
+                  Course-of-construction coverage for contractors, owners, and
+                  renovations — the building under construction, materials, off-site
+                  storage, and transit. Educational overview, not a binder.
+                </p>
+                <span className="mt-5 text-sm font-semibold text-teal-dark">
+                  Read the builders risk overview
+                </span>
+              </Link>
+              <nav aria-label="Coverage types" className="mt-6 flex flex-wrap gap-2">
+                {businessCoverages.map((item) => (
+                  <a
+                    key={item.id}
+                    href={
+                      "pageHref" in item && item.pageHref ? item.pageHref : `#${item.id}`
+                    }
+                    className="rounded-sm border border-line bg-paper px-3 py-1.5 text-sm font-medium text-ink hover:border-ink"
+                  >
+                    {item.title}
+                  </a>
+                ))}
+              </nav>
+            </div>
+          </div>
+        }
+      >
+      <div className="space-y-6 pb-16">
         {businessCoverages.map((item) => (
           <article
             key={item.id}
@@ -80,7 +102,7 @@ export default function BusinessInsurancePage() {
         ))}
       </div>
 
-      <div className="wrap pb-10 text-sm text-muted">
+      <div className="pb-10 text-sm text-muted">
         For an individual life policy, see{" "}
         <Link
           className="font-semibold text-ink hover:text-teal-dark"
@@ -102,11 +124,12 @@ export default function BusinessInsurancePage() {
         </a>
         . The callback form is optional and is not a price.
       </div>
+      </CoverageWithQuote>
 
       <CtaBand
         title="Need a commercial quote?"
         body={`Call ${brand.phone} and tell us which coverages to look at. ${brand.hours}. The online form only asks us to call you back.`}
-        secondaryHref={`${callbackCta.href}?type=commercial`}
+        secondaryHref={commercialQuoteHref}
         secondaryLabel={callbackCta.label}
       />
     </>
