@@ -50,6 +50,7 @@ export const footerLinks = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
   ...coverageNav,
+  { href: "/workers-comp", label: "Workers’ Comp" },
   buildersRiskNavItem,
   { href: "/contact", label: "Contact" },
 ] as const;

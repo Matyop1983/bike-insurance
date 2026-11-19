@@ -39,23 +39,42 @@ export default function BusinessInsurancePage() {
             </div>
             <div className="mt-8">
               <SampleCallout>{educationalNotice}</SampleCallout>
-              <Link
-                href="/builders-risk"
-                className="mt-6 flex h-full flex-col rounded-sm border border-line bg-paper p-6 hover:border-ink/30 sm:p-8"
-              >
-                <p className="text-xs font-semibold tracking-[0.2em] text-teal-dark uppercase">
-                  Featured commercial product
-                </p>
-                <h2 className="display mt-2 text-3xl text-ink">Builders Risk</h2>
-                <p className="mt-3 max-w-3xl text-muted">
-                  Course-of-construction coverage for contractors, owners, and
-                  renovations — the building under construction, materials, off-site
-                  storage, and transit. Educational overview, not a binder.
-                </p>
-                <span className="mt-5 text-sm font-semibold text-teal-dark">
-                  Read the builders risk overview
-                </span>
-              </Link>
+              <div className="mt-6 grid gap-4 md:grid-cols-2">
+                <Link
+                  href="/workers-comp"
+                  className="flex h-full flex-col rounded-sm border border-line bg-paper p-6 hover:border-ink/30 sm:p-8"
+                >
+                  <p className="text-xs font-semibold tracking-[0.2em] text-teal-dark uppercase">
+                    Commercial product
+                  </p>
+                  <h2 className="display mt-2 text-3xl text-ink">Workers’ Comp</h2>
+                  <p className="mt-3 text-muted">
+                    Texas employers can often choose whether to carry workers’
+                    compensation. The overview covers injury costs, lawsuits, and
+                    job-site certificates — then how to request a quote.
+                  </p>
+                  <span className="mt-5 text-sm font-semibold text-teal-dark">
+                    Read the workers’ comp overview
+                  </span>
+                </Link>
+                <Link
+                  href="/builders-risk"
+                  className="flex h-full flex-col rounded-sm border border-line bg-paper p-6 hover:border-ink/30 sm:p-8"
+                >
+                  <p className="text-xs font-semibold tracking-[0.2em] text-teal-dark uppercase">
+                    Commercial product
+                  </p>
+                  <h2 className="display mt-2 text-3xl text-ink">Builders Risk</h2>
+                  <p className="mt-3 text-muted">
+                    Course-of-construction coverage for contractors, owners, and
+                    renovations — the building under construction, materials, off-site
+                    storage, and transit. Educational overview, not a binder.
+                  </p>
+                  <span className="mt-5 text-sm font-semibold text-teal-dark">
+                    Read the builders risk overview
+                  </span>
+                </Link>
+              </div>
               <nav aria-label="Coverage types" className="mt-6 flex flex-wrap gap-2">
                 {businessCoverages.map((item) => (
                   <a
@@ -95,7 +114,9 @@ export default function BusinessInsurancePage() {
                 href={item.pageHref}
                 className="mt-6 inline-flex text-sm font-semibold text-teal-dark hover:text-ink"
               >
-                Full builders risk overview
+                {"overviewLabel" in item && item.overviewLabel
+                  ? item.overviewLabel
+                  : "Full overview"}
               </Link>
             ) : null}
           </article>

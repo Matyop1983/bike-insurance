@@ -1,6 +1,7 @@
 import {
   coverageLabels,
   isBuildersRiskIntakeQuote,
+  isWorkersCompIntakeQuote,
   quoteTypeLabel,
   type QuotePayload,
 } from "@/lib/quote";
@@ -22,23 +23,29 @@ export function formatQuoteNotification(
   quote: QuotePayload,
   meta: { id: string; receivedAt: string },
 ): { subject: string; text: string } {
+  const workersComp = isWorkersCompIntakeQuote(quote);
   const lines = [
+    ...(workersComp ? ["Workers’ Comp quote request", ""] : []),
     `Reference ID: ${meta.id}`,
     `Submitted: ${meta.receivedAt}`,
     `Coverage Type: ${quoteTypeLabel(quote.quoteType)}`,
     `Applicant Name: ${quote.name}`,
-    `Email: ${quote.email}`,
+    `Email: ${quote.email || "(none)"}`,
     `Phone Number: ${quote.phone || "(none)"}`,
     `City or ZIP: ${quote.location}`,
     `Business Name: ${quote.businessName || "(none)"}`,
     `Coverage Interests: ${coverageLabels(quote) || "(none)"}`,
     `Message: ${quote.message || "(none)"}`,
     "",
-    "This is a website callback request, not a price or a binder.",
+    workersComp
+      ? "This is a Workers’ Comp quote request from the website, not a price or a binder."
+      : "This is a website callback request, not a price or a binder.",
   ];
-  const subject = isBuildersRiskIntakeQuote(quote)
-    ? `Rhino builder’s risk intake ${meta.id}`
-    : `Rhino callback request ${meta.id} (${quoteTypeLabel(quote.quoteType)})`;
+  const subject = workersComp
+    ? `Workers’ Comp quote request ${meta.id}`
+    : isBuildersRiskIntakeQuote(quote)
+      ? `Rhino builder’s risk intake ${meta.id}`
+      : `Rhino callback request ${meta.id} (${quoteTypeLabel(quote.quoteType)})`;
   return {
     subject,
     text: lines.join("\n"),

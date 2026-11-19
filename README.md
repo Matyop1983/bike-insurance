@@ -15,6 +15,8 @@ Former bicycle routes (`/bicycle-insurance`, `/coverage`, `/how-it-works`, `/faq
 - `/group-benefits` — employer benefits: group health, dental, vision, group life, disability
 - `/builders-risk` — course-of-construction coverage (contractors, owners, renovations). Page and URL stay; not in the header. The page links to the project intake.
 - `/builders-risk/quote` — builder’s risk questionnaire (address, construction, values, dates, named insured, contractor). It is still a callback request, not a price or a binder.
+- `/workers-comp` — workers’ compensation for Texas employers. Linked from the business insurance page and the footer, not the top nav. The page links to the quote form.
+- `/workers-comp/quote` — workers’ comp quote request (business, employees, payroll, current coverage). Same callback rules: not a price and not a binder.
 - `/quote` — optional callback request (`?type=commercial`, optional `&coverage=` such as `builders-risk`, `life`, or `group-benefits`)
 - `/contact` — phone, email, address, hours
 
@@ -69,6 +71,8 @@ The webhook body is `{ AgencyID, FormName, json }` where `json` is a string of t
 
 The builder’s risk intake (`POST /api/quote` with `form: "builders-risk"`) uses this same route, form name, and field list. The API validates the questionnaire, then puts the answers in `Message` (it starts with `Builder’s risk intake`) and sets `Coverage Interests` to Builders risk. `Applicant Name`, `Email`, and `Phone Number` are the person to call. `Business Name` prefers the named insured’s company. `City or ZIP` is the project city, state, and ZIP. `Source` is `Rhino website builder’s risk intake`. No new file is written. The short callback note stays capped at 1,000 characters; this intake’s Message may be longer, up to 8,000.
 
+The workers’ comp quote (`POST /api/quote` with `form: "workers-comp"`) uses that same route, form name, and field list. `Message` starts with `Workers’ Comp quote request`. `Coverage Interests` is Workers’ comp. `Source` is `Rhino website workers’ comp quote request`. `Applicant Name` is the contact. `Business Name` is the business. `City or ZIP` is the business city, state, and ZIP, or `Not provided`. Phone or email is enough; a missing email is sent as an empty Email field when a phone number is present. The Resend subject line is `Workers’ Comp quote request` plus the reference ID, to `Matthew@Rhinoia.com` when `RESEND_API_KEY` and `QUOTE_NOTIFY_FROM` are set. The message cap is 8,000 characters.
+
 After the first real or test submit:
 
 1. In NowCerts / Momentum AMS go to **Prospects/Leads → Quote Applications**.
@@ -80,7 +84,7 @@ If NowCerts is down or returns `Error!`, the visitor still sees the RH- ID. The 
 
 ### Email notification
 
-Set `RESEND_API_KEY` and `QUOTE_NOTIFY_FROM` (verified Resend sender). `QUOTE_NOTIFY_TO` defaults to `Matthew@Rhinoia.com`. If those env vars are missing, NowCerts still runs and the log notes that email is pending.
+Set `RESEND_API_KEY` and `QUOTE_NOTIFY_FROM` (verified Resend sender). `QUOTE_NOTIFY_TO` defaults to `Matthew@Rhinoia.com`. If those env vars are missing, NowCerts still runs and the log notes that email is pending. A workers’ comp submission uses the subject `Workers’ Comp quote request` so the alert is distinct from the general callback and the builder’s risk intake.
 
 ## Deploy and DNS (later)
 

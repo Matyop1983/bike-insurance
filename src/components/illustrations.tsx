@@ -100,3 +100,39 @@ export function GroupBenefitsArt() {
     </svg>
   );
 }
+
+export function WorkersCompArt() {
+  return (
+    <svg
+      viewBox="0 0 640 520"
+      className="h-auto w-full"
+      role="img"
+      aria-label="Illustration of a work crew beside a small building"
+    >
+      <rect width="640" height="520" fill="none" />
+      <ellipse cx="400" cy="250" rx="175" ry="180" fill="#243044" />
+      <g
+        fill="none"
+        stroke="#eef2f6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M130 400h380" strokeWidth="8" />
+        <path d="M180 400V230h150v170" strokeWidth="8" />
+        <path d="M180 290h150" strokeWidth="5" />
+        <path d="M220 230v-24h70v24" strokeWidth="6" />
+        <circle cx="430" cy="292" r="26" strokeWidth="6" />
+        <path d="M392 392c8-34 26-50 38-50s30 16 38 50" strokeWidth="6" />
+        <circle cx="510" cy="304" r="22" strokeWidth="6" />
+        <path d="M478 392c6-28 20-42 32-42s26 14 32 42" strokeWidth="6" />
+      </g>
+      <path
+        d="M404 268h52l-8 16h-36z"
+        fill="none"
+        stroke="#00d9c7"
+        strokeWidth="4"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}

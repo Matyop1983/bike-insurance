@@ -1,6 +1,7 @@
 import {
   coverageLabels,
   isBuildersRiskIntakeQuote,
+  isWorkersCompIntakeQuote,
   quoteTypeLabel,
   type QuotePayload,
 } from "@/lib/quote";
@@ -73,9 +74,11 @@ export function buildNowCertsPayload(
     Message: quote.message,
     "Reference ID": meta.id,
     "Submitted At": meta.receivedAt,
-    Source: isBuildersRiskIntakeQuote(quote)
-      ? "Rhino website builder’s risk intake"
-      : "Rhino website callback form",
+    Source: isWorkersCompIntakeQuote(quote)
+      ? "Rhino website workers’ comp quote request"
+      : isBuildersRiskIntakeQuote(quote)
+        ? "Rhino website builder’s risk intake"
+        : "Rhino website callback form",
   };
 }
 
