@@ -4,6 +4,7 @@ import { Logo } from "@/components/Logo";
 import { SecondaryQuoteLink } from "@/components/QuoteAside";
 import { brand, callCta, callbackCta } from "@/lib/brand";
 import { homePillars, testimonials } from "@/lib/content";
+import { buildersRiskIntakeHref } from "@/lib/content/builders-risk";
 
 export default function HomePage() {
   return (
@@ -18,9 +19,10 @@ export default function HomePage() {
               {brand.tagline}.
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted">
-              {brand.integrity} Call the Edinburg office and talk with an advisor.
+              {brand.integrity} Builders risk is available while a job is still
+              under construction. Call the Edinburg office and talk with an advisor.
             </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
               <a
                 href={callCta.href}
                 className="inline-flex flex-col items-center justify-center rounded-sm bg-teal px-6 py-3 text-center text-sm font-semibold text-ink hover:bg-teal-dark sm:flex-row"
@@ -28,7 +30,13 @@ export default function HomePage() {
                 <span>{callCta.label}</span>
                 <span className="font-medium sm:ml-2">{brand.phone}</span>
               </a>
-              <SecondaryQuoteLink />
+              <Link
+                href={buildersRiskIntakeHref}
+                className="inline-flex w-full items-center justify-center rounded-sm border border-line bg-paper px-5 py-3 text-center text-sm font-semibold text-ink hover:border-ink sm:w-auto"
+              >
+                Builder’s risk quote
+              </Link>
+              <SecondaryQuoteLink className="w-full sm:w-auto" />
             </div>
             <ul className="mt-6 flex flex-wrap gap-2" aria-label="Coverage lines">
               {homePillars.map((item) => (
