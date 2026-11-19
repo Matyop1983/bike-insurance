@@ -3,16 +3,17 @@ import Link from "next/link";
 import { CtaBand, PageIntro, SampleCallout } from "@/components/CtaBand";
 import { FaqAccordion } from "@/components/FaqAccordion";
 import { BuildersRiskArt } from "@/components/illustrations";
-import { CoverageWithQuote, SecondaryQuoteLink } from "@/components/QuoteAside";
-import { brand, callCta, callbackCta } from "@/lib/brand";
+import { CoverageWithQuote } from "@/components/QuoteAside";
+import { brand, callCta } from "@/lib/brand";
 import { educationalNotice, sampleNotice } from "@/lib/content";
 import {
   buildersRiskAudiences,
   buildersRiskCovered,
   buildersRiskFaqs,
   buildersRiskHowItWorks,
+  buildersRiskIntakeCta,
+  buildersRiskIntakeHref,
   buildersRiskNotCovered,
-  buildersRiskQuoteHref,
   buildersRiskSampleLanguage,
 } from "@/lib/content/builders-risk";
 
@@ -32,17 +33,29 @@ export default function BuildersRiskPage() {
       />
 
       <CoverageWithQuote
-        quoteHref={buildersRiskQuoteHref}
+        quoteHref={buildersRiskIntakeHref}
+        card={{
+          kicker: "Builder’s risk",
+          title: "Start your quote",
+          body: "Project address, construction type, values, and dates. We’ll call you back — this is not a price or a binder.",
+          label: buildersRiskIntakeCta,
+          prominent: true,
+        }}
         lead={
           <div className="pb-10">
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+              <Link
+                href={buildersRiskIntakeHref}
+                className="inline-flex w-full items-center justify-center rounded-sm bg-teal px-5 py-3 text-center text-sm font-semibold text-ink hover:bg-teal-dark sm:w-auto"
+              >
+                {buildersRiskIntakeCta}
+              </Link>
               <a
                 href={callCta.href}
-                className="inline-flex rounded-sm bg-teal px-5 py-3 text-sm font-semibold text-ink hover:bg-teal-dark"
+                className="inline-flex w-full items-center justify-center rounded-sm border border-line bg-paper px-5 py-3 text-center text-sm font-semibold text-ink hover:border-ink sm:w-auto"
               >
                 {callCta.label}
               </a>
-              <SecondaryQuoteLink href={buildersRiskQuoteHref} className="lg:hidden" />
             </div>
             <div className="mt-8 grid items-center gap-10 xl:grid-cols-[0.9fr_1.1fr]">
               <div className="overflow-hidden rounded-sm bg-ink-mid px-4 pt-6">
@@ -149,9 +162,11 @@ export default function BuildersRiskPage() {
 
       <CtaBand
         title="Ask Rhino about the job."
-        body={`Call ${brand.phone}, ${brand.hours}. We’ll talk through builders risk with you. Leaving details online only requests a callback — it is not a price or a binder.`}
-        secondaryHref={buildersRiskQuoteHref}
-        secondaryLabel={callbackCta.label}
+        body={`Call ${brand.phone}, ${brand.hours}, or send the project details with the form. A submission only requests a callback — it is not a price or a binder.`}
+        href={buildersRiskIntakeHref}
+        label={buildersRiskIntakeCta}
+        secondaryHref={callCta.href}
+        secondaryLabel={callCta.label}
       />
     </>
   );

@@ -8,6 +8,7 @@ const paths = [
   "/life-insurance",
   "/group-benefits",
   "/builders-risk",
+  "/builders-risk/quote",
   "/quote",
   "/contact",
 ] as const;

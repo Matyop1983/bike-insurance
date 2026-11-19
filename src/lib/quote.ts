@@ -32,6 +32,16 @@ export type QuotePayload = {
 
 export type QuoteFieldErrors = Partial<Record<keyof QuotePayload, string>>;
 
+/** Short callback notes. The builder’s risk intake uses a higher cap. */
+export const QUOTE_MESSAGE_MAX = 1000;
+
+/**
+ * Marker at the start of Message when the builder’s risk questionnaire
+ * is delivered through this same quote payload.
+ */
+export const BUILDERS_RISK_INTAKE_MARKER = "Builder’s risk intake";
+export const BUILDERS_RISK_MESSAGE_MAX = 8000;
+
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const phonePattern = /^[+()0-9.\-\s]{7,20}$/;
 
@@ -99,8 +109,9 @@ export function validateQuote(input: QuotePayload): QuoteFieldErrors {
   if (location.length < 3) {
     errors.location = "Add a city or ZIP so we know the region.";
   }
-  if (input.message.trim().length > 1000) {
-    errors.message = "Keep the note under 1,000 characters.";
+  const messageMax = quoteMessageLimit(input);
+  if (input.message.trim().length > messageMax) {
+    errors.message = `Keep the note under ${messageMax.toLocaleString("en-US")} characters.`;
   }
 
   if (input.quoteType === "commercial" && input.businessName.trim().length < 2) {
@@ -150,4 +161,21 @@ export function quoteTypeLabel(value: QuotePayload["quoteType"]): string {
 export function coverageLabels(input: QuotePayload): string {
   const options = coverageOptionsFor(input.quoteType);
   return input.coverage.map((item) => findLabel(options, item)).join(", ");
+}
+
+export function isBuildersRiskIntakeQuote(
+  input: Pick<QuotePayload, "coverage" | "message">,
+): boolean {
+  return (
+    input.coverage.includes("builders-risk") &&
+    input.message.startsWith(BUILDERS_RISK_INTAKE_MARKER)
+  );
+}
+
+export function quoteMessageLimit(
+  input: Pick<QuotePayload, "coverage" | "message">,
+): number {
+  return isBuildersRiskIntakeQuote(input)
+    ? BUILDERS_RISK_MESSAGE_MAX
+    : QUOTE_MESSAGE_MAX;
 }
