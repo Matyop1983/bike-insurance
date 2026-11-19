@@ -3,7 +3,8 @@ import { CtaBand } from "@/components/CtaBand";
 import { Logo } from "@/components/Logo";
 import { SecondaryQuoteLink } from "@/components/QuoteAside";
 import { brand, callCta, callbackCta } from "@/lib/brand";
-import { buildersRiskHomeLink, homePillars, testimonials } from "@/lib/content";
+import { homePillars, testimonials } from "@/lib/content";
+import { buildersRiskIntakeHref } from "@/lib/content/builders-risk";
 
 export default function HomePage() {
   return (
@@ -18,9 +19,10 @@ export default function HomePage() {
               {brand.tagline}.
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted">
-              {brand.integrity} Call the Edinburg office and talk with an advisor.
+              {brand.integrity} Builders risk is available while a job is still
+              under construction. Call the Edinburg office and talk with an advisor.
             </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
               <a
                 href={callCta.href}
                 className="inline-flex flex-col items-center justify-center rounded-sm bg-teal px-6 py-3 text-center text-sm font-semibold text-ink hover:bg-teal-dark sm:flex-row"
@@ -28,7 +30,13 @@ export default function HomePage() {
                 <span>{callCta.label}</span>
                 <span className="font-medium sm:ml-2">{brand.phone}</span>
               </a>
-              <SecondaryQuoteLink />
+              <Link
+                href={buildersRiskIntakeHref}
+                className="inline-flex w-full items-center justify-center rounded-sm border border-line bg-paper px-5 py-3 text-center text-sm font-semibold text-ink hover:border-ink sm:w-auto"
+              >
+                Builder’s risk quote
+              </Link>
+              <SecondaryQuoteLink className="w-full sm:w-auto" />
             </div>
             <ul className="mt-6 flex flex-wrap gap-2" aria-label="Coverage lines">
               {homePillars.map((item) => (
@@ -60,7 +68,7 @@ export default function HomePage() {
         <h2 className="display mt-2 max-w-2xl text-3xl text-ink sm:text-4xl">
           Commercial strength. Local attention.
         </h2>
-        <ul className="mt-10 grid gap-4 lg:grid-cols-3">
+        <ul className="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
           {homePillars.map((item) => (
             <li key={item.href}>
               <Link
@@ -78,27 +86,6 @@ export default function HomePage() {
             </li>
           ))}
         </ul>
-        <div className="mt-4">
-          <Link
-            href={buildersRiskHomeLink.href}
-            className="flex flex-col rounded-sm border border-line bg-paper p-6 hover:border-ink/30 sm:flex-row sm:items-center sm:justify-between sm:gap-8"
-          >
-            <div>
-              <p className="text-xs font-semibold tracking-[0.16em] text-teal-dark uppercase">
-                Also available
-              </p>
-              <h3 className="mt-2 text-xl font-semibold text-ink">
-                {buildersRiskHomeLink.title}
-              </h3>
-              <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted">
-                {buildersRiskHomeLink.body}
-              </p>
-            </div>
-            <span className="mt-4 shrink-0 text-sm font-semibold text-teal-dark sm:mt-0">
-              Learn more
-            </span>
-          </Link>
-        </div>
       </section>
 
       <section className="bg-ink-mid py-16 text-stone">

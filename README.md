@@ -2,18 +2,18 @@
 
 Custom [Next.js](https://nextjs.org) site for **Rhino Insurance Advisors** (Edinburg, TX), intended to replace the current Squarespace site at [rhinoinsuranceadvisors.com](https://www.rhinoinsuranceadvisors.com/).
 
-Commercial, life insurance, and group benefits are the lines in the header and home hero. Builders risk stays available at `/builders-risk`, linked lower on the home page and in the footer — not in the top nav. Quotes start with a phone call to the Edinburg office, `(956) 609-6222`, Monday–Friday 8AM–5PM. The `/quote` page is an optional callback request — not a price and not a binder. Brand, nav, and contact live in `src/lib/brand.ts`. Coverage copy lives in `src/lib/content/`.
+Commercial, life insurance, group benefits, and builders risk are in the header. On the home page, builders risk is also a services card beside group benefits, a hero quote button, and a footer link. Quotes start with a phone call to the Edinburg office, `(956) 609-6222`, Monday–Friday 8AM–5PM. The `/quote` page is an optional callback request — not a price and not a binder. Brand, nav, and contact live in `src/lib/brand.ts`. Coverage copy lives in `src/lib/content/`.
 
 Former bicycle routes (`/bicycle-insurance`, `/coverage`, `/how-it-works`, `/faq`) redirect to `/contact`. `/personal-insurance` redirects to `/`.
 
 ## Pages
 
-- `/` — agency home (commercial, life insurance, and group benefits in the hero; builders risk linked lower; testimonials, visit strip). Primary CTA is the phone number.
+- `/` — agency home (commercial, life insurance, group benefits, and builders risk in the header, hero, and services grid; testimonials, visit strip). Primary CTA is the phone number. The hero links to the builder’s risk intake.
 - `/about` — mission and service-with-integrity
 - `/business-insurance` — commercial: GL, E&O, workers’ comp, umbrella, commercial auto, builders risk
 - `/life-insurance` — families, mortgage protection, business owners and key person; term and permanent in general terms
 - `/group-benefits` — employer benefits: group health, dental, vision, group life, disability
-- `/builders-risk` — course-of-construction coverage (contractors, owners, renovations). Page and URL stay; not in the header. The page links to the project intake.
+- `/builders-risk` — course-of-construction coverage (contractors, owners, renovations). Linked from the header, home hero, services grid, and footer. The page links to the project intake.
 - `/builders-risk/quote` — builder’s risk questionnaire (address, construction, values, dates, named insured, contractor). It is still a callback request, not a price or a binder.
 - `/quote` — optional callback request (`?type=commercial`, optional `&coverage=` such as `builders-risk`, `life`, or `group-benefits`)
 - `/contact` — phone, email, address, hours
