@@ -29,11 +29,14 @@ export const businessCoverages = [
   {
     id: "workers-comp",
     title: "Workers’ Comp",
+    pageHref: "/workers-comp",
+    overviewLabel: "Full workers’ comp overview",
     summary:
-      "A statutory benefit in state law requiring most employers to compensate employees or their families for lost wages and medical care due to job-related injuries or occupational disease.",
+      "Helps pay medical care and a portion of lost wages when an employee is hurt at work. In Texas, most private employers may choose whether to carry it.",
     details: [
-      "In exchange, employees typically give up the right to sue the employer for negligence.",
-      "Workers’ compensation insurance helps cover the cost of injured employees’ medical and income benefits.",
+      "Employers who carry workers’ compensation generally have exclusive-remedy protection: a work injury is handled as a claim instead of a negligence lawsuit against the employer.",
+      "An employer who opts out is a nonsubscriber. An injured employee can sue, and the employer loses three common-law defenses.",
+      "General contractors, property owners, and job contracts often still require a policy and a certificate of insurance.",
     ],
   },
   {
@@ -61,6 +64,7 @@ export const businessCoverages = [
     id: "builders-risk",
     title: "Builders Risk",
     pageHref: "/builders-risk",
+    overviewLabel: "Full builders risk overview",
     summary:
       "Covers the building and materials in the course of construction — typically at the job site, in off-site storage, and in transit.",
     details: [

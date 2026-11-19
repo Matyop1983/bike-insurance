@@ -13,6 +13,12 @@ import {
   validateBuildersRiskIntake,
 } from "@/lib/builders-risk-intake";
 import {
+  isWorkersCompIntakeBody,
+  toWorkersCompQuotePayload,
+  validateWorkersCompIntake,
+  workersCompQuoteErrors,
+} from "@/lib/workers-comp-intake";
+import {
   normalizeQuote,
   type QuotePayload,
   validateQuote,
@@ -106,6 +112,28 @@ async function handleQuotePost(request: Request) {
       );
     }
     return deliverQuote(toQuotePayload(body));
+  }
+
+  if (isWorkersCompIntakeBody(body)) {
+    const intakeErrors = validateWorkersCompIntake(body);
+    if (Object.keys(intakeErrors).length) {
+      return NextResponse.json(
+        { error: "Please fix the highlighted fields.", errors: intakeErrors },
+        { status: 400 },
+      );
+    }
+    const quoteErrors = workersCompQuoteErrors(body);
+    if (Object.keys(quoteErrors).length) {
+      console.error(
+        "[quote] workers comp intake did not fit the quote payload",
+        quoteErrors,
+      );
+      return NextResponse.json(
+        { error: "Server error — we couldn’t save that request. Try again." },
+        { status: 500 },
+      );
+    }
+    return deliverQuote(toWorkersCompQuotePayload(body));
   }
 
   if (!isPayload(body)) {

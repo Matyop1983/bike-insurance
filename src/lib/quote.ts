@@ -32,7 +32,7 @@ export type QuotePayload = {
 
 export type QuoteFieldErrors = Partial<Record<keyof QuotePayload, string>>;
 
-/** Short callback notes. The builder’s risk intake uses a higher cap. */
+/** Short callback notes. Dedicated intakes use a higher cap. */
 export const QUOTE_MESSAGE_MAX = 1000;
 
 /**
@@ -41,6 +41,13 @@ export const QUOTE_MESSAGE_MAX = 1000;
  */
 export const BUILDERS_RISK_INTAKE_MARKER = "Builder’s risk intake";
 export const BUILDERS_RISK_MESSAGE_MAX = 8000;
+
+/**
+ * Marker at the start of Message when the workers’ comp questionnaire
+ * is delivered through this same quote payload.
+ */
+export const WORKERS_COMP_INTAKE_MARKER = "Workers’ Comp quote request";
+export const WORKERS_COMP_MESSAGE_MAX = 8000;
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const phonePattern = /^[+()0-9.\-\s]{7,20}$/;
@@ -172,10 +179,19 @@ export function isBuildersRiskIntakeQuote(
   );
 }
 
+export function isWorkersCompIntakeQuote(
+  input: Pick<QuotePayload, "coverage" | "message">,
+): boolean {
+  return (
+    input.coverage.includes("workers-comp") &&
+    input.message.startsWith(WORKERS_COMP_INTAKE_MARKER)
+  );
+}
+
 export function quoteMessageLimit(
   input: Pick<QuotePayload, "coverage" | "message">,
 ): number {
-  return isBuildersRiskIntakeQuote(input)
-    ? BUILDERS_RISK_MESSAGE_MAX
-    : QUOTE_MESSAGE_MAX;
+  if (isBuildersRiskIntakeQuote(input)) return BUILDERS_RISK_MESSAGE_MAX;
+  if (isWorkersCompIntakeQuote(input)) return WORKERS_COMP_MESSAGE_MAX;
+  return QUOTE_MESSAGE_MAX;
 }
