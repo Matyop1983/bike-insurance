@@ -3,7 +3,7 @@ import { CtaBand } from "@/components/CtaBand";
 import { Logo } from "@/components/Logo";
 import { SecondaryQuoteLink } from "@/components/QuoteAside";
 import { brand, callCta, callbackCta } from "@/lib/brand";
-import { buildersRiskHomeLink, homePillars, testimonials } from "@/lib/content";
+import { homePillars, testimonials } from "@/lib/content";
 
 export default function HomePage() {
   return (
@@ -60,7 +60,7 @@ export default function HomePage() {
         <h2 className="display mt-2 max-w-2xl text-3xl text-ink sm:text-4xl">
           Commercial strength. Local attention.
         </h2>
-        <ul className="mt-10 grid gap-4 lg:grid-cols-3">
+        <ul className="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
           {homePillars.map((item) => (
             <li key={item.href}>
               <Link
@@ -78,27 +78,6 @@ export default function HomePage() {
             </li>
           ))}
         </ul>
-        <div className="mt-4">
-          <Link
-            href={buildersRiskHomeLink.href}
-            className="flex flex-col rounded-sm border border-line bg-paper p-6 hover:border-ink/30 sm:flex-row sm:items-center sm:justify-between sm:gap-8"
-          >
-            <div>
-              <p className="text-xs font-semibold tracking-[0.16em] text-teal-dark uppercase">
-                Also available
-              </p>
-              <h3 className="mt-2 text-xl font-semibold text-ink">
-                {buildersRiskHomeLink.title}
-              </h3>
-              <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted">
-                {buildersRiskHomeLink.body}
-              </p>
-            </div>
-            <span className="mt-4 shrink-0 text-sm font-semibold text-teal-dark sm:mt-0">
-              Learn more
-            </span>
-          </Link>
-        </div>
       </section>
 
       <section className="bg-ink-mid py-16 text-stone">

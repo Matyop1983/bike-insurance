@@ -6,7 +6,7 @@ export {
   commercialQuoteHref,
   educationalNotice,
 } from "./business";
-export { buildersRiskHomeLink, homePillars, testimonials } from "./home";
+export { homePillars, testimonials } from "./home";
 export { buildersRiskQuoteHref } from "./builders-risk";
 export { lifeQuoteHref } from "./life";
 export { groupBenefitsQuoteHref } from "./group-benefits";

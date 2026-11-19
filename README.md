@@ -2,13 +2,13 @@
 
 Custom [Next.js](https://nextjs.org) site for **Rhino Insurance Advisors** (Edinburg, TX), intended to replace the current Squarespace site at [rhinoinsuranceadvisors.com](https://www.rhinoinsuranceadvisors.com/).
 
-Commercial, life insurance, and group benefits are the lines in the header and home hero. Builders risk stays available at `/builders-risk`, linked lower on the home page and in the footer — not in the top nav. Quotes start with a phone call to the Edinburg office, `(956) 609-6222`, Monday–Friday 8AM–5PM. The `/quote` page is an optional callback request — not a price and not a binder. Brand, nav, and contact live in `src/lib/brand.ts`. Coverage copy lives in `src/lib/content/`.
+Commercial, life insurance, and group benefits are the lines in the header. Builders risk stays off the top nav. On the home page it is a services card beside group benefits, and it is also in the footer. Quotes start with a phone call to the Edinburg office, `(956) 609-6222`, Monday–Friday 8AM–5PM. The `/quote` page is an optional callback request — not a price and not a binder. Brand, nav, and contact live in `src/lib/brand.ts`. Coverage copy lives in `src/lib/content/`.
 
 Former bicycle routes (`/bicycle-insurance`, `/coverage`, `/how-it-works`, `/faq`) redirect to `/contact`. `/personal-insurance` redirects to `/`.
 
 ## Pages
 
-- `/` — agency home (commercial, life insurance, and group benefits in the hero; builders risk linked lower; testimonials, visit strip). Primary CTA is the phone number.
+- `/` — agency home (commercial, life insurance, group benefits, and builders risk in the services grid; testimonials, visit strip). Primary CTA is the phone number. Builders risk is not in the header.
 - `/about` — mission and service-with-integrity
 - `/business-insurance` — commercial: GL, E&O, workers’ comp, umbrella, commercial auto, builders risk
 - `/life-insurance` — families, mortgage protection, business owners and key person; term and permanent in general terms

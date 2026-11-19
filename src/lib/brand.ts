@@ -33,7 +33,7 @@ export const coverageNav = [
   { href: "/group-benefits", label: "Group Benefits" },
 ] as const;
 
-/** Kept off the header. Still linked in the footer and lower on the home page. */
+/** Kept off the header. Linked in the home services grid and the footer. */
 export const buildersRiskNavItem = {
   href: "/builders-risk",
   label: "Builders Risk",

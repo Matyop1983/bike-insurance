@@ -35,10 +35,9 @@ export const homePillars = [
     title: "Group Benefits",
     body: "Employee benefits for local employers: group health, dental, vision, group life, and disability.",
   },
+  {
+    href: "/builders-risk",
+    title: "Builders Risk",
+    body: "Course-of-construction coverage for contractors, owners, and renovations — the job site, materials, storage, and transit.",
+  },
 ] as const;
-
-export const buildersRiskHomeLink = {
-  href: "/builders-risk",
-  title: "Builders risk",
-  body: "Course-of-construction coverage for contractors, owners, and renovations — the job site, materials, storage, and transit.",
-} as const;
