@@ -3,6 +3,10 @@ import { brand } from "../brand";
 export const buildersRiskQuoteHref =
   "/quote?type=commercial&coverage=builders-risk" as const;
 
+export const buildersRiskIntakeHref = "/builders-risk/quote" as const;
+
+export const buildersRiskIntakeCta = "Start your Builder’s Risk quote" as const;
+
 export const buildersRiskAudiences = [
   {
     title: "General contractors",
@@ -49,7 +53,7 @@ export const buildersRiskHowItWorks = [
   {
     n: "01",
     title: "Tell us about the job",
-    body: "Share who is buying the policy (owner or contractor), project type, estimated completed value, location, and start/finish dates. No account required.",
+    body: "Use the builder’s risk form for the project address, construction type, completed value, and start and finish dates. No account required.",
   },
   {
     n: "02",

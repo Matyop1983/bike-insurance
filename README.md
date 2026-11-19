@@ -13,7 +13,8 @@ Former bicycle routes (`/bicycle-insurance`, `/coverage`, `/how-it-works`, `/faq
 - `/business-insurance` — commercial: GL, E&O, workers’ comp, umbrella, commercial auto, builders risk
 - `/life-insurance` — families, mortgage protection, business owners and key person; term and permanent in general terms
 - `/group-benefits` — employer benefits: group health, dental, vision, group life, disability
-- `/builders-risk` — course-of-construction coverage (contractors, owners, renovations). Page and URL stay; not in the header.
+- `/builders-risk` — course-of-construction coverage (contractors, owners, renovations). Page and URL stay; not in the header. The page links to the project intake.
+- `/builders-risk/quote` — builder’s risk questionnaire (address, construction, values, dates, named insured, contractor). It is still a callback request, not a price or a binder.
 - `/quote` — optional callback request (`?type=commercial`, optional `&coverage=` such as `builders-risk`, `life`, or `group-benefits`)
 - `/contact` — phone, email, address, hours
 
@@ -65,6 +66,8 @@ Config (see `.env.example`):
 - Optional `NOWCERTS_ENDPOINT` / `NOWCERTS_API_KEY` if NowCerts ever requires them
 
 The webhook body is `{ AgencyID, FormName, json }` where `json` is a string of those labeled fields (a flat JSON object is rejected by NowCerts with HTTP 200 `{"status":1,"message":"Error!"}`). Inner keys are human-readable for the mapping UI: `AgencyID`, `Form Name`, `Applicant Name`, `Email`, `Phone Number`, `Coverage Type`, `Business Name`, `City or ZIP`, `Coverage Interests` (includes Builders risk when selected), `Message`, `Reference ID`, `Submitted At`, and `Source`. Success is an AMS message containing `successfully inserted` (not HTTP 200 alone).
+
+The builder’s risk intake (`POST /api/quote` with `form: "builders-risk"`) uses this same route, form name, and field list. The API validates the questionnaire, then puts the answers in `Message` (it starts with `Builder’s risk intake`) and sets `Coverage Interests` to Builders risk. `Applicant Name`, `Email`, and `Phone Number` are the person to call. `Business Name` prefers the named insured’s company. `City or ZIP` is the project city, state, and ZIP. `Source` is `Rhino website builder’s risk intake`. No new file is written. The short callback note stays capped at 1,000 characters; this intake’s Message may be longer, up to 8,000.
 
 After the first real or test submit:
 

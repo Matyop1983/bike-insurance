@@ -1,4 +1,9 @@
-import { coverageLabels, quoteTypeLabel, type QuotePayload } from "@/lib/quote";
+import {
+  coverageLabels,
+  isBuildersRiskIntakeQuote,
+  quoteTypeLabel,
+  type QuotePayload,
+} from "@/lib/quote";
 
 export const DEFAULT_QUOTE_NOTIFY_TO = "Matthew@Rhinoia.com";
 
@@ -31,8 +36,11 @@ export function formatQuoteNotification(
     "",
     "This is a website callback request, not a price or a binder.",
   ];
+  const subject = isBuildersRiskIntakeQuote(quote)
+    ? `Rhino builder’s risk intake ${meta.id}`
+    : `Rhino callback request ${meta.id} (${quoteTypeLabel(quote.quoteType)})`;
   return {
-    subject: `Rhino callback request ${meta.id} (${quoteTypeLabel(quote.quoteType)})`,
+    subject,
     text: lines.join("\n"),
   };
 }

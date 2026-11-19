@@ -7,6 +7,12 @@ import {
   pushNowCertsQuote,
 } from "@/lib/integrations/nowcerts";
 import {
+  buildersRiskQuoteErrors,
+  isBuildersRiskIntakeBody,
+  toQuotePayload,
+  validateBuildersRiskIntake,
+} from "@/lib/builders-risk-intake";
+import {
   normalizeQuote,
   type QuotePayload,
   validateQuote,
@@ -80,6 +86,28 @@ async function handleQuotePost(request: Request) {
     return NextResponse.json({ error: "Send JSON in the request body." }, { status: 400 });
   }
 
+  if (isBuildersRiskIntakeBody(body)) {
+    const intakeErrors = validateBuildersRiskIntake(body);
+    if (Object.keys(intakeErrors).length) {
+      return NextResponse.json(
+        { error: "Please fix the highlighted fields.", errors: intakeErrors },
+        { status: 400 },
+      );
+    }
+    const quoteErrors = buildersRiskQuoteErrors(body);
+    if (Object.keys(quoteErrors).length) {
+      console.error(
+        "[quote] builders risk intake did not fit the quote payload",
+        quoteErrors,
+      );
+      return NextResponse.json(
+        { error: "Server error — we couldn’t save that request. Try again." },
+        { status: 500 },
+      );
+    }
+    return deliverQuote(toQuotePayload(body));
+  }
+
   if (!isPayload(body)) {
     return NextResponse.json(
       { error: "The form was missing required fields." },
@@ -96,6 +124,10 @@ async function handleQuotePost(request: Request) {
     );
   }
 
+  return deliverQuote(normalized);
+}
+
+async function deliverQuote(normalized: QuotePayload) {
   const id = `RH-${crypto.randomUUID().slice(0, 8).toUpperCase()}`;
   const receivedAt = new Date().toISOString();
   const entry = {
