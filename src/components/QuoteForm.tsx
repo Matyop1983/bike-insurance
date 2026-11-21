@@ -1,6 +1,13 @@
 "use client";
 
 import { useRef, useState } from "react";
+import {
+  SpamTraps,
+  TURNSTILE_PENDING_MESSAGE,
+  TurnstileWidget,
+  turnstilePending,
+  withSpamFields,
+} from "@/components/SpamProtectionFields";
 import { brand } from "@/lib/brand";
 import {
   commercialCoverages,
@@ -126,13 +133,19 @@ export function QuoteForm({
       return;
     }
 
+    if (turnstilePending(event.currentTarget)) {
+      setStatus({ kind: "error", message: TURNSTILE_PENDING_MESSAGE });
+      return;
+    }
+
+    const payload = withSpamFields(event.currentTarget, form);
     setStatus({ kind: "submitting" });
     let response: Response;
     try {
       response = await fetch("/api/quote", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify(payload),
       });
     } catch {
       setStatus({ kind: "error", message: NETWORK_ERROR_MESSAGE });
@@ -196,8 +209,9 @@ export function QuoteForm({
       ref={formRef}
       noValidate
       onSubmit={onSubmit}
-      className="rounded-sm border border-line bg-paper px-5 pt-5 pb-8 shadow-[0_24px_50px_-36px_rgba(26,36,51,0.28)] sm:px-8 sm:pt-8 sm:pb-10"
+      className="relative rounded-sm border border-line bg-paper px-5 pt-5 pb-8 shadow-[0_24px_50px_-36px_rgba(26,36,51,0.28)] sm:px-8 sm:pt-8 sm:pb-10"
     >
+      <SpamTraps />
       <p className="sr-only" aria-live="polite">
         {status.kind === "submitting" ? "Sending your request" : ""}
       </p>
@@ -404,6 +418,8 @@ export function QuoteForm({
         {brand.phone} if you want to talk through a quote now. We’ll only use
         these details to call you back.
       </p>
+
+      <TurnstileWidget />
 
       <button
         type="submit"

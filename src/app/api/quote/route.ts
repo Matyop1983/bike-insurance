@@ -23,6 +23,8 @@ import {
   type QuotePayload,
   validateQuote,
 } from "@/lib/quote";
+import { contentDrop, logDroppedSubmission, trapDrop } from "@/lib/spam";
+import { turnstileToken, verifyTurnstileToken } from "@/lib/turnstile";
 
 export const runtime = "nodejs";
 
@@ -84,14 +86,38 @@ export async function POST(request: Request) {
   }
 }
 
-async function handleQuotePost(request: Request) {
-  let body: unknown;
-  try {
-    body = await request.json();
-  } catch {
-    return NextResponse.json({ error: "Send JSON in the request body." }, { status: 400 });
-  }
+function clientIp(request: Request): string | null {
+  const cloudflare = request.headers.get("cf-connecting-ip")?.trim();
+  if (cloudflare) return cloudflare;
+  const forwarded = request.headers.get("x-forwarded-for");
+  const first = forwarded?.split(",")[0]?.trim();
+  return first || null;
+}
 
+/**
+ * Same shape as a delivered quote. Bots get an RH- id and nothing is
+ * forwarded to NowCerts or Resend.
+ */
+function silentDrop(reason: string, body: unknown) {
+  logDroppedSubmission(reason, body);
+  const id = `RH-${crypto.randomUUID().slice(0, 8).toUpperCase()}`;
+  return NextResponse.json({
+    ok: true,
+    id,
+    nowcerts: "ok",
+    email: "ok",
+  });
+}
+
+function turnstileRejection(reason: "turnstile" | "turnstile-unavailable", body: unknown) {
+  logDroppedSubmission(reason, body);
+  return NextResponse.json(
+    { error: "We couldn’t verify this submission. Please try again." },
+    { status: reason === "turnstile-unavailable" ? 503 : 400 },
+  );
+}
+
+function acceptQuote(body: unknown): QuotePayload | NextResponse {
   if (isBuildersRiskIntakeBody(body)) {
     const intakeErrors = validateBuildersRiskIntake(body);
     if (Object.keys(intakeErrors).length) {
@@ -111,7 +137,7 @@ async function handleQuotePost(request: Request) {
         { status: 500 },
       );
     }
-    return deliverQuote(toQuotePayload(body));
+    return toQuotePayload(body);
   }
 
   if (isWorkersCompIntakeBody(body)) {
@@ -133,7 +159,7 @@ async function handleQuotePost(request: Request) {
         { status: 500 },
       );
     }
-    return deliverQuote(toWorkersCompQuotePayload(body));
+    return toWorkersCompQuotePayload(body);
   }
 
   if (!isPayload(body)) {
@@ -152,7 +178,30 @@ async function handleQuotePost(request: Request) {
     );
   }
 
-  return deliverQuote(normalized);
+  return normalized;
+}
+
+async function handleQuotePost(request: Request) {
+  let body: unknown;
+  try {
+    body = await request.json();
+  } catch {
+    return NextResponse.json({ error: "Send JSON in the request body." }, { status: 400 });
+  }
+
+  const trap = trapDrop(body);
+  if (trap) return silentDrop(trap.reason, body);
+
+  const accepted = acceptQuote(body);
+  if (accepted instanceof NextResponse) return accepted;
+
+  const content = contentDrop(body);
+  if (content) return silentDrop(content.reason, body);
+
+  const turnstile = await verifyTurnstileToken(turnstileToken(body), clientIp(request));
+  if (!turnstile.ok) return turnstileRejection(turnstile.reason, body);
+
+  return deliverQuote(accepted);
 }
 
 async function deliverQuote(normalized: QuotePayload) {
